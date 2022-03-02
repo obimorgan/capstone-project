@@ -33,8 +33,8 @@ export default function Login() {
                         startAdornment: <InputAdornment position="start"><LockIcon /></InputAdornment>,
                     }}
                 />
-                <Button sx={{ m: 1, width: '35ch' }} variant="contained" color="success">Sign Up</Button>
-                <Grid sx={{ display: 'flex' }}>
+                <Button sx={{ m: 1, width: '35ch' }} variant="contained" color="success">Log In</Button>
+                <Container sx={{ display: 'flex', textAlign: 'center ', justifyContent: 'center' }}>
                     <IconButton size="large">
                         <Badge>
                             <FacebookIcon />
@@ -50,7 +50,7 @@ export default function Login() {
                             <InstagramIcon />
                         </Badge>
                     </IconButton>
-                </Grid>
+                </Container>
             </Box>
         </Container >
     )
