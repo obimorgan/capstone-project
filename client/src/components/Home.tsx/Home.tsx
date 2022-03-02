@@ -20,7 +20,7 @@ export default function Home() {
 
     const handleOpen = () => {
         setOpen(true)
-        socket.emit('host-join', {gameName})
+        socket.emit('host-join', {game: gameName})
     }
 
     // 2 Creatign a new game
