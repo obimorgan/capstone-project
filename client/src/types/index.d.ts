@@ -3,8 +3,9 @@ interface IReduxStore {
     gameroom: IReduxGameroom
 }
 
-interface IReduxUser {
+interface IReduxStoreUser {
     isLoggedIn: boolean
+    currentUser: IUser | null
 }
 
 interface IReduxGameRoom {
