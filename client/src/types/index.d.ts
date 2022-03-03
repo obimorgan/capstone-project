@@ -8,7 +8,7 @@ interface IReduxStoreUser {
     currentUser: IUser | null
 }
 
-interface IReduxGameRoom {
+interface IReduxLobby {
     _id: string
     users: IUser
 }

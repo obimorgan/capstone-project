@@ -5,33 +5,35 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField/TextField';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { buttonMargin, containerStyle, modalStyle } from '../style';
-import { useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { io } from 'socket.io-client'
 
 const   ADDRESS = 'http://localhost:3001'
 const socket = io(ADDRESS, {transports: ["websocket"]})
 
 export default function Home() {
-    // const params = useParams()
+    const navigate = useNavigate()
     const [gameName, setGameName] = useState('')
 
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
 
+    // when a user clicks on "create a new game"
     const handleOpen = () => {
         setOpen(true)
-        socket.emit('host-join', {game: gameName})
     }
 
-    // 2 Creatign a new game
+    //2 Creatign a new game
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-        socket.emit("setGameName", ({gameName: gameName})) //can send any data!
-        console.log("Creating a new Game")
+        socket.emit("create a game", ({gameName: gameName})) //can send any data!
+        console.log("Creating a new Game", gameName)
+        setOpen(false)
+        navigate('lobby')
     }
 
     useEffect(() => {
-        // trapping connection from  server
+        //1 trapping connection from  server
         socket.on('connect', () => {
             console.log("connection is established!")
         })

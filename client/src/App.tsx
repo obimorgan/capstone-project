@@ -3,9 +3,9 @@ import Home from './components/Home.tsx/Home';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import Profile from './components/Profile';
-import Watitingroom from './components/Watitingroom';
+import Lobby from './components/Lobby';
 import Scoreboard from './components/Scoreboard';
-import Gameroom from './components/Gameroom';
+import Gameroom from './components/Lobby';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/waitingroom" element={<Watitingroom />} />
+        <Route path="/lobby" element={<Lobby />} />
         <Route path="/scoreboard" element={<Scoreboard />} />
         <Route path="/gameroom" element={<Gameroom/>} />
       </Routes>

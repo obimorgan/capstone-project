@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from 'redux-thunk'
-import Gameroom from "../components/Gameroom";
+import Gameroom from "../components/Lobby";
 import userReducer from "./userReducer";
 import gameroomReducer from "./gameroomReducer";
 
