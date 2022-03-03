@@ -14,7 +14,6 @@ const socket = io('http://localhost:3001', {transports: ["websocket"]})
 
 export default function Home() {
     const navigate = useNavigate()
-    const { axiosRequest } = Axios()
     const [gameName, setGameName] = useState('')
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
