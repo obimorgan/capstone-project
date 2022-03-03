@@ -8,13 +8,14 @@ import { buttonMargin, containerStyle, modalStyle } from '../style';
 import { useNavigate } from 'react-router';
 import { io } from 'socket.io-client'
 
-const   ADDRESS = 'http://localhost:3001'
-const socket = io(ADDRESS, {transports: ["websocket"]})
+
+// const { REACT_APP_SERVER_URL } = process.env
+const socket = io('http://localhost:3001', {transports: ["websocket"]})
 
 export default function Home() {
     const navigate = useNavigate()
+    const { axiosRequest } = Axios()
     const [gameName, setGameName] = useState('')
-
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
 
@@ -24,12 +25,13 @@ export default function Home() {
     }
 
     //2 Creatign a new game
-    const handleSubmit = (e: FormEvent) => {
+    const handleCreateAGame = async (e: React.FormEvent) => {
         e.preventDefault()
-        socket.emit("create a game", ({gameName: gameName})) //can send any data!
-        console.log("Creating a new Game", gameName)
-        setOpen(false)
-        navigate('lobby')
+        const gamePin = Math.floor(Math.random() * 90000) + 10000
+        socket.emit("create a game", ({ gameName: gameName, gamePin: gamePin })) // need to send id of the user
+        // b|e is creating a new game!
+        console.log("Creating a new Game called: ", gameName)
+        navigate('/lobby')
     }
 
     useEffect(() => {
@@ -53,9 +55,10 @@ export default function Home() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box component="form" onSubmit={handleSubmit} sx={modalStyle} noValidate autoComplete="off">
-                    <TextField id="Game Name" label="Game Name" variant="outlined" value={gameName} onChange={e => setGameName(e.target.value)}/>
-            </Box>
+                <Box onSubmit={handleCreateAGame} component="form" sx={modalStyle} noValidate autoComplete="off">
+                    <TextField id="Game Name" label="Game Name" variant="outlined" value={gameName} onChange={e => setGameName(e.target.value)}
+                    />
+                </Box>
             </Modal>
         </Container>
   );
