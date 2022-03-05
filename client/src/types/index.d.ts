@@ -19,3 +19,18 @@ interface IUser {
     email: string
     password: string
 }
+
+interface ICredentials {
+    name: string
+    email: string
+    password: string
+}
+
+interface ILoginCredentials {
+    email: string
+    password: string
+}
+
+interface IProps {
+    children: JSX.Element
+}
