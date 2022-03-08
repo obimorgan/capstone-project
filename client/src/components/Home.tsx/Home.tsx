@@ -6,13 +6,11 @@ import Container from '@mui/material/Container'
 import Modal from '@mui/material/Modal'
 import TextField from '@mui/material/TextField/TextField'
 import React, { FormEvent, useEffect, useState } from 'react'
-import { buttonMargin, containerStyle, modalStyle } from '../style'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { io } from 'socket.io-client'
-import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentUserAction } from '../../redux/actions'
-import { errorMonitor } from 'events'
-import { ErrorOutline } from '@mui/icons-material'
+import { setCurrentGameDetailsAction } from '../../redux/actions'
+import { buttonMargin, containerStyle, modalStyle } from '../style'
 
 // const { REACT_APP_SERVER_URL } = process.env
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
@@ -20,25 +18,23 @@ const socket = io('http://localhost:3001', { transports: ['websocket'] })
 export default function Home() {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const [gameName, setGameName] = useState('')
+	const [gameName, setGameName] = useState<string>()
 	const [joiningGamePin, setJoiningGamePin] = useState('')
 	const [createGame, setCreateGame] = useState(false)
 	const [open, setOpen] = useState(false)
-	const isLoggedIn = useSelector((state: IReduxStore) => state.user.isLoggedIn)
 	const handleClose = () => setOpen(false)
-
-	const currentUser = useSelector((state: IReduxStore) => state.user.currentUser)
+	const currentUser = useSelector((state: IReduxStore) => state.user.currentUser?._id)
 
 	// when a user clicks on "create a new game"
 	const handleOpen = () => {
 		setOpen(true)
 	}
-
+	console.log(currentUser)
 	//2 Creatign a new game
 	const handleCreateAGame = async (e: FormEvent) => {
 		e.preventDefault()
 		const gamePin = Math.floor(Math.random() * 90000) + 10000
-		socket.emit('create a game', { gameName: gameName, gamePin: gamePin, users: currentUser._id }) // need to send id of the user
+		socket.emit('create a game', { gameName: gameName, gamePin: gamePin, users: currentUser }) // need to send id of the user
 		// b|e is creating a new game!
 		console.log('Creating a new Game called: ', gameName)
 		// navigate to lobby - where the host waits for other palyers to join
@@ -47,19 +43,24 @@ export default function Home() {
 
 	const handleJoinGame = async (e: FormEvent) => {
 		e.preventDefault()
-		socket.emit('create a game', { joingGamePin: joiningGamePin, users: currentUser._id }) // need to send id of the user
-		// b|e is joining the user to an existing game!
-		console.log('Joined game: ', gameName)
+		socket.emit('create a game', { joingGamePin: joiningGamePin, users: currentUser }) // need to send id of the user
 		navigate('/lobby')
 	}
 
 	useEffect(() => {
-		// fetchCurrentUser()
 		//1 trapping connection from  server
 		socket.on('connect', () => {
-			// socket.emit('online', {senderId})
+			// socket.emit('online', {senderId)
+		})
+		//game pin from server.
+		socket.on('display game pin', (data) => {
+			// b|e is joining the user to an existing game!
+			console.log('current game: ', data)
+			dispatch(setCurrentGameDetailsAction(data))
 		})
 	}, [])
+
+	useEffect(() => {})
 
 	return (
 		<Container sx={containerStyle}>

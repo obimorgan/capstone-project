@@ -1,8 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
-import thunk from 'redux-thunk'
-import Gameroom from "../components/Lobby";
-import userReducer from "./userReducer";
+import thunk from 'redux-thunk';
 import gameroomReducer from "./gameroomReducer";
+import userReducer from "./userReducer";
 
 const composeSafely = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -12,7 +11,7 @@ export const initialState: IReduxStore = {
         currentUser: null
     },
     gameroom: {
-        users: [],
+        games: null,
     }
 }
 
@@ -21,4 +20,4 @@ const rootReducer = combineReducers({
     gameroom: gameroomReducer
 })
 
-export const storeConfig = createStore(rootReducer, initialState, compose(applyMiddleware(thunk)))
+export const storeConfig = createStore(rootReducer, initialState, composeSafely(applyMiddleware(thunk)))

@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentUserAction } from '../redux/actions'
@@ -10,18 +10,24 @@ export default function UserProvider({ children }: IProps) {
 	const isLoggedIn = useSelector((state: IReduxStore) => state.user.isLoggedIn)
 	// const [currentUserData, setCurrentUserData] = useState()
 
+	console.log(isLoggedIn)
+
 	const fetchCurrentUser = async () => {
 		try {
-			const response = await fetch('http://localhost:3001/user/me/6225d4618b5e8898a08fe2fb')
+			const response = await fetch('http://localhost:3001/user/me/6227263b0e90d738894bc1c7')
 			if (response.status === 200) {
-				const currentUserData = await response.json()
-				console.log(currentUserData)
-				dispatch(setCurrentUserAction(currentUserData))
+				const userData = await response.json()
+				// setCurrentUserData(userData)
+				dispatch(setCurrentUserAction(userData))
+				console.log(userData)
 			}
 		} catch (error) {
 			throw new Error()
 		}
 	}
-	if (isLoggedIn) fetchCurrentUser()
+	useEffect(() => {
+		if (isLoggedIn) fetchCurrentUser()
+	}, [])
+
 	return isLoggedIn ? children : <Navigate to='/login' />
 }

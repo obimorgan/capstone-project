@@ -1,5 +1,5 @@
 interface IReduxStore {
-    user: IReduxUser
+    user: IReduxStoreUser
     gameroom: IReduxGameroom
 }
 
@@ -33,4 +33,19 @@ interface ILoginCredentials {
 
 interface IProps {
     children: JSX.Element
+}
+
+interface IPlayer {
+    _id: string
+    name?: string
+}
+
+interface IReduxGameroom {
+    games: IGameDetails | null
+}
+
+interface IGameDetails {
+    gameName: string
+    gamePin: number
+    players: IPlayer[]
 }
