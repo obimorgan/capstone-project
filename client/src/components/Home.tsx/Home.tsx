@@ -9,7 +9,7 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { io } from 'socket.io-client'
-import { setCurrentGameDetailsAction } from '../../redux/actions'
+import { setAHostAction, setCurrentGameDetailsAction } from '../../redux/actions'
 import { buttonMargin, containerStyle, modalStyle } from '../style'
 
 // const { REACT_APP_SERVER_URL } = process.env
@@ -24,43 +24,67 @@ export default function Home() {
 	const [open, setOpen] = useState(false)
 	const handleClose = () => setOpen(false)
 	const currentUser = useSelector((state: IReduxStore) => state.user.currentUser?._id)
+	const [gameDetails, setGameDetails] = useState<IGameDetails>()
+	const [updatePlayers, setUpdateplayers] = useState(0)
 
 	// when a user clicks on "create a new game"
 	const handleOpen = () => {
 		setOpen(true)
 	}
-	console.log(currentUser)
+	console.log('Current user ID:', currentUser)
 	//2 Creatign a new game
 	const handleCreateAGame = async (e: FormEvent) => {
 		e.preventDefault()
+		dispatch(setAHostAction())
 		const gamePin = Math.floor(Math.random() * 90000) + 10000
-		socket.emit('create a game', { gameName: gameName, gamePin: gamePin, users: currentUser }) // need to send id of the user
+		socket.emit('create a game', { gameName: gameName, gamePin: gamePin, users: currentUser }) // need to send id of the user somehow
 		// b|e is creating a new game!
 		console.log('Creating a new Game called: ', gameName)
 		// navigate to lobby - where the host waits for other palyers to join
 		navigate('/lobby')
 	}
 
+	// Joinning a game
 	const handleJoinGame = async (e: FormEvent) => {
 		e.preventDefault()
-		socket.emit('create a game', { joingGamePin: joiningGamePin, users: currentUser }) // need to send id of the user
+		const gamePin = parseInt(joiningGamePin)
+		socket.emit('joining a game', { gamePin: gamePin, users: currentUser }) // need to send id of the user somehow
 		navigate('/lobby')
 	}
 
 	useEffect(() => {
-		//1 trapping connection from  server
+		//Initial connection, trapping connection from  server
 		socket.on('connect', () => {
 			// socket.emit('online', {senderId)
 		})
 		//game pin from server.
-		socket.on('display game pin', (data) => {
+		socket.on('display game', (data) => {
 			// b|e is joining the user to an existing game!
-			console.log('current game: ', data)
-			dispatch(setCurrentGameDetailsAction(data))
+			const query = parseInt(data.gamePin)
+			console.log('current gamePin: ', query)
+			const fetchCurrentGame = async () => {
+				try {
+					let response = await fetch(`http://localhost:3001/games/currentgame/${query}`)
+					if (response.ok) {
+						let data = await response.json()
+						dispatch(setCurrentGameDetailsAction(data))
+						setUpdateplayers(updatePlayers + 1)
+						console.log('setting game details..')
+					} else {
+						throw new Error()
+					}
+				} catch (error) {
+					console.log(error)
+				}
+			}
+			fetchCurrentGame()
 		})
 	}, [])
 
-	useEffect(() => {})
+	// useEffect(() => {
+	// 	dispatch(setCurrentGameDetailsAction(gameDetails!))
+	// 	console.log('updating game details')
+	// }, [updatePlayers])
 
 	return (
 		<Container sx={containerStyle}>

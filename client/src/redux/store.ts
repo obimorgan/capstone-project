@@ -8,6 +8,7 @@ const composeSafely = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || co
 export const initialState: IReduxStore = {
     user: {
         isLoggedIn: false,
+        isAHost: false,
         currentUser: null
     },
     gameroom: {

@@ -14,7 +14,7 @@ export default function UserProvider({ children }: IProps) {
 
 	const fetchCurrentUser = async () => {
 		try {
-			const response = await fetch('http://localhost:3001/user/me/6227263b0e90d738894bc1c7')
+			const response = await fetch('http://localhost:3001/user/me/6227208d8e39df1c7c5a1164')
 			if (response.status === 200) {
 				const userData = await response.json()
 				// setCurrentUserData(userData)

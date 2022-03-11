@@ -5,7 +5,7 @@ export const ACTIONS = {
     // SET_USER_CREDENTIALS: 'SET_USER_CREDENTIALS',
     SET_CURRENT_USER: 'SET_CURRENT_USER',
     USER_LOGIN: 'USER_LOGIN',
-    // SET_NEW_GAME: 'SET_NEW_GAME',
+    SET_HOST: 'SET_HOST',
     ADD_USER_TO_GAME_ROOM: 'ADD_USER_TO_GAME_ROOM',
     SET_CURRENT_GAME_DETAILS: 'SET_CURRENT_GAME_DETAILS'
 }
@@ -21,6 +21,10 @@ export const setCurrentUserAction = (myInfo: IUser) => ({
 
 export const userLoginAction = () => {
     return { type: ACTIONS.USER_LOGIN } 
+}
+
+export const setAHostAction = () => {
+    return {type: ACTIONS.SET_HOST}
 }
 
 export const setCurrentGameDetailsAction = (gameDetails: IGameDetails) => ({

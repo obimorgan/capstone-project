@@ -22,6 +22,11 @@ const userReducer = (state = initialState.user, action: AnyAction) => {
 				...state,
 				isLoggedIn: true,
 			}
+		case ACTIONS.SET_HOST:
+			return {
+				...state,
+				isAHost: true,
+			}
 		default:
 			return state
 	}
