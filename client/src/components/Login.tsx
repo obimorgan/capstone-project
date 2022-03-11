@@ -13,7 +13,7 @@ import GoogleIcon from '@mui/icons-material/Google'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { userLoginAction } from '../redux/actions'
@@ -36,10 +36,17 @@ export default function Login() {
 		try {
 			const response = await fetch('http://localhost:3001/user/login', {
 				method: 'POST',
-				body: JSON.stringify(credentials),
-				headers: { 'content-type': 'application/json' },
+				body: credentials && JSON.stringify(credentials),
+				headers: {
+					Accept: 'applicaiton/json',
+					'content-type': 'application/json',
+					withCredentials: 'true',
+				},
+				// withCredentials: true,
+				credentials: 'include',
 			})
 			if (response.status === 201) {
+				localStorage.setItem('token', 'Hello')
 				dispatch(userLoginAction())
 				navigate('/')
 			} else {
@@ -49,6 +56,23 @@ export default function Login() {
 			console.log(error)
 		}
 	}
+
+	// useEffect(() => {
+	// 	const fetchUser = async () => {
+	// 		try {
+	// 			const response = await fetch('http://localhost:3001/user/the')
+	// 			if (response.status === 200) {
+	// 				const userData = await response.json()
+	// 				// setCurrentUserData(userData)
+	// 				dispatch(setCurrentUserAction(userData))
+	// 				console.log(userData)
+	// 			}
+	// 		} catch (error) {
+	// 			throw new Error()
+	// 		}
+	// 	}
+	// }, [handleSubmit])
+
 	return (
 		<Container
 			sx={{ display: 'flex', flexDirection: 'column', textAlign: 'center ', height: '100vh', justifyContent: 'center' }}

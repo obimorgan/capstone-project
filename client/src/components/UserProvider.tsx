@@ -8,16 +8,16 @@ import { setCurrentUserAction } from '../redux/actions'
 export default function UserProvider({ children }: IProps) {
 	const dispatch = useDispatch()
 	const isLoggedIn = useSelector((state: IReduxStore) => state.user.isLoggedIn)
-	// const [currentUserData, setCurrentUserData] = useState()
 
-	console.log(isLoggedIn)
+	console.log('Is the user logged in?', isLoggedIn)
 
 	const fetchCurrentUser = async () => {
 		try {
-			const response = await fetch('http://localhost:3001/user/me/6227208d8e39df1c7c5a1164')
+			const response = await fetch('http://localhost:3001/user/me', {
+				credentials: 'include',
+			})
 			if (response.status === 200) {
 				const userData = await response.json()
-				// setCurrentUserData(userData)
 				dispatch(setCurrentUserAction(userData))
 				console.log(userData)
 			}
@@ -27,7 +27,7 @@ export default function UserProvider({ children }: IProps) {
 	}
 	useEffect(() => {
 		if (isLoggedIn) fetchCurrentUser()
-	}, [])
+	}, [isLoggedIn])
 
 	return isLoggedIn ? children : <Navigate to='/login' />
 }
