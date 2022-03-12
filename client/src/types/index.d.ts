@@ -19,6 +19,7 @@ interface IUser {
     name: string
     email: string
     password: string
+    avatar: string
 }
 
 interface ICredentials {
@@ -41,6 +42,7 @@ interface IPlayer {
     player: string
     name?: string
     scores: IHoles[]
+    avatar: string
 }
 
 interface IReduxGameroom {

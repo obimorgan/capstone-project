@@ -16,11 +16,29 @@ import { buttonMargin, containerStyle, WallPaper } from './style'
 import Container from '@mui/material/Container/Container'
 import { Button, IconButton, Typography } from '@mui/material'
 import e from 'express'
+import { io } from 'socket.io-client'
+
+const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
 const Gameroom = () => {
 	const gameDetails = useSelector((state: IReduxStore) => state.gameroom.games)
 	const dispatch = useDispatch()
-	const [score, setScore] = useState(0)
+	const [player1Score, setPlayer1Score] = useState(0)
+	const [player2Score, setPlayer2Score] = useState(0)
+	const [player3Score, setPlayer3Score] = useState(0)
+	const [player4Score, setPlayer4Score] = useState(0)
+
+	console.log(gameDetails)
+
+	const handlePlayerScores = () => {
+		socket.emit('submit scores', {
+			player1: { p1Score: player1Score, p1Id: gameDetails?.players[0].player },
+			player2: { p1Score: player1Score, p1Id: gameDetails?.players[1].player },
+			player3: { p1Score: player1Score, p1Id: gameDetails?.players[2].player },
+			player4: { p1Score: player1Score, p1Id: gameDetails?.players[3].player },
+		})
+	}
+
 	return (
 		<Container sx={containerStyle}>
 			<Typography variant='h1' sx={{ zIndex: 1 }}>
@@ -35,26 +53,82 @@ const Gameroom = () => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{gameDetails?.players.map((player) => (
-							<TableRow key={player._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+						{gameDetails?.players[0] ? (
+							<TableRow key={gameDetails?.players[0].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 								<TableCell component='th' scope='row'>
-									{player.player}
+									{gameDetails?.players[0].name}
 								</TableCell>
 								<TableCell align='right'>
-									<IconButton onClick={() => setScore(score - 1)}>
+									<IconButton onClick={() => setPlayer1Score(player1Score - 1)}>
 										<RemoveCircleOutlineRoundedIcon />
 									</IconButton>
-									{score}
-									<IconButton onClick={() => setScore(score + 1)}>
+									{player1Score}
+									<IconButton onClick={() => setPlayer1Score(player1Score + 1)}>
 										<AddCircleOutlineRoundedIcon />
 									</IconButton>
 								</TableCell>
 							</TableRow>
-						))}
+						) : (
+							''
+						)}
+						{gameDetails?.players[1] ? (
+							<TableRow key={gameDetails?.players[1].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+								<TableCell component='th' scope='row'>
+									{gameDetails?.players[1].name}
+								</TableCell>
+								<TableCell align='right'>
+									<IconButton onClick={() => setPlayer2Score(player2Score - 1)}>
+										<RemoveCircleOutlineRoundedIcon />
+									</IconButton>
+									{player2Score}
+									<IconButton onClick={() => setPlayer2Score(player2Score + 1)}>
+										<AddCircleOutlineRoundedIcon />
+									</IconButton>
+								</TableCell>
+							</TableRow>
+						) : (
+							''
+						)}
+						{gameDetails?.players[2] ? (
+							<TableRow key={gameDetails?.players[2].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+								<TableCell component='th' scope='row'>
+									{gameDetails?.players[2].name}
+								</TableCell>
+								<TableCell align='right'>
+									<IconButton onClick={() => setPlayer3Score(player3Score - 1)}>
+										<RemoveCircleOutlineRoundedIcon />
+									</IconButton>
+									{player3Score}
+									<IconButton onClick={() => setPlayer3Score(player3Score + 1)}>
+										<AddCircleOutlineRoundedIcon />
+									</IconButton>
+								</TableCell>
+							</TableRow>
+						) : (
+							''
+						)}
+						{gameDetails?.players[3] ? (
+							<TableRow key={gameDetails?.players[3].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+								<TableCell component='th' scope='row'>
+									{gameDetails?.players[3].name}
+								</TableCell>
+								<TableCell align='right'>
+									<IconButton onClick={() => setPlayer4Score(player4Score - 1)}>
+										<RemoveCircleOutlineRoundedIcon />
+									</IconButton>
+									{player4Score}
+									<IconButton onClick={() => setPlayer4Score(player4Score + 1)}>
+										<AddCircleOutlineRoundedIcon />
+									</IconButton>
+								</TableCell>
+							</TableRow>
+						) : (
+							''
+						)}
 					</TableBody>
 				</Table>
 			</TableContainer>
-			<Button variant='contained' sx={{ m: 1, zIndex: 1, color: 'success' }}>
+			<Button onClick={handlePlayerScores} variant='contained' sx={{ m: 1, zIndex: 1, color: 'success' }}>
 				Submit Scores
 			</Button>
 			<WallPaper />

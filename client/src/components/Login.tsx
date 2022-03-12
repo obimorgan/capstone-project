@@ -1,19 +1,18 @@
 /** @format */
 
 import { Mail } from '@mui/icons-material'
-import LockIcon from '@mui/icons-material/Lock'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Container from '@mui/material/Container'
-import InputAdornment from '@mui/material/InputAdornment'
-import TextField from '@mui/material/TextField/TextField'
-import Badge from '@mui/material/Badge'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import GoogleIcon from '@mui/icons-material/Google'
 import InstagramIcon from '@mui/icons-material/Instagram'
-import Grid from '@mui/material/Grid'
+import LockIcon from '@mui/icons-material/Lock'
+import Badge from '@mui/material/Badge'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
-import { useState, FormEvent, useEffect } from 'react'
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField/TextField'
+import { FormEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { userLoginAction } from '../redux/actions'
@@ -56,22 +55,6 @@ export default function Login() {
 			console.log(error)
 		}
 	}
-
-	// useEffect(() => {
-	// 	const fetchUser = async () => {
-	// 		try {
-	// 			const response = await fetch('http://localhost:3001/user/the')
-	// 			if (response.status === 200) {
-	// 				const userData = await response.json()
-	// 				// setCurrentUserData(userData)
-	// 				dispatch(setCurrentUserAction(userData))
-	// 				console.log(userData)
-	// 			}
-	// 		} catch (error) {
-	// 			throw new Error()
-	// 		}
-	// 	}
-	// }, [handleSubmit])
 
 	return (
 		<Container
