@@ -50,6 +50,7 @@ interface IReduxGameroom {
 }
 
 interface IGameDetails {
+    _id: string
     gameName: string
     gamePin: number
     players: IPlayer[]

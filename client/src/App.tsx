@@ -7,7 +7,7 @@ import Registration from './components/Registration'
 import Profile from './components/Profile'
 import Lobby from './components/Lobby'
 import Scoreboard from './components/Scoreboard'
-import Gameroom from './components/Gameroom'
+import Gameroom from './components/Holes/Hole1'
 import UserProvider from './components/UserProvider'
 
 function App() {
@@ -27,7 +27,8 @@ function App() {
 				<Route path='/profile' element={<Profile />} />
 				<Route path='/lobby' element={<Lobby />} />
 				<Route path='/scoreboard' element={<Scoreboard />} />
-				<Route path='/gameroom' element={<Gameroom />} />
+				<Route path='/hole1' element={<Gameroom />} />
+				<Route path='/hole2' element={<Gameroom />} />
 			</Routes>
 		</BrowserRouter>
 	)

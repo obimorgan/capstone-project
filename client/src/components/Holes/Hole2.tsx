@@ -12,37 +12,42 @@ import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRou
 import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { buttonMargin, containerStyle, WallPaper } from './style'
+import { buttonMargin, containerStyle, WallPaper } from '../style'
 import Container from '@mui/material/Container/Container'
 import { Button, IconButton, Typography } from '@mui/material'
 import e from 'express'
 import { io } from 'socket.io-client'
+import { useNavigate } from 'react-router-dom'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
-const Gameroom = () => {
+const Hole2 = () => {
 	const gameDetails = useSelector((state: IReduxStore) => state.gameroom.games)
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 	const [player1Score, setPlayer1Score] = useState(0)
 	const [player2Score, setPlayer2Score] = useState(0)
 	const [player3Score, setPlayer3Score] = useState(0)
 	const [player4Score, setPlayer4Score] = useState(0)
 
-	console.log(gameDetails)
-
 	const handlePlayerScores = () => {
-		socket.emit('submit scores', {
-			player1: { p1Score: player1Score, p1Id: gameDetails?.players[0].player },
-			player2: { p1Score: player1Score, p1Id: gameDetails?.players[1].player },
-			player3: { p1Score: player1Score, p1Id: gameDetails?.players[2].player },
-			player4: { p1Score: player1Score, p1Id: gameDetails?.players[3].player },
-		})
+		socket.emit('hole2', [
+			{ gameId: gameDetails?._id },
+			{ player1: { score: player1Score, id: gameDetails?.players[0].player, name: gameDetails?.players[0].name } },
+			{ player2: { score: player2Score, id: gameDetails?.players[1].player, name: gameDetails?.players[1].name } },
+			{ player3: { score: player3Score, id: gameDetails?.players[2].player, name: gameDetails?.players[2].name } },
+			{ player4: { score: player4Score, id: gameDetails?.players[3].player, name: gameDetails?.players[3].name } },
+		])
+		navigate('/hole3')
+		console.log('hole 2 Completed')
 	}
+
+	socket.on('hole 2', (data) => {})
 
 	return (
 		<Container sx={containerStyle}>
 			<Typography variant='h1' sx={{ zIndex: 1 }}>
-				HOLE 1
+				HOLE 2
 			</Typography>
 			<TableContainer component={Paper} sx={{ zIndex: 1 }}>
 				<Table sx={{ minWidth: '100%' }} aria-label='simple table'>
@@ -136,4 +141,4 @@ const Gameroom = () => {
 	)
 }
 
-export default Gameroom
+export default Hole2

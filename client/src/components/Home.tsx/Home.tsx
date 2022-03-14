@@ -24,7 +24,7 @@ export default function Home() {
 	const [open, setOpen] = useState(false)
 	const handleClose = () => setOpen(false)
 	const currentUser = useSelector((state: IReduxStore) => state.user.currentUser)
-	const [updateGameDetails, setUpdateGameDetails] = useState(0)
+	// const [updateGameDetails, setUpdateGameDetails] = useState(0)
 
 	// when a user clicks on "create a new game"
 	const handleOpen = () => {
@@ -78,7 +78,7 @@ export default function Home() {
 					if (response.ok) {
 						let data = await response.json()
 						dispatch(setCurrentGameDetailsAction(data))
-						setUpdateGameDetails(updateGameDetails + 1)
+						// setUpdateGameDetails(updateGameDetails + 1)
 						console.log('setting game details..')
 					} else {
 						throw new Error()

@@ -15,7 +15,7 @@ export default function MusicPlayerSlider() {
 	const navigate = useNavigate()
 
 	const handleStartGame = () => {
-		navigate('/gameroom')
+		navigate('/hole1')
 	}
 
 	return (
@@ -31,7 +31,7 @@ export default function MusicPlayerSlider() {
 					{currentGame?.players.map((player, index) => (
 						<Box key={index} sx={{ display: 'flex', alignItems: 'center', m: 1, overflow: 'hidden' }}>
 							<CoverImage>
-								<img alt="can't win - Chilling Sunday" src={player.avatar} />
+								<img src={player.avatar} />
 							</CoverImage>
 							<Box sx={{ ml: 1.5, minWidth: 0 }}>
 								<Typography variant='h6' color='text.secondary' fontWeight={500}>
