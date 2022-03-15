@@ -11,11 +11,13 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				...state,
 				games: action.payload,
 			}
-		// case ACTIONS.ADD_USER_TO_GAME_ROOM:
-		// 	return {
-		// 		...state,
-		// 		user: [...state.games, action.payload],
-		// 	}
+		case ACTIONS.SET_CURRENT_HOLE_STATUS:
+			return {
+				...state,
+				currentHoleStatus: action.payload,
+			}
+		case ACTIONS.OPEN_SCORE_MODAL:
+			return { ...state, openScoreModal: true }
 		default:
 			return state
 	}

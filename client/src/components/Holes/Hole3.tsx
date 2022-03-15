@@ -1,27 +1,26 @@
 /** @format */
 
-import * as React from 'react'
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded'
+import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded'
+import { Button, IconButton, Typography } from '@mui/material'
+import Container from '@mui/material/Container/Container'
+import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded'
-import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded'
-import { useDispatch, useSelector } from 'react-redux'
+import * as React from 'react'
 import { useState } from 'react'
-import { buttonMargin, containerStyle, WallPaper } from '../style'
-import Container from '@mui/material/Container/Container'
-import { Button, IconButton, Typography } from '@mui/material'
-import e from 'express'
-import { io } from 'socket.io-client'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { io } from 'socket.io-client'
+import { containerStyle, WallPaper } from '../style'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
-const Hole2 = () => {
+const Hole3 = () => {
 	const gameDetails = useSelector((state: IReduxStore) => state.gameroom.games)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -38,10 +37,22 @@ const Hole2 = () => {
 			{ player3: { score: player3Score, id: gameDetails?.players[2].player, name: gameDetails?.players[2].name } },
 			{ player4: { score: player4Score, id: gameDetails?.players[3].player, name: gameDetails?.players[3].name } },
 		])
+		fetchScores()
+		console.log('Hole 3 Completed')
 		navigate('/hole4')
 	}
 
-	socket.on('hole 2', (data) => {})
+	const gameId = gameDetails?._id
+	const fetchScores = async () => {
+		try {
+			let response = await fetch(`http://localhost:3001/games/${gameId}/hole2`)
+			if (!response.ok) return Error('Could not find game')
+			let gameStatus = response.json()
+			console.log('hole 3 results:', gameStatus)
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	return (
 		<Container sx={containerStyle}>
@@ -140,4 +151,4 @@ const Hole2 = () => {
 	)
 }
 
-export default Hole2
+export default Hole3

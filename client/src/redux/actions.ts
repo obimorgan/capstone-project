@@ -7,7 +7,10 @@ export const ACTIONS = {
     USER_LOGIN: 'USER_LOGIN',
     SET_HOST: 'SET_HOST',
     ADD_USER_TO_GAME_ROOM: 'ADD_USER_TO_GAME_ROOM',
-    SET_CURRENT_GAME_DETAILS: 'SET_CURRENT_GAME_DETAILS'
+    SET_CURRENT_GAME_DETAILS: 'SET_CURRENT_GAME_DETAILS',
+    SET_HOLE_ONE_SCORE: 'SET_HOLE_ONE_SCORE',
+    SET_CURRENT_HOLE_STATUS: "SET_CURRENT_HOLE_STATUS",
+    OPEN_SCORE_MODAL: "OPEN_SCORE_MODAL"
 }
 
 // export const setUserCredentialsAction = () => {
@@ -32,9 +35,13 @@ export const setCurrentGameDetailsAction = (gameDetails: IGameDetails) => ({
     payload: gameDetails
 })
 
-export const addUserToGameroomAction = (user: IUser) => {
-    return {
-        type: ACTIONS.ADD_USER_TO_GAME_ROOM,
-        payload: user
-    }
+// Set Scores //
+
+export const openScoreModalAction = () => {
+    return { type: ACTIONS.OPEN_SCORE_MODAL}
 }
+
+export const setCurrentHoleStatusAction = (data: ISingleHole) => ({
+    type: ACTIONS.SET_CURRENT_HOLE_STATUS,
+    payload: data
+})

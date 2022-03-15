@@ -16,13 +16,11 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
-import { openScoreModalAction, setCurrentHoleStatusAction } from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
-import Scorepreview from './Scorepreview'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
-const Hole1 = () => {
+const Hole4 = () => {
 	const gameDetails = useSelector((state: IReduxStore) => state.gameroom.games)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -32,36 +30,23 @@ const Hole1 = () => {
 	const [player4Score, setPlayer4Score] = useState(0)
 
 	const handlePlayerScores = () => {
-		socket.emit('hole1', [
+		socket.emit('hole4', [
 			{ gameId: gameDetails?._id },
 			{ player1: { score: player1Score, id: gameDetails?.players[0].player, name: gameDetails?.players[0].name } },
 			{ player2: { score: player2Score, id: gameDetails?.players[1].player, name: gameDetails?.players[1].name } },
 			{ player3: { score: player3Score, id: gameDetails?.players[2].player, name: gameDetails?.players[2].name } },
 			{ player4: { score: player4Score, id: gameDetails?.players[3].player, name: gameDetails?.players[3].name } },
 		])
-		fetchScores()
-		navigate('/hole2')
-		console.log('hole 1 Completed')
+		console.log('Hole 4 Completed')
+		navigate('/hole5')
 	}
 
-	const gameId = gameDetails?._id
-	const fetchScores = async () => {
-		try {
-			let response = await fetch(`http://localhost:3001/games/${gameId}/hole1`)
-			if (!response.ok) return Error('Could not find game')
-			let gameStatus = await response.json()
-			console.log('hole 1 results:', gameStatus)
-			dispatch(setCurrentHoleStatusAction(gameStatus))
-			dispatch(openScoreModalAction())
-		} catch (error) {
-			console.log(error)
-		}
-	}
+	socket.on('hole4', (data) => {})
 
 	return (
 		<Container sx={containerStyle}>
 			<Typography variant='h1' sx={{ zIndex: 1 }}>
-				HOLE 1
+				HOLE 4
 			</Typography>
 			<TableContainer component={Paper} sx={{ zIndex: 1 }}>
 				<Table sx={{ minWidth: '100%' }} aria-label='simple table'>
@@ -155,4 +140,4 @@ const Hole1 = () => {
 	)
 }
 
-export default Hole1
+export default Hole4

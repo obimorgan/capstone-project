@@ -13,6 +13,8 @@ export const initialState: IReduxStore = {
     },
     gameroom: {
         games: null,
+        currentHoleStatus: [],
+        openScoreModal: false
     }
 }
 

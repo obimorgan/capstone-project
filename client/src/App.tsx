@@ -7,8 +7,10 @@ import Registration from './components/Registration'
 import Profile from './components/Profile'
 import Lobby from './components/Lobby'
 import Scoreboard from './components/Scoreboard'
-import Gameroom from './components/Holes/Hole1'
 import UserProvider from './components/UserProvider'
+import Hole1 from './components/Holes/Hole1'
+import Hole2 from './components/Holes/Hole2'
+import Hole3 from './components/Holes/Hole3'
 
 function App() {
 	return (
@@ -27,8 +29,10 @@ function App() {
 				<Route path='/profile' element={<Profile />} />
 				<Route path='/lobby' element={<Lobby />} />
 				<Route path='/scoreboard' element={<Scoreboard />} />
-				<Route path='/hole1' element={<Gameroom />} />
-				<Route path='/hole2' element={<Gameroom />} />
+				<Route path='/hole1' element={<Hole1 />} />
+				<Route path='/hole2' element={<Hole2 />} />
+				<Route path='/hole3' element={<Hole3 />} />
+				<Route path='/hole4' element={<Hole3 />} />
 			</Routes>
 		</BrowserRouter>
 	)
