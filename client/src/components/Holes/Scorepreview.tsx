@@ -1,5 +1,6 @@
 /** @format */
 
+import Button from '@mui/material/Button/Button'
 import Container from '@mui/material/Container/Container'
 import Modal from '@mui/material/Modal'
 import Paper from '@mui/material/Paper/Paper'
@@ -14,17 +15,14 @@ import { openScoreModalAction } from '../../redux/actions'
 import { scorePreview } from '../style'
 
 export default function Scorepreview() {
-	// const handleOpen = () => setOpen(true)
 	const dispatch = useDispatch()
-	const handleClose = () => dispatch(openScoreModalAction())
-	// const [open, setOpen] = React.useState(false)
+	const handleClose = () => dispatch(openScoreModalAction(false))
 	const openModal = useSelector((state: IReduxStore) => state.gameroom.openScoreModal)
 	const currentScore = useSelector((state: IReduxStore) => state.gameroom.currentHoleStatus)
 	console.log(currentScore)
 
 	return (
 		<>
-			{/* <Button onClick={handleOpen}>Open modal</Button> */}
 			<Modal
 				open={openModal}
 				onClose={handleClose}
@@ -46,14 +44,15 @@ export default function Scorepreview() {
 									<TableBody>
 										<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
 											<TableCell component='th' scope='row'>
-												{index}
+												{(index = index + 1)}
 											</TableCell>
-											<TableCell align='right'>{score.name}</TableCell>
+											<TableCell align='right'>{score.id}</TableCell>
 											<TableCell align='right'>{score.score}</TableCell>
 										</TableRow>
 									</TableBody>
 								))}
 						</Table>
+						<Button onClick={handleClose}>close</Button>
 					</TableContainer>
 				</Container>
 			</Modal>

@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
 import { containerStyle, WallPaper } from '../style'
+import { openScoreModalAction, setCurrentHoleStatusAction } from '../../redux/actions'
+import Scorepreview from './Scorepreview'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
@@ -45,10 +47,12 @@ const Hole3 = () => {
 	const gameId = gameDetails?._id
 	const fetchScores = async () => {
 		try {
-			let response = await fetch(`http://localhost:3001/games/${gameId}/hole2`)
+			let response = await fetch(`http://localhost:3001/games/${gameId}/hole3`)
 			if (!response.ok) return Error('Could not find game')
-			let gameStatus = response.json()
+			let gameStatus = await response.json()
 			console.log('hole 3 results:', gameStatus)
+			dispatch(setCurrentHoleStatusAction(gameStatus))
+			dispatch(openScoreModalAction(true))
 		} catch (error) {
 			console.log(error)
 		}
@@ -147,6 +151,7 @@ const Hole3 = () => {
 				Submit Scores
 			</Button>
 			<WallPaper />
+			<Scorepreview />
 		</Container>
 	)
 }

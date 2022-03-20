@@ -10,7 +10,9 @@ export const ACTIONS = {
     SET_CURRENT_GAME_DETAILS: 'SET_CURRENT_GAME_DETAILS',
     SET_HOLE_ONE_SCORE: 'SET_HOLE_ONE_SCORE',
     SET_CURRENT_HOLE_STATUS: "SET_CURRENT_HOLE_STATUS",
-    OPEN_SCORE_MODAL: "OPEN_SCORE_MODAL"
+    OPEN_SCORE_MODAL: "OPEN_SCORE_MODAL",
+    RE_RENDER_LOBBY: "RE_RENDER_LOBBY",
+    SET_HOLE1_ACTION: 'SET_HOLE1_ACTION'
 }
 
 // export const setUserCredentialsAction = () => {
@@ -35,13 +37,28 @@ export const setCurrentGameDetailsAction = (gameDetails: IGameDetails) => ({
     payload: gameDetails
 })
 
+export const reRenderLobbyAction = (data: boolean) => {
+    return {
+        type: ACTIONS.RE_RENDER_LOBBY,
+        payload: data
+    }
+}
+
 // Set Scores //
 
-export const openScoreModalAction = () => {
-    return { type: ACTIONS.OPEN_SCORE_MODAL}
+export const openScoreModalAction = (data: boolean) => {
+    return {
+        type: ACTIONS.OPEN_SCORE_MODAL,
+        payload: data
+    }
 }
 
 export const setCurrentHoleStatusAction = (data: ISingleHole) => ({
     type: ACTIONS.SET_CURRENT_HOLE_STATUS,
+    payload: data
+})
+
+export const setHole1ScoresAction = (data: ISingleHole[]) => ({
+    type: ACTIONS.SET_HOLE1_ACTION,
     payload: data
 })

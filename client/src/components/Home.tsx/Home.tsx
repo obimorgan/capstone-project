@@ -9,7 +9,7 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { io } from 'socket.io-client'
-import { setAHostAction, setCurrentGameDetailsAction } from '../../redux/actions'
+import { reRenderLobbyAction, setAHostAction, setCurrentGameDetailsAction } from '../../redux/actions'
 import { buttonMargin, containerStyle, modalStyle } from '../style'
 
 // const { REACT_APP_SERVER_URL } = process.env
@@ -24,7 +24,6 @@ export default function Home() {
 	const [open, setOpen] = useState(false)
 	const handleClose = () => setOpen(false)
 	const currentUser = useSelector((state: IReduxStore) => state.user.currentUser)
-	// const [updateGameDetails, setUpdateGameDetails] = useState(0)
 
 	// when a user clicks on "create a new game"
 	const handleOpen = () => {
@@ -62,35 +61,43 @@ export default function Home() {
 	}
 
 	useEffect(() => {
-		//Initial connection, trapping connection from  server
-		socket.on('connect', () => {
-			// socket.emit('online', {senderId)
-		})
-		// game pin from server.
+		// //Initial connection, trapping connection from  server
+		// socket.on('connect', () => {
+		// 	console.log('Connection is now established!')
+		// })
 		socket.on('display game', (data) => {
 			// b|e is joining the user to an existing game!
 			const query = data._id
 			console.log('GAME ID:', query)
 			console.log('current gamePin: ', data.gamePin)
-			const fetchCurrentGame = async () => {
-				try {
-					let response = await fetch(`http://localhost:3001/games/${query}`)
-					if (response.ok) {
-						let data = await response.json()
-						dispatch(setCurrentGameDetailsAction(data))
-						// setUpdateGameDetails(updateGameDetails + 1)
-						console.log('setting game details..')
-					} else {
-						throw new Error()
-					}
-				} catch (error) {
-					console.log(error)
-				}
-			}
-			fetchCurrentGame()
+			fetchCurrentGame(query)
+			dispatch(reRenderLobbyAction(true))
+			navigate('/lobby')
+		})
+		// game pin from server.
+		socket.on('joining player', (data) => {
+			const query = data._id
+			fetchCurrentGame(query)
+			console.log('A NEW player is joining')
+			dispatch(reRenderLobbyAction(true))
 			navigate('/lobby')
 		})
 	}, [])
+
+	const fetchCurrentGame = async (query: string) => {
+		try {
+			let response = await fetch(`http://localhost:3001/games/${query}`)
+			if (response.ok) {
+				let data = await response.json()
+				dispatch(setCurrentGameDetailsAction(data))
+				console.log('setting game details..')
+			} else {
+				throw new Error()
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	return (
 		<Container sx={containerStyle}>

@@ -49,6 +49,7 @@ interface IReduxGameroom {
     games: IGameDetails | null
     currentHoleStatus: ISingleHole[]
     openScoreModal: boolean
+    reRenderLobby: boolean
 }
 
 interface IGameDetails {
@@ -56,10 +57,39 @@ interface IGameDetails {
     gameName: string
     gamePin: number
     players: IPlayer[]
+    hole1: ISingleHole[]
+    hole2: ISingleHole[]
+    hole3: ISingleHole[]
+    hole4: ISingleHole[]
+    hole5: ISingleHole[]
+    hole6: ISingleHole[]
+    hole7: ISingleHole[]
+    hole8: ISingleHole[]
+    hole9: ISingleHole[]
+    hole10: ISingleHole[]
+    hole11: ISingleHole[]
+    hole12: ISingleHole[]
+    hole13: ISingleHole[]
+    hole14: ISingleHole[]
+    hole15: ISingleHole[]
+    hole16: ISingleHole[]
+    hole17: ISingleHole[]
+    hole18: ISingleHole[]
 }
 
 interface ISingleHole {
-    name: string
-    id: string
+    name?: string
+    id?: string
     score: number
+}
+
+interface ISubmitScores {
+    hole: ISingleHole[]
+}
+
+interface IHole1 {
+    playerId: string
+    name: string
+    score: number
+    totalScore: number
 }

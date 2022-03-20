@@ -16,6 +16,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
+import { openScoreModalAction, setCurrentHoleStatusAction } from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
 import Scorepreview from './Scorepreview'
 
@@ -39,8 +40,8 @@ const Hole2 = () => {
 			{ player4: { score: player4Score, id: gameDetails?.players[3].player, name: gameDetails?.players[3].name } },
 		])
 		fetchScores()
-		navigate('/hole3')
 		console.log('hole 2 Completed')
+		navigate('/hole3')
 	}
 
 	const gameId = gameDetails?._id
@@ -48,8 +49,10 @@ const Hole2 = () => {
 		try {
 			let response = await fetch(`http://localhost:3001/games/${gameId}/hole2`)
 			if (!response.ok) return Error('Could not find game')
-			let gameStatus = response.json()
+			let gameStatus = await response.json()
 			console.log('hole 2 results:', gameStatus)
+			dispatch(setCurrentHoleStatusAction(gameStatus))
+			dispatch(openScoreModalAction(true))
 		} catch (error) {
 			console.log(error)
 		}

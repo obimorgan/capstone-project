@@ -3,6 +3,11 @@ import thunk from 'redux-thunk';
 import gameroomReducer from "./gameroomReducer";
 import userReducer from "./userReducer";
 
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { encryptTransform } from "redux-persist-transform-encrypt";
+
+
 const composeSafely = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 export const initialState: IReduxStore = {
@@ -14,7 +19,8 @@ export const initialState: IReduxStore = {
     gameroom: {
         games: null,
         currentHoleStatus: [],
-        openScoreModal: false
+        openScoreModal: false,
+        reRenderLobby: false,
     }
 }
 
@@ -23,4 +29,27 @@ const rootReducer = combineReducers({
     gameroom: gameroomReducer
 })
 
-export const storeConfig = createStore(rootReducer, initialState, composeSafely(applyMiddleware(thunk)))
+const {REACT_APP_SECRET_KEY: secretKey} = process.env
+
+const persistConfig = {
+  key: "root",
+  storage,
+  transforms: [
+    encryptTransform({
+      secretKey: secretKey!, 
+      onError: (error) => {
+        console.log("encryption error", error);
+      },
+    }),
+  ],
+};
+
+const persistedReducer = persistReducer<any, any>(persistConfig, rootReducer);
+
+export const store = createStore(
+  persistedReducer,
+  initialState,
+  composeSafely(applyMiddleware(thunk))
+);
+
+export const persistor = persistStore(store);
