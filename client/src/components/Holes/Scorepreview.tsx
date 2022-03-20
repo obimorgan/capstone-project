@@ -46,7 +46,7 @@ export default function Scorepreview() {
 											<TableCell component='th' scope='row'>
 												{(index = index + 1)}
 											</TableCell>
-											<TableCell align='right'>{score.id}</TableCell>
+											<TableCell align='right'>{score.playerId}</TableCell>
 											<TableCell align='right'>{score.score}</TableCell>
 										</TableRow>
 									</TableBody>

@@ -12,7 +12,11 @@ export const ACTIONS = {
     SET_CURRENT_HOLE_STATUS: "SET_CURRENT_HOLE_STATUS",
     OPEN_SCORE_MODAL: "OPEN_SCORE_MODAL",
     RE_RENDER_LOBBY: "RE_RENDER_LOBBY",
-    SET_HOLE1_ACTION: 'SET_HOLE1_ACTION'
+    SET_HOLE1_ACTION: 'SET_HOLE1_ACTION',
+    ADD_PLAYER_TO_HOLES: 'ADD_PLAYER_TO_HOLES',
+    DECREASE_SCORE: 'DECREASE_SCORE',
+    INCREASE_SCORE: 'INCREASE_SCORE',
+    SET_HOLE1: 'SET_HOLE1'
 }
 
 // export const setUserCredentialsAction = () => {
@@ -46,6 +50,20 @@ export const reRenderLobbyAction = (data: boolean) => {
 
 // Set Scores //
 
+export const decreaseScoreAction = (userId: string) => {
+        return {
+        type: ACTIONS.DECREASE_SCORE,
+        payload: userId
+    }
+}
+
+export const increaseScoreAction = (userId: string) => {
+        return {
+        type: ACTIONS.INCREASE_SCORE,
+        payload: userId
+    }
+}
+
 export const openScoreModalAction = (data: boolean) => {
     return {
         type: ACTIONS.OPEN_SCORE_MODAL,
@@ -58,7 +76,12 @@ export const setCurrentHoleStatusAction = (data: ISingleHole) => ({
     payload: data
 })
 
-export const setHole1ScoresAction = (data: ISingleHole[]) => ({
+export const setHole1Action = (data: ISingleHole[]) => ({
     type: ACTIONS.SET_HOLE1_ACTION,
+    payload: data
+})
+
+export const addPlayerToHolesAction = (data: ISingleHole) => ({
+    type: ACTIONS.ADD_PLAYER_TO_HOLES,
     payload: data
 })

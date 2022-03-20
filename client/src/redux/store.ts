@@ -16,11 +16,34 @@ export const initialState: IReduxStore = {
         isAHost: false,
         currentUser: null
     },
-    gameroom: {
-        games: null,
-        currentHoleStatus: [],
-        openScoreModal: false,
-        reRenderLobby: false,
+  gameroom: {
+    games: {
+        _id: null,
+        gameName: "",
+        gamePin: null,
+        players: [],
+        hole1: [],
+        hole2: [],
+        hole3: [],
+        hole4: [],
+        hole5: [],
+        hole6: [],
+        hole7: [],
+        hole8: [],
+        hole9: [],
+        hole10: [],
+        hole11: [],
+        hole12: [],
+        hole13: [],
+        hole14: [],
+        hole15: [],
+        hole16: [],
+        hole17: [],
+        hole18: [],
+      }, 
+      currentHoleStatus: [],
+      openScoreModal: false,
+      reRenderLobby: false,
     }
 }
 

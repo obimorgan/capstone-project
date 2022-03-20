@@ -9,7 +9,12 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { io } from 'socket.io-client'
-import { reRenderLobbyAction, setAHostAction, setCurrentGameDetailsAction } from '../../redux/actions'
+import {
+	addPlayerToHolesAction,
+	reRenderLobbyAction,
+	setAHostAction,
+	setCurrentGameDetailsAction,
+} from '../../redux/actions'
 import { buttonMargin, containerStyle, modalStyle } from '../style'
 
 // const { REACT_APP_SERVER_URL } = process.env
@@ -34,11 +39,19 @@ export default function Home() {
 	const handleCreateAGame = async (e: FormEvent) => {
 		e.preventDefault()
 		dispatch(setAHostAction())
+		// dispatch(
+		// 	addPlayerToHolesAction({
+		// 		playerId: currentUser?._id,
+		// 		name: currentUser?.name,
+		// 		score: 0,
+		// 		totalScore: 0,
+		// 	}),
+		// )
 		const gamePin = Math.floor(Math.random() * 90000) + 10000
 		socket.emit('create a game', {
 			gameName: gameName,
 			gamePin: gamePin,
-			users: currentUser?._id,
+			userId: currentUser?._id,
 			avatar: currentUser?.avatar,
 			name: currentUser?.name,
 		})
@@ -54,7 +67,7 @@ export default function Home() {
 		const gamePin = parseInt(joiningGamePin)
 		socket.emit('joining a game', {
 			gamePin: gamePin,
-			users: currentUser,
+			userId: currentUser?._id,
 			avatar: currentUser?.avatar,
 			name: currentUser?.name,
 		})
@@ -90,6 +103,7 @@ export default function Home() {
 			if (response.ok) {
 				let data = await response.json()
 				dispatch(setCurrentGameDetailsAction(data))
+				console.log(data)
 				console.log('setting game details..')
 			} else {
 				throw new Error()

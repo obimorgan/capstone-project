@@ -19,11 +19,8 @@ const socket = io('http://localhost:3001', { transports: ['websocket'] })
 export default function MusicPlayerSlider() {
 	const currentGame = useSelector((state: IReduxStore) => state.gameroom.games)
 	const isAhost = useSelector((state: IReduxStore) => state.user.isAHost)
-	const reRenderLobby = useSelector((state: IReduxStore) => state.gameroom.reRenderLobby)
 	const navigate = useNavigate()
-	const [players, setPlayers] = useState<IPlayer[]>([])
 	const dispatch = useDispatch()
-	const [lobbyDetails, setLobbyDetails] = useState<IGameDetails>()
 
 	const handleStartGame = () => {
 		navigate('/hole1')
@@ -32,24 +29,26 @@ export default function MusicPlayerSlider() {
 
 	const query = currentGame?._id
 	console.log('@Lobby', query)
-	// const fetchCurrentGame = async () => {
-	// 	try {
-	// 		let response = await fetch(`http://localhost:3001/games/${query}`)
-	// 		if (response.ok) {
-	// 			let data = await response.json()
-	// 			// dispatch(setCurrentGameDetailsAction(data))
-	// 			dispatch(reRenderLobbyAction(false))
-	// 			setLobbyDetails(data)
-	// 			console.log('setting game details AT THE LOBBY', data)
-	// 		} else {
-	// 			throw new Error()
-	// 		}
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 	}
-	// }
+	const fetchCurrentGame = async () => {
+		try {
+			let response = await fetch(`http://localhost:3001/games/${query}`)
+			if (response.ok) {
+				let data = await response.json()
+				dispatch(setCurrentGameDetailsAction(data))
+				dispatch(reRenderLobbyAction(false))
 
-	// if (reRenderLobby) fetchCurrentGame()
+				console.log('setting game details AT THE LOBBY', data)
+			} else {
+				throw new Error()
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	useEffect(() => {
+		fetchCurrentGame()
+	}, [])
 
 	function refreshPage() {
 		window.location.reload()

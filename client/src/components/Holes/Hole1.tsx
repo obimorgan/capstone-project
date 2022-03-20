@@ -1,8 +1,6 @@
 /** @format */
 
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded'
-import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded'
-import { Button, IconButton, TextField, Typography } from '@mui/material'
+import { Button, IconButton, Typography } from '@mui/material'
 import Container from '@mui/material/Container/Container'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -11,101 +9,53 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import { handleBreakpoints } from '@mui/system'
-import e from 'express'
-import * as React from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
-import { openScoreModalAction, setCurrentHoleStatusAction, setHole1ScoresAction } from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined'
+import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined'
+import { decreaseScoreAction, setHole1Action, increaseScoreAction } from '../../redux/actions'
+
 // import Scorepreview from './Scorepreview'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
 const Hole1 = () => {
-	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
-
+	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
+	const hole1 = useSelector((state: IReduxStore) => state.gameroom.games.hole1)
+	// const [hole1, setHole1] = useState([])
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const [player1Score, setPlayer1Score] = useState(0)
-	const [player2Score, setPlayer2Score] = useState(0)
-	const [player3Score, setPlayer3Score] = useState(0)
-	const [player4Score, setPlayer4Score] = useState(0)
-	const [score, setScore] = useState(0)
-	const [hole1Scores, setHole1Scores] = useState({
-		name: '',
-		score: 0,
-	})
-
-	const handleScore = (e: any) => {
-		console.log('Decrease score')
-		// setHole1([...hole1, { [field]: value }])
-	}
-
-	// const handleScore = (index: number) => (e: any) => {
-	// 	console.log('index: ' + index)
-	// 	console.log('property name: ' + e.target.name)
-	// 	let newArr = [...hole1Players] // copying the old datas array
-	// 	newArr[index] = e.target.value // replace e.target.value with whatever you want to change it to
-
-	// 	dispatch(setHole1ScoresAction(newArr))
-	// }
 
 	// const handleDecreaseScore = () => {
-	// 	setScore(score - 1)
+	// 	dispatch(decreaseScoreAction())
 	// }
 
 	// const handleIncreaseScore = () => {
-	// 	setScore(score + 1)
+	// 	console.log('Decrease')
 	// }
 
-	// const handlePlayerScores = () => {
-	// 	socket.emit('hole1', [
-	// 		// { gameId: gameDetails?._id },
-	// 		// gameDetails?.players.length === 1
-	// 		// 	? { player1: { score: player1Score, id: gameDetails?.players[0].player, name: gameDetails?.players[0].name } }
-	// 		// 	: '',
-	// 		// // { player2: { score: player2Score, id: gameDetails?.players[1].player, name: gameDetails?.players[1].name } },
-	// 		// gameDetails?.players.length === 2
-	// 		// 	? { player2: { score: player2Score, id: gameDetails?.players[1].player, name: gameDetails?.players[1].name } }
-	// 		// 	: '',
-	// 		// gameDetails?.players.length === 3
-	// 		// 	? { player3: { score: player3Score, id: gameDetails?.players[2].player, name: gameDetails?.players[2].name } }
-	// 		// 	: '',
-	// 		// gameDetails?.players.length === 4
-	// 		// 	? { player4: { score: player4Score, id: gameDetails?.players[3].player, name: gameDetails?.players[3].name } }
-	// 		// 	: '',
-	// 		{ gameId: gameDetails?._id },
-	// 		{ player1: { score: player1Score, id: gameDetails?.players[0].player, name: gameDetails?.players[0].name } },
-	// 		{ player2: { score: player2Score, id: gameDetails?.players[1].player, name: gameDetails?.players[1].name } },
-	// 		{ player3: { score: player3Score, id: gameDetails?.players[2].player, name: gameDetails?.players[2].name } },
-	// 		{ player4: { score: player4Score, id: gameDetails?.players[3].player, name: gameDetails?.players[3].name } },
-	// 	])
-	// 	fetchScores()
-	// 	console.log('hole 1 Completed')
-	// 	navigate('/hole2')
-	// }
-	// const handlePlayerScores = async () => {
-	// 	const postScores = fetch(`http://localhost:3001/games/${gameId}/hole1`, {
-	// 		method: 'POST', body: JSON.stringify(), headers: {'content-type': 'application/json'}}
-	// 	})
-	// }
+	const fetchHole1 = async (gameId: string) => {
+		try {
+			let response = await fetch(`http://localhost:3001/games/${gameId}/hole1`)
+			if (response.ok) {
+				let data = await response.json()
+				// setHole1(data)
+				dispatch(setHole1Action(data))
+				console.log(data)
+			} else {
+				throw new Error()
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
-	// const gameId = gameDetails?._id
-	// const fetchScores = async () => {
-	// 	try {
-	// 		let response = await fetch(`http://localhost:3001/games/${gameId}/hole1`)
-	// 		if (!response.ok) return Error('Could not find game')
-	// 		let gameStatus = await response.json()
-	// 		console.log('hole 1 results:', gameStatus)
-	// 		dispatch(setCurrentHoleStatusAction(gameStatus))
-	// 		dispatch(openScoreModalAction(true))
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 	}
-	// }
+	useEffect(() => {
+		fetchHole1(gameId)
+	}, [])
 
 	return (
 		<Container sx={containerStyle}>
@@ -121,116 +71,21 @@ const Hole1 = () => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{/* {gameDetails?.players[0] ? (
-							<TableRow key={gameDetails?.players[0].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell component='th' scope='row'>
-									{gameDetails?.players[0].name}
-								</TableCell>
-								<TableCell align='right'>
-									<IconButton onClick={() => setPlayer1Score(player1Score - 1)}>
-										<RemoveCircleOutlineRoundedIcon />
-									</IconButton>
-									{player1Score}
-									<IconButton onClick={() => setPlayer1Score(player1Score + 1)}>
-										<AddCircleOutlineRoundedIcon />
-									</IconButton>
-								</TableCell>
-							</TableRow>
-						) : (
-							''
-						)}
-						{gameDetails?.players[1] ? (
-							<TableRow key={gameDetails?.players[1].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell component='th' scope='row'>
-									{gameDetails?.players[1].name}
-								</TableCell>
-								<TableCell align='right'>
-									<IconButton onClick={() => setPlayer2Score(player2Score - 1)}>
-										<RemoveCircleOutlineRoundedIcon />
-									</IconButton>
-									{player2Score}
-									<IconButton onClick={() => setPlayer2Score(player2Score + 1)}>
-										<AddCircleOutlineRoundedIcon />
-									</IconButton>
-								</TableCell>
-							</TableRow>
-						) : (
-							''
-						)}
-						{gameDetails?.players[2] ? (
-							<TableRow key={gameDetails?.players[2].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell component='th' scope='row'>
-									{gameDetails?.players[2].name}
-								</TableCell>
-								<TableCell align='right'>
-									<IconButton onClick={() => setPlayer3Score(player3Score - 1)}>
-										<RemoveCircleOutlineRoundedIcon />
-									</IconButton>
-									{player3Score}
-									<IconButton onClick={() => setPlayer3Score(player3Score + 1)}>
-										<AddCircleOutlineRoundedIcon />
-									</IconButton>
-								</TableCell>
-							</TableRow>
-						) : (
-							''
-						)}
-						{gameDetails?.players[3] ? (
-							<TableRow key={gameDetails?.players[3].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell component='th' scope='row'>
-									{gameDetails?.players[3].name}
-								</TableCell>
-								<TableCell align='right'>
-									<IconButton onClick={() => setPlayer4Score(player4Score - 1)}>
-										<RemoveCircleOutlineRoundedIcon />
-									</IconButton>
-									{player4Score}
-									<IconButton onClick={() => setPlayer4Score(player4Score + 1)}>
-										<AddCircleOutlineRoundedIcon />
-									</IconButton>
-								</TableCell>
-							</TableRow>
-						) : (
-							''
-						)} */}
-						{/* {gameDetails &&
-							gameDetails?.players.map((player, index) => (
-								<TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-									<TableCell component='th' scope='row'>
-										{player.name}
-									</TableCell>
-									<TableCell align='right'>
-										<IconButton onClick={() => setPlayer4Score(player4Score - 1)}>
-											<RemoveCircleOutlineRoundedIcon />
-										</IconButton>
-										{player4Score}
-										<IconButton onClick={() => setPlayer4Score(player4Score + 1)}>
-											<AddCircleOutlineRoundedIcon />
-										</IconButton>
-									</TableCell>
-								</TableRow>
-							))} */}
-						{players?.map((player, i) => (
+						{hole1?.map((player, i) => (
 							<>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+								<TableRow key={player.playerId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 									<TableCell component='th' scope='column'>
-										{/* {player.name} */}
-										<input type='text' value={player.name} />
+										{player.name}
+										{/* <input type='text' value={player.name} /> */}
 									</TableCell>
 									<TableCell align='right'>
-										{/* <IconButton onClick={handleDecreaseScore}>
-											<RemoveCircleOutlineRoundedIcon />
-										</IconButton> */}
-										<input
-											type='number'
-											value={score}
-											onChange={(e) => {
-												handleScore(e.target.value)
-											}}
-										/>
-										{/* <IconButton onClick={handleIncreaseScore}>
-											<AddCircleOutlineRoundedIcon />
-										</IconButton> */}
+										<Button onClick={(e) => dispatch(decreaseScoreAction(player.playerId))}>
+											<RemoveCircleOutlinedIcon />
+										</Button>
+										{player.score}
+										<Button onClick={(e) => dispatch(increaseScoreAction(player.playerId))}>
+											<AddCircleOutlinedIcon />
+										</Button>
 									</TableCell>
 								</TableRow>
 							</>
@@ -247,6 +102,3 @@ const Hole1 = () => {
 }
 
 export default Hole1
-function handleScore(arg0: string, value: string) {
-	throw new Error('Function not implemented.')
-}

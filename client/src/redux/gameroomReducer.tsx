@@ -26,14 +26,40 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				...state,
 				reRenderLobby: action.payload,
 			}
-		// scores
-		case ACTIONS.SET_HOLE1_ACTION:
-			const { payload } = action
+		case ACTIONS.DECREASE_SCORE:
+			console.log({
+				...state,
+				games: {
+					...state.games,
+					hole1: [...state.games.hole1].map((player) => {
+						player.playerId === action.payload
+						return 'Hello'
+					}),
+				},
+			})
 			return {
 				...state,
 				games: {
-					...state,
-					hole1: [{ ...state, payload }],
+					...state.games,
+					hole1: [...state.games.hole1].map((player) => {
+						player.playerId === action.payload
+							? {
+									score: +1,
+							  }
+							: ''
+					}),
+				},
+			}
+		// case ACTIONS.INCREASE_SCORE:
+		// 	return {
+		// 		...state,
+		// 	}
+		case ACTIONS.SET_HOLE1:
+			return {
+				...state,
+				games: {
+					...state.games,
+					hole1: action.payload,
 				},
 			}
 		default:
