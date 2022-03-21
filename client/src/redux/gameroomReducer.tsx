@@ -26,42 +26,111 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				...state,
 				reRenderLobby: action.payload,
 			}
-		case ACTIONS.DECREASE_SCORE:
-			console.log({
-				...state,
-				games: {
-					...state.games,
-					hole1: [...state.games.hole1].map((player) => {
-						player.playerId === action.payload
-						return 'Hello'
-					}),
-				},
-			})
+		case ACTIONS.DECREASE_HOLE1_SCORE:
 			return {
 				...state,
 				games: {
 					...state.games,
-					hole1: [...state.games.hole1].map((player) => {
-						player.playerId === action.payload
-							? {
-									score: +1,
-							  }
-							: ''
+					hole1: [...state.games.hole1].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: (detail.score -= 1) }
+						}
+						return { ...detail }
 					}),
 				},
 			}
-		// case ACTIONS.INCREASE_SCORE:
-		// 	return {
-		// 		...state,
-		// 	}
-		case ACTIONS.SET_HOLE1:
+		case ACTIONS.INCREASE_HOLE1_SCORE:
 			return {
 				...state,
 				games: {
 					...state.games,
-					hole1: action.payload,
+					hole1: [...state.games.hole1].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: (detail.score += 1) }
+						}
+						return { ...detail }
+					}),
 				},
 			}
+		case ACTIONS.DECREASE_HOLE2_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					hole2: [...state.games.hole2].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: (detail.score -= 1) }
+						}
+						return { ...detail }
+					}),
+				},
+			}
+		case ACTIONS.INCREASE_HOLE2_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					hole2: [...state.games.hole2].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: (detail.score += 1) }
+						}
+						return { ...detail }
+					}),
+				},
+			}
+		case ACTIONS.DECREASE_HOLE3_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					hole3: [...state.games.hole3].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: (detail.score -= 1) }
+						}
+						return { ...detail }
+					}),
+				},
+			}
+		case ACTIONS.INCREASE_HOLE3_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					hole3: [...state.games.hole3].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: (detail.score += 1) }
+						}
+						return { ...detail }
+					}),
+				},
+			}
+		case ACTIONS.DECREASE_HOLE4_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					hole4: [...state.games.hole4].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: (detail.score -= 1) }
+						}
+						return { ...detail }
+					}),
+				},
+			}
+		case ACTIONS.INCREASE_HOLE4_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					hole4: [...state.games.hole4].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: (detail.score += 1) }
+						}
+						return { ...detail }
+					}),
+				},
+			}
+
 		default:
 			return state
 	}

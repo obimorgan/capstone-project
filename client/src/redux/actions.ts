@@ -14,9 +14,19 @@ export const ACTIONS = {
     RE_RENDER_LOBBY: "RE_RENDER_LOBBY",
     SET_HOLE1_ACTION: 'SET_HOLE1_ACTION',
     ADD_PLAYER_TO_HOLES: 'ADD_PLAYER_TO_HOLES',
-    DECREASE_SCORE: 'DECREASE_SCORE',
-    INCREASE_SCORE: 'INCREASE_SCORE',
-    SET_HOLE1: 'SET_HOLE1'
+    
+    DECREASE_HOLE1_SCORE: 'DECREASE_HOLE1_SCORE',
+    INCREASE_HOLE1_SCORE: 'INCREASE_HOLE1_SCORE',
+
+    DECREASE_HOLE2_SCORE: 'DECREASE_HOLE2_SCORE',
+    INCREASE_HOLE2_SCORE: 'INCREASE_HOLE2_SCORE',
+
+    DECREASE_HOLE3_SCORE: 'DECREASE_HOLE3_SCORE',
+    INCREASE_HOLE3_SCORE: 'INCREASE_HOLE3_SCORE',
+
+    DECREASE_HOLE4_SCORE: 'DECREASE_HOLE4_SCORE',
+    INCREASE_HOLE4_SCORE: 'INCREASE_HOLE4_SCORE',
+    
 }
 
 // export const setUserCredentialsAction = () => {
@@ -47,23 +57,6 @@ export const reRenderLobbyAction = (data: boolean) => {
         payload: data
     }
 }
-
-// Set Scores //
-
-export const decreaseScoreAction = (userId: string) => {
-        return {
-        type: ACTIONS.DECREASE_SCORE,
-        payload: userId
-    }
-}
-
-export const increaseScoreAction = (userId: string) => {
-        return {
-        type: ACTIONS.INCREASE_SCORE,
-        payload: userId
-    }
-}
-
 export const openScoreModalAction = (data: boolean) => {
     return {
         type: ACTIONS.OPEN_SCORE_MODAL,
@@ -76,12 +69,65 @@ export const setCurrentHoleStatusAction = (data: ISingleHole) => ({
     payload: data
 })
 
-export const setHole1Action = (data: ISingleHole[]) => ({
-    type: ACTIONS.SET_HOLE1_ACTION,
-    payload: data
-})
-
 export const addPlayerToHolesAction = (data: ISingleHole) => ({
     type: ACTIONS.ADD_PLAYER_TO_HOLES,
     payload: data
 })
+
+// Set Scores //
+
+export const decHole1ScoreAction = (userId: string) => {
+        return {
+        type: ACTIONS.DECREASE_HOLE1_SCORE,
+        payload: userId
+    }
+}
+
+export const incHole1ScoreAction = (userId: string) => {
+        return {
+        type: ACTIONS.INCREASE_HOLE1_SCORE,
+        payload: userId
+    }
+}
+
+export const decHole2ScoreAction = (userId: string) => {
+        return {
+        type: ACTIONS.DECREASE_HOLE2_SCORE,
+        payload: userId
+    }
+}
+
+export const incHole2ScoreAction = (userId: string) => {
+        return {
+        type: ACTIONS.INCREASE_HOLE2_SCORE,
+        payload: userId
+    }
+}
+
+export const decHole3ScoreAction = (userId: string) => {
+        return {
+        type: ACTIONS.DECREASE_HOLE3_SCORE,
+        payload: userId
+    }
+}
+
+export const incHole3ScoreAction = (userId: string) => {
+        return {
+        type: ACTIONS.INCREASE_HOLE3_SCORE,
+        payload: userId
+    }
+}
+
+export const decHole4ScoreAction = (userId: string) => {
+        return {
+        type: ACTIONS.DECREASE_HOLE4_SCORE,
+        payload: userId
+    }
+}
+
+export const incHole4ScoreAction = (userId: string) => {
+        return {
+        type: ACTIONS.INCREASE_HOLE4_SCORE,
+        payload: userId
+    }
+}

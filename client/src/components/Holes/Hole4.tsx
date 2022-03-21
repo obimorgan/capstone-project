@@ -1,8 +1,8 @@
 /** @format */
 
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded'
-import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded'
-import { Button, IconButton, Typography } from '@mui/material'
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined'
+import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined'
+import { Button, Typography } from '@mui/material'
 import Container from '@mui/material/Container/Container'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -11,51 +11,21 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import * as React from 'react'
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { io } from 'socket.io-client'
-import { setCurrentHoleStatusAction, openScoreModalAction } from '../../redux/actions'
+import { decHole4ScoreAction, incHole4ScoreAction, openScoreModalAction } from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
 import Scorepreview from './Scorepreview'
 
-const socket = io('http://localhost:3001', { transports: ['websocket'] })
-
 const Hole4 = () => {
-	const gameDetails = useSelector((state: IReduxStore) => state.gameroom.games)
+	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
+	const hole4 = useSelector((state: IReduxStore) => state.gameroom.games.hole4)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const [player1Score, setPlayer1Score] = useState(0)
-	const [player2Score, setPlayer2Score] = useState(0)
-	const [player3Score, setPlayer3Score] = useState(0)
-	const [player4Score, setPlayer4Score] = useState(0)
 
 	const handlePlayerScores = () => {
-		socket.emit('hole4', [
-			{ gameId: gameDetails?._id },
-			{ player1: { score: player1Score, id: gameDetails?.players[0].player, name: gameDetails?.players[0].name } },
-			{ player2: { score: player2Score, id: gameDetails?.players[1].player, name: gameDetails?.players[1].name } },
-			{ player3: { score: player3Score, id: gameDetails?.players[2].player, name: gameDetails?.players[2].name } },
-			{ player4: { score: player4Score, id: gameDetails?.players[3].player, name: gameDetails?.players[3].name } },
-		])
-		fetchScores()
-		console.log('Hole 4 Completed')
+		dispatch(openScoreModalAction(true))
 		navigate('/hole5')
-	}
-
-	const gameId = gameDetails?._id
-	const fetchScores = async () => {
-		try {
-			let response = await fetch(`http://localhost:3001/games/${gameId}/hole4`)
-			if (!response.ok) return Error('Could not find game')
-			let gameStatus = await response.json()
-			console.log('hole 4 results:', gameStatus)
-			dispatch(setCurrentHoleStatusAction(gameStatus))
-			dispatch(openScoreModalAction(true))
-		} catch (error) {
-			console.log(error)
-		}
 	}
 
 	return (
@@ -72,86 +42,33 @@ const Hole4 = () => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{gameDetails?.players[0] ? (
-							<TableRow key={gameDetails?.players[0].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell component='th' scope='row'>
-									{gameDetails?.players[0].name}
-								</TableCell>
-								<TableCell align='right'>
-									<IconButton onClick={() => setPlayer1Score(player1Score - 1)}>
-										<RemoveCircleOutlineRoundedIcon />
-									</IconButton>
-									{player1Score}
-									<IconButton onClick={() => setPlayer1Score(player1Score + 1)}>
-										<AddCircleOutlineRoundedIcon />
-									</IconButton>
-								</TableCell>
-							</TableRow>
-						) : (
-							''
-						)}
-						{gameDetails?.players[1] ? (
-							<TableRow key={gameDetails?.players[1].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell component='th' scope='row'>
-									{gameDetails?.players[1].name}
-								</TableCell>
-								<TableCell align='right'>
-									<IconButton onClick={() => setPlayer2Score(player2Score - 1)}>
-										<RemoveCircleOutlineRoundedIcon />
-									</IconButton>
-									{player2Score}
-									<IconButton onClick={() => setPlayer2Score(player2Score + 1)}>
-										<AddCircleOutlineRoundedIcon />
-									</IconButton>
-								</TableCell>
-							</TableRow>
-						) : (
-							''
-						)}
-						{gameDetails?.players[2] ? (
-							<TableRow key={gameDetails?.players[2].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell component='th' scope='row'>
-									{gameDetails?.players[2].name}
-								</TableCell>
-								<TableCell align='right'>
-									<IconButton onClick={() => setPlayer3Score(player3Score - 1)}>
-										<RemoveCircleOutlineRoundedIcon />
-									</IconButton>
-									{player3Score}
-									<IconButton onClick={() => setPlayer3Score(player3Score + 1)}>
-										<AddCircleOutlineRoundedIcon />
-									</IconButton>
-								</TableCell>
-							</TableRow>
-						) : (
-							''
-						)}
-						{gameDetails?.players[3] ? (
-							<TableRow key={gameDetails?.players[3].player} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell component='th' scope='row'>
-									{gameDetails?.players[3].name}
-								</TableCell>
-								<TableCell align='right'>
-									<IconButton onClick={() => setPlayer4Score(player4Score - 1)}>
-										<RemoveCircleOutlineRoundedIcon />
-									</IconButton>
-									{player4Score}
-									<IconButton onClick={() => setPlayer4Score(player4Score + 1)}>
-										<AddCircleOutlineRoundedIcon />
-									</IconButton>
-								</TableCell>
-							</TableRow>
-						) : (
-							''
-						)}
+						{hole4?.map((player, i) => (
+							<>
+								<TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+									<TableCell component='th' scope='column'>
+										{player.name}
+										{/* <input type='text' value={player.name} /> */}
+									</TableCell>
+									<TableCell align='right'>
+										<Button onClick={(e) => dispatch(decHole4ScoreAction(player.playerId))}>
+											<RemoveCircleOutlinedIcon />
+										</Button>
+										{player.score}
+										<Button onClick={(e) => dispatch(incHole4ScoreAction(player.playerId))}>
+											<AddCircleOutlinedIcon />
+										</Button>
+									</TableCell>
+								</TableRow>
+							</>
+						))}
 					</TableBody>
 				</Table>
 			</TableContainer>
 			<Button onClick={handlePlayerScores} variant='contained' sx={{ m: 1, zIndex: 1, color: 'success' }}>
 				Submit Scores
 			</Button>
-			<WallPaper />
 			<Scorepreview />
+			<WallPaper />
 		</Container>
 	)
 }
