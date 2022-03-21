@@ -18,7 +18,7 @@ import { containerStyle, WallPaper } from '../style'
 import Scorepreview from './Scorepreview'
 
 const Hole4 = () => {
-	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
+	const hole3Ranking = useSelector((state: IReduxStore) => state.gameroom.games.hole3)
 	const hole4 = useSelector((state: IReduxStore) => state.gameroom.games.hole4)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -67,7 +67,7 @@ const Hole4 = () => {
 			<Button onClick={handlePlayerScores} variant='contained' sx={{ m: 1, zIndex: 1, color: 'success' }}>
 				Submit Scores
 			</Button>
-			<Scorepreview />
+			<Scorepreview data={hole3Ranking} hole='hole3' />
 			<WallPaper />
 		</Container>
 	)

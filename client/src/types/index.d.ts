@@ -120,6 +120,7 @@ interface IGameDetails {
 }
 
 interface ISingleHole {
+	map: any;
     name?: string
     playerId?: string
     score: number

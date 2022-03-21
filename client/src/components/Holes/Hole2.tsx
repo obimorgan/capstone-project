@@ -11,18 +11,18 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { decHole2ScoreAction, incHole2ScoreAction, openScoreModalAction } from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
 import Scorepreview from './Scorepreview'
 
-const Hole2 = () => {
-	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
+const Hole2: React.FC = () => {
+	const hole1Ranking = useSelector((state: IReduxStore) => state.gameroom.games.hole1)
 	const hole2 = useSelector((state: IReduxStore) => state.gameroom.games.hole2)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-
 	const handlePlayerScores = () => {
 		dispatch(openScoreModalAction(true))
 		navigate('/hole3')
@@ -67,7 +67,7 @@ const Hole2 = () => {
 			<Button onClick={handlePlayerScores} variant='contained' sx={{ m: 1, zIndex: 1, color: 'success' }}>
 				Submit Scores
 			</Button>
-			<Scorepreview />
+			<Scorepreview data={hole1Ranking} hole='Hole3' />
 			<WallPaper />
 		</Container>
 	)

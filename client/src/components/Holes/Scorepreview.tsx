@@ -14,12 +14,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { openScoreModalAction } from '../../redux/actions'
 import { scorePreview } from '../style'
 
-export default function Scorepreview() {
+type Prop = {
+	data: ISingleHole[]
+	hole: string
+}
+
+const Scorepreview: React.FC<Prop> = ({ data, hole }) => {
+	console.log(data)
 	const dispatch = useDispatch()
 	const handleClose = () => dispatch(openScoreModalAction(false))
 	const openModal = useSelector((state: IReduxStore) => state.gameroom.openScoreModal)
-	const currentScore = useSelector((state: IReduxStore) => state.gameroom.currentHoleStatus)
-	console.log(currentScore)
 
 	return (
 		<>
@@ -39,15 +43,15 @@ export default function Scorepreview() {
 									<TableCell align='right'>Score</TableCell>
 								</TableRow>
 							</TableHead>
-							{currentScore &&
-								currentScore.map((score, index) => (
+							{data &&
+								data.map((player, index) => (
 									<TableBody>
 										<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
 											<TableCell component='th' scope='row'>
 												{(index = index + 1)}
 											</TableCell>
-											<TableCell align='right'>{score.playerId}</TableCell>
-											<TableCell align='right'>{score.score}</TableCell>
+											<TableCell align='right'>{player.name}</TableCell>
+											<TableCell align='right'>{player.score}</TableCell>
 										</TableRow>
 									</TableBody>
 								))}
@@ -59,3 +63,5 @@ export default function Scorepreview() {
 		</>
 	)
 }
+
+export default Scorepreview
