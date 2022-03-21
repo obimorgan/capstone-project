@@ -15,16 +15,34 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { decHole1ScoreAction, incHole1ScoreAction, openScoreModalAction } from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
+import { io } from 'socket.io-client'
+import { useState } from 'react'
+
+const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
 const Hole1 = () => {
 	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
 	const hole1 = useSelector((state: IReduxStore) => state.gameroom.games.hole1)
+	// const [emit, setEmit] = useState(hole1)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
 	const handlePlayerScores = () => {
 		dispatch(openScoreModalAction(true))
-		navigate('/hole2')
+		const submitHole1 = async () => {
+			try {
+				let response = await fetch(`http://localhost:3001/games/${gameId}/hole1`, {
+					method: 'PUT',
+					body: hole1 && JSON.stringify(hole1),
+					headers: { 'Content-Type': 'application/json', withCredentials: 'true', Accept: 'application/json' },
+				})
+				if (!response) throw new Error('Could not submit hole 1 scores')
+				navigate('/hole2')
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		submitHole1()
 	}
 
 	return (

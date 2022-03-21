@@ -41,7 +41,7 @@ interface IPlayer {
     _id: string // new id is given to a player who joined the game
     player: string
     name?: string
-    scores: IHoles[]
+    totalScore: number
     avatar: string
 }
 

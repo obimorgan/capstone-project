@@ -77,7 +77,7 @@ export default function MusicPlayerSlider() {
 								</Typography>
 								<Typography noWrap>
 									<b>Best score:</b>
-									<span>{player.scores}</span>
+									{/* <span>{player.scores}</span> */}
 								</Typography>
 							</Box>
 						</Box>

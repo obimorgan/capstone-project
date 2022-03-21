@@ -37,7 +37,7 @@ export default function Login() {
 				method: 'POST',
 				body: credentials && JSON.stringify(credentials),
 				headers: {
-					Accept: 'applicaiton/json',
+					Accept: 'application/json',
 					'content-type': 'application/json',
 					withCredentials: 'true',
 				},

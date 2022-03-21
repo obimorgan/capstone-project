@@ -29,7 +29,7 @@ function App() {
 				<Route path='/registration' element={<Registration />} />
 				<Route path='/profile' element={<Profile />} />
 				<Route path='/lobby' element={<Lobby />} />
-				<Route path='/scoreboard' element={<Scoreboard />} />
+				<Route path='/scoreboard' element={<Scoreboard data={[]} />} />
 				<Route path='/hole1' element={<Hole1 />} />
 				<Route path='/hole2' element={<Hole2 />} />
 				<Route path='/hole3' element={<Hole3 />} />

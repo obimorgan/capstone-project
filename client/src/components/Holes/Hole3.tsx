@@ -15,9 +15,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { decHole3ScoreAction, incHole3ScoreAction, openScoreModalAction } from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
-import Scorepreview from './Scorepreview'
+import Scorepreview from '../Scorepreview'
 
 const Hole3 = () => {
+	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
 	const hole2Ranking = useSelector((state: IReduxStore) => state.gameroom.games.hole2)
 	const hole3 = useSelector((state: IReduxStore) => state.gameroom.games.hole3)
 	const dispatch = useDispatch()
@@ -25,9 +26,21 @@ const Hole3 = () => {
 
 	const handlePlayerScores = () => {
 		dispatch(openScoreModalAction(true))
-		navigate('/hole4')
+		const submitHole3 = async () => {
+			try {
+				let response = await fetch(`http://localhost:3001/games/${gameId}/hole3`, {
+					method: 'PUT',
+					body: hole3 && JSON.stringify(hole3),
+					headers: { 'Content-Type': 'application/json', withCredentials: 'true', Accept: 'application/json' },
+				})
+				if (!response) throw new Error('Could not submit hole 3 scores')
+				navigate('/hole4')
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		submitHole3()
 	}
-
 	return (
 		<Container sx={containerStyle}>
 			<Typography variant='h1' sx={{ zIndex: 1 }}>
@@ -67,7 +80,7 @@ const Hole3 = () => {
 			<Button onClick={handlePlayerScores} variant='contained' sx={{ m: 1, zIndex: 1, color: 'success' }}>
 				Submit Scores
 			</Button>
-			<Scorepreview data={hole2Ranking} hole='hole3' />
+			<Scorepreview data={hole2Ranking} hole='Hole2' />
 			<WallPaper />
 		</Container>
 	)

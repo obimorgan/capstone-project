@@ -10,9 +10,10 @@ import TableCell from '@mui/material/TableCell/TableCell'
 import TableContainer from '@mui/material/TableContainer/TableContainer'
 import TableHead from '@mui/material/TableHead/TableHead'
 import TableRow from '@mui/material/TableRow/TableRow'
+import Typography from '@mui/material/Typography/Typography'
 import { useDispatch, useSelector } from 'react-redux'
-import { openScoreModalAction } from '../../redux/actions'
-import { scorePreview } from '../style'
+import { openScoreModalAction } from '../redux/actions'
+import { scorePreview } from './style'
 
 type Prop = {
 	data: ISingleHole[]
@@ -35,6 +36,9 @@ const Scorepreview: React.FC<Prop> = ({ data, hole }) => {
 			>
 				<Container sx={scorePreview}>
 					<TableContainer component={Paper} sx={{ zIndex: 1 }}>
+						<Typography variant='h6' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
+							{hole} Ranking
+						</Typography>
 						<Table>
 							<TableHead>
 								<TableRow>
@@ -44,17 +48,21 @@ const Scorepreview: React.FC<Prop> = ({ data, hole }) => {
 								</TableRow>
 							</TableHead>
 							{data &&
-								data.map((player, index) => (
-									<TableBody>
-										<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-											<TableCell component='th' scope='row'>
-												{(index = index + 1)}
-											</TableCell>
-											<TableCell align='right'>{player.name}</TableCell>
-											<TableCell align='right'>{player.score}</TableCell>
-										</TableRow>
-									</TableBody>
-								))}
+								data
+									.sort((a, b) => {
+										return a.score - b.score
+									})
+									.map((player, index) => (
+										<TableBody>
+											<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
+												<TableCell component='th' scope='row'>
+													{(index = index + 1)}
+												</TableCell>
+												<TableCell align='left'>{player.name}</TableCell>
+												<TableCell align='right'>{player.score}</TableCell>
+											</TableRow>
+										</TableBody>
+									))}
 						</Table>
 						<Button onClick={handleClose}>close</Button>
 					</TableContainer>

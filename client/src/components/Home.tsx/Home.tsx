@@ -39,14 +39,7 @@ export default function Home() {
 	const handleCreateAGame = async (e: FormEvent) => {
 		e.preventDefault()
 		dispatch(setAHostAction())
-		// dispatch(
-		// 	addPlayerToHolesAction({
-		// 		playerId: currentUser?._id,
-		// 		name: currentUser?.name,
-		// 		score: 0,
-		// 		totalScore: 0,
-		// 	}),
-		// )
+
 		const gamePin = Math.floor(Math.random() * 90000) + 10000
 		socket.emit('create a game', {
 			gameName: gameName,
