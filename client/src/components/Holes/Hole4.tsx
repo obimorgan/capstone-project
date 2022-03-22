@@ -17,21 +17,28 @@ import {
 	decHole4ScoreAction,
 	incHole4ScoreAction,
 	openScoreModalAction,
-	setFirstPlayerTotalAction,
-	setSecondPlayerTotalAction,
+	setPlayerTotalScoreAction,
 } from '../../redux/actions'
-import { containerStyle, WallPaper } from '../style'
 import Scorepreview from '../Scorepreview'
-import { useState } from 'react'
+import { containerStyle, WallPaper } from '../style'
 
 const Hole4 = () => {
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
 	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
 	const hole3Ranking = useSelector((state: IReduxStore) => state.gameroom.games.hole3)
 	const hole4 = useSelector((state: IReduxStore) => state.gameroom.games.hole4)
-	const [player1, setPlayer1] = useState<ITotalScore>({ id: hole4[0].playerId, score: hole4[0].score })
-	const [player2, setPlayer2] = useState<ITotalScore>({ id: hole4[1].playerId, score: hole4[1].score })
-	const dispatch = useDispatch()
-	const navigate = useNavigate()
+
+	let playersArray = []
+	const mapping = hole4.map((player) => {
+		return playersArray.push(player)
+	})
+
+	const setTotalScores = () => {
+		playersArray.map((player, i) => {
+			dispatch(setPlayerTotalScoreAction(player))
+		})
+	}
 
 	const handlePlayerScores = () => {
 		dispatch(openScoreModalAction(true))
@@ -43,8 +50,7 @@ const Hole4 = () => {
 					headers: { 'Content-Type': 'application/json', withCredentials: 'true', Accept: 'application/json' },
 				})
 				if (!response) throw new Error('Could not submit hole 4 scores')
-				dispatch(setFirstPlayerTotalAction(player1))
-				dispatch(setSecondPlayerTotalAction(player2))
+				setTotalScores()
 				navigate('/scoreboard')
 			} catch (error) {
 				console.log(error)
@@ -72,7 +78,6 @@ const Hole4 = () => {
 								<TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 									<TableCell component='th' scope='column'>
 										{player.name}
-										{/* <input type='text' value={player.name} /> */}
 									</TableCell>
 									<TableCell align='right'>
 										<Button onClick={(e) => dispatch(decHole4ScoreAction(player.playerId))}>

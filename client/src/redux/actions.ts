@@ -83,41 +83,14 @@ export const setPlayerTotalScoreAction = (data: ITotalScore) => ({
 	payload: data,
 })
 
-//player 1
-export const setFirstPlayerTotalAction = (player1: ITotalScore) => ({
-	type: ACTIONS.SET_FIRST_PLAYER_TOTAL_SCORE,
-	payload: {
-		p1Id: player1.id,
-		p1Score: player1.score,
-	},
-})
-
-//player 2
-export const setSecondPlayerTotalAction = (player2: ITotalScore) => ({
-	type: ACTIONS.SET_SECOND_PLAYER_TOTAL_SCORE,
-	payload: {
-		p2Id: player2.id,
-		p2Score: player2.score,
-	},
-})
-
-//player3
-export const setThirdPlayerTotalAction = (player3: ITotalScore) => ({
-	type: ACTIONS.SET_THIRD_PLAYER_TOTAL_SCORE,
-	payload: {
-		p3Id: player3.id,
-		p3Score: player3.score,
-	},
-})
-
-//player 4
-export const setFourthPlayerTotalAction = (player4: ITotalScore) => ({
-	type: ACTIONS.SET_FOURTH_PLAYER_TOTAL_SCORE,
-	payload: {
-		p4Id: player4.id,
-		p4Score: player4.score,
-	},
-})
+//player 1 ======first attempt =====
+// export const setFirstPlayerTotalAction = (player1: ITotalScore) => ({
+// 	type: ACTIONS.SET_FIRST_PLAYER_TOTAL_SCORE,
+// 	payload: {
+// 		p1Id: player1.id,
+// 		p1Score: player1.score,
+// 	},
+// })
 // Set Holes Scores //
 
 export const decHole1ScoreAction = (userId: string) => {

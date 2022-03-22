@@ -21,7 +21,6 @@ type Prop = {
 }
 
 const Scorepreview: React.FC<Prop> = ({ data, hole }) => {
-	console.log(data)
 	const dispatch = useDispatch()
 	const handleClose = () => dispatch(openScoreModalAction(false))
 	const openModal = useSelector((state: IReduxStore) => state.gameroom.openScoreModal)

@@ -17,27 +17,15 @@ import {
 	decHole1ScoreAction,
 	incHole1ScoreAction,
 	openScoreModalAction,
-	setFirstPlayerTotalAction,
-	setSecondPlayerTotalAction,
-	setThirdPlayerTotalAction,
-	setFourthPlayerTotalAction,
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
-import { io } from 'socket.io-client'
-import { useState } from 'react'
-
-// const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
 const Hole1 = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
-	console.log(players.length)
 	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
 	const hole1 = useSelector((state: IReduxStore) => state.gameroom.games.hole1)
-	// const [player1, setPlayer1] = useState<ITotalScore>({ id: hole1[0].playerId, score: hole1[0].score })
-	// const [player2, setPlayer2] = useState<ITotalScore>({ id: hole1[1].playerId, score: hole1[1].score })
 
 	let playersArray = []
 	const mapping = hole1.map((player) => {
@@ -47,14 +35,6 @@ const Hole1 = () => {
 
 	const setTotalScores = () => {
 		playersArray.map((player, i) => {
-			// if (!player[0]) return
-			// dispatch(setFirstPlayerTotalAction(player[0]))
-			// if (!player[1]) return
-			// dispatch(setSecondPlayerTotalAction(player[1]))
-			// if (!player[2]) return
-			// dispatch(setThirdPlayerTotalAction(player[2]))
-			// if (!player[3]) return
-			// dispatch(setFourthPlayerTotalAction(player[3]))
 			dispatch(setPlayerTotalScoreAction(player))
 		})
 	}
@@ -89,7 +69,6 @@ const Hole1 = () => {
 						<TableRow>
 							<TableCell align='center'>Players</TableCell>
 							<TableCell align='center'>Score</TableCell>
-							{/* <TableCell align='right'>Total</TableCell> */}
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -109,9 +88,6 @@ const Hole1 = () => {
 											<Button onClick={(e) => dispatch(incHole1ScoreAction(player.playerId))}>
 												<AddCircleOutlinedIcon />
 											</Button>
-											{/* {totals?.map((total) => (
-											<TableCell align='right'>{total.totalScore}</TableCell>
-										))} */}
 										</TableCell>
 									</TableRow>
 								</>

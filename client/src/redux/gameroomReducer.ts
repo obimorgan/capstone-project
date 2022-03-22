@@ -30,27 +30,12 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 		//Total scores
 
 		case ACTIONS.SET_PLAYER_TOTAL_SCORE:
-			console.log({
-				...state,
-				games: {
-					...state.games,
-					players: [...state.games.players].map((player, index) => {
-						if (index !== action.payload.index) {
-							return { ...player }
-						}
-						return {
-							...player,
-							totalScore: (player.totalScore += action.payload.score),
-						}
-					}),
-				},
-			})
 			return {
 				...state,
 				games: {
 					...state.games,
 					players: [...state.games.players].map((player, index) => {
-						if (index !== action.payload.index) {
+						if (player.playerId === action.payload.playerId) {
 							return player
 						}
 						return {
