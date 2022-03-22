@@ -11,6 +11,7 @@ import TableContainer from '@mui/material/TableContainer/TableContainer'
 import TableHead from '@mui/material/TableHead/TableHead'
 import TableRow from '@mui/material/TableRow/TableRow'
 import Typography from '@mui/material/Typography/Typography'
+import { strictEqual } from 'assert'
 import { useDispatch, useSelector } from 'react-redux'
 import { openScoreModalAction } from '../redux/actions'
 import { containerStyle, scorePreview, WallPaper } from './style'
@@ -20,6 +21,7 @@ type Prop = {
 }
 
 const Scoreboard: React.FC<Prop> = ({ data }) => {
+	const gameName = useSelector((state: IReduxStore) => state.gameroom.games.gameName)
 	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
 	const hole1 = useSelector((state: IReduxStore) => state.gameroom.games.hole1)
 	console.log(hole1)
@@ -28,6 +30,9 @@ const Scoreboard: React.FC<Prop> = ({ data }) => {
 
 	return (
 		<Container sx={containerStyle}>
+			<Typography variant='h3' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
+				The Winner of Game: {gameName}
+			</Typography>
 			<TableContainer component={Paper} sx={{ zIndex: 1 }}>
 				<Typography variant='h6' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
 					Leaderboard

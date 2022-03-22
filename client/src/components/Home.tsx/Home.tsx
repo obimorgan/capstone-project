@@ -9,12 +9,8 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { io } from 'socket.io-client'
-import {
-	addPlayerToHolesAction,
-	reRenderLobbyAction,
-	setAHostAction,
-	setCurrentGameDetailsAction,
-} from '../../redux/actions'
+import { reRenderLobbyAction, setAHostAction, setCurrentGameDetailsAction } from '../../redux/actions'
+import Profile from './Profile'
 import { buttonMargin, containerStyle, modalStyle } from '../style'
 
 // const { REACT_APP_SERVER_URL } = process.env
@@ -107,65 +103,70 @@ export default function Home() {
 	}
 
 	return (
-		<Container sx={containerStyle}>
-			<Button
-				sx={buttonMargin}
-				variant='contained'
-				onClick={(e) => {
-					handleOpen()
-					setCreateGame(true)
-				}}
-			>
-				Create a new Game
-			</Button>
-			<Button
-				sx={buttonMargin}
-				variant='contained'
-				onClick={(e) => {
-					handleOpen()
-					setCreateGame(false)
-				}}
-			>
-				join a game
-			</Button>
-			<Button sx={buttonMargin} variant='outlined' color='secondary' onClick={handleOpen}>
-				Profile
-			</Button>
-			<Button sx={buttonMargin} variant='outlined' color='secondary' onClick={handleOpen}>
-				Dashboard
-			</Button>
+		<>
+			<Profile />
+			<Container sx={containerStyle}>
+				<Button
+					sx={buttonMargin}
+					variant='contained'
+					color='success'
+					onClick={(e) => {
+						handleOpen()
+						setCreateGame(true)
+					}}
+				>
+					Create a new Game
+				</Button>
+				<Button
+					sx={buttonMargin}
+					variant='contained'
+					color='success'
+					onClick={(e) => {
+						handleOpen()
+						setCreateGame(false)
+					}}
+				>
+					join a game
+				</Button>
+				<Button sx={buttonMargin} variant='outlined' color='primary' onClick={handleOpen}>
+					Profile
+				</Button>
+				<Button sx={buttonMargin} variant='outlined' color='primary' onClick={handleOpen}>
+					Dashboard
+				</Button>
 
-			{/* Create game modal */}
-			<Modal
-				open={open}
-				onClose={handleClose}
-				aria-labelledby='modal-modal-title'
-				aria-describedby='modal-modal-description'
-			>
-				<>
-					{createGame ? (
-						<Box onSubmit={handleCreateAGame} component='form' sx={modalStyle} noValidate autoComplete='off'>
-							<TextField
-								id='Game Name'
-								label='Enter Game Name'
-								variant='outlined'
-								value={gameName}
-								onChange={(e) => setGameName(e.target.value)}
-							/>
-						</Box>
-					) : (
-						<Box onSubmit={handleJoinGame} component='form' sx={modalStyle} noValidate autoComplete='off'>
-							<TextField
-								id='Game Name'
-								label='Enter Game Pin'
-								variant='outlined'
-								value={joiningGamePin}
-								onChange={(e) => setJoiningGamePin(e.target.value)}
-							/>
-						</Box>
-					)}
-				</>
-			</Modal>
-		</Container>
+				{/* Create game modal */}
+				<Modal
+					open={open}
+					onClose={handleClose}
+					aria-labelledby='modal-modal-title'
+					aria-describedby='modal-modal-description'
+				>
+					<>
+						{createGame ? (
+							<Box onSubmit={handleCreateAGame} component='form' sx={modalStyle} noValidate autoComplete='off'>
+								<TextField
+									id='Game Name'
+									label='Enter Game Name'
+									variant='outlined'
+									value={gameName}
+									onChange={(e) => setGameName(e.target.value)}
+								/>
+							</Box>
+						) : (
+							<Box onSubmit={handleJoinGame} component='form' sx={modalStyle} noValidate autoComplete='off'>
+								<TextField
+									id='Game Name'
+									label='Enter Game Pin'
+									variant='outlined'
+									value={joiningGamePin}
+									onChange={(e) => setJoiningGamePin(e.target.value)}
+								/>
+							</Box>
+						)}
+					</>
+				</Modal>
+			</Container>
+		</>
 	)
 }

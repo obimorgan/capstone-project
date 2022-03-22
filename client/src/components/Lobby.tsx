@@ -91,40 +91,5 @@ export default function MusicPlayerSlider() {
 				{/* )} */}
 			</Box>
 		</Container>
-		// <Container sx={containerStyle}>
-		// 	<Box sx={{ width: '100%', overflow: 'hidden' }}>
-		// 		<Widget>
-		// 			<h1>Welcome to game</h1>
-		// 			<h1>{lobbyDetails?.gameName}</h1>
-		// 			<h2>Game-pin: {lobbyDetails?.gamePin}</h2>
-		// 			<Typography variant='h6' color='text.secondary' fontWeight={500}>
-		// 				{isAhost ? <b>Waiting for players to join...</b> : <b>Waiting for the host to start the game </b>}
-		// 			</Typography>
-		// 			{lobbyDetails &&
-		// 				lobbyDetails.players.map((player, index) => (
-		// 					<Box key={index} sx={{ display: 'flex', alignItems: 'center', m: 1, overflow: 'hidden' }}>
-		// 						<CoverImage>
-		// 							<img src={player.avatar} />
-		// 						</CoverImage>
-		// 						<Box sx={{ ml: 1.5, minWidth: 0 }}>
-		// 							<Typography variant='h6' color='text.secondary' fontWeight={500}>
-		// 								{player.name}
-		// 							</Typography>
-		// 							<Typography noWrap>
-		// 								<b>Best score:</b>
-		// 								<span>{player.scores}</span>
-		// 							</Typography>
-		// 						</Box>
-		// 					</Box>
-		// 				))}
-		// 		</Widget>
-		// 		<WallPaper />
-		// 		{/* {isAhost && ( */}
-		// 		<Button variant='contained' sx={buttonMargin} onClick={handleStartGame}>
-		// 			START GAME
-		// 		</Button>
-		// 		{/* )} */}
-		// 	</Box>
-		// </Container>
 	)
 }
