@@ -13,14 +13,23 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { decHole4ScoreAction, incHole4ScoreAction, openScoreModalAction } from '../../redux/actions'
+import {
+	decHole4ScoreAction,
+	incHole4ScoreAction,
+	openScoreModalAction,
+	setFirstPlayerTotalAction,
+	setSecondPlayerTotalAction,
+} from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
 import Scorepreview from '../Scorepreview'
+import { useState } from 'react'
 
 const Hole4 = () => {
 	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
 	const hole3Ranking = useSelector((state: IReduxStore) => state.gameroom.games.hole3)
 	const hole4 = useSelector((state: IReduxStore) => state.gameroom.games.hole4)
+	const [player1, setPlayer1] = useState<ITotalScore>({ id: hole4[0].playerId, score: hole4[0].score })
+	const [player2, setPlayer2] = useState<ITotalScore>({ id: hole4[1].playerId, score: hole4[1].score })
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
@@ -34,6 +43,8 @@ const Hole4 = () => {
 					headers: { 'Content-Type': 'application/json', withCredentials: 'true', Accept: 'application/json' },
 				})
 				if (!response) throw new Error('Could not submit hole 4 scores')
+				dispatch(setFirstPlayerTotalAction(player1))
+				dispatch(setSecondPlayerTotalAction(player2))
 				navigate('/scoreboard')
 			} catch (error) {
 				console.log(error)

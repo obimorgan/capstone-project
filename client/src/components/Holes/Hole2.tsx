@@ -14,16 +14,26 @@ import TableRow from '@mui/material/TableRow'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { decHole2ScoreAction, incHole2ScoreAction, openScoreModalAction } from '../../redux/actions'
+import {
+	decHole2ScoreAction,
+	incHole2ScoreAction,
+	openScoreModalAction,
+	setFirstPlayerTotalAction,
+	setSecondPlayerTotalAction,
+} from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
 import Scorepreview from '../Scorepreview'
 
 const Hole2: React.FC = () => {
 	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
 	const hole1Ranking = useSelector((state: IReduxStore) => state.gameroom.games.hole1)
+	console.log(hole1Ranking)
 	const hole2 = useSelector((state: IReduxStore) => state.gameroom.games.hole2)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
+	const [player1, setPlayer1] = useState<ITotalScore>({ id: hole2[0].playerId, score: hole2[0].score })
+	const [player2, setPlayer2] = useState<ITotalScore>({ id: hole2[1].playerId, score: hole2[1].score })
+	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
 
 	const handlePlayerScores = () => {
 		dispatch(openScoreModalAction(true))
@@ -35,12 +45,17 @@ const Hole2: React.FC = () => {
 					headers: { 'Content-Type': 'application/json', withCredentials: 'true', Accept: 'application/json' },
 				})
 				if (!response) throw new Error('Could not submit hole 2 scores')
+				dispatch(setSecondPlayerTotalAction(player2))
+				dispatch(setFirstPlayerTotalAction(player1))
 				navigate('/hole3')
 			} catch (error) {
 				console.log(error)
 			}
 		}
 		submitHole2()
+		// {
+		// 	players.length === 2 ? dispatch(setFirstPlayerTotalAction(player2)) : dispatch(setFirstPlayerTotalAction(player1))
+		// }
 	}
 
 	return (
@@ -53,7 +68,7 @@ const Hole2: React.FC = () => {
 					<TableHead>
 						<TableRow>
 							<TableCell>Players</TableCell>
-							<TableCell align='right'>Score</TableCell>
+							<TableCell align='center'>Score</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -64,7 +79,7 @@ const Hole2: React.FC = () => {
 										{player.name}
 										{/* <input type='text' value={player.name} /> */}
 									</TableCell>
-									<TableCell align='right'>
+									<TableCell align='center'>
 										<Button onClick={(e) => dispatch(decHole2ScoreAction(player.playerId))}>
 											<RemoveCircleOutlinedIcon />
 										</Button>
@@ -82,7 +97,7 @@ const Hole2: React.FC = () => {
 			<Button onClick={handlePlayerScores} variant='contained' sx={{ m: 1, zIndex: 1, color: 'success' }}>
 				Submit Scores
 			</Button>
-			<Scorepreview data={hole1Ranking} hole='Hole1' />
+			{/* <Scorepreview data={hole1Ranking} hole='Hole1' /> */}
 			<WallPaper />
 		</Container>
 	)

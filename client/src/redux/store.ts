@@ -49,7 +49,7 @@ export const initialState: IReduxStore = {
 
 const rootReducer = combineReducers({
     user: userReducer,
-    gameroom: gameroomReducer
+    gameroom: gameroomReducer,
 })
 
 const {REACT_APP_SECRET_KEY: secretKey} = process.env

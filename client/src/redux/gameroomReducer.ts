@@ -26,6 +26,106 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				...state,
 				reRenderLobby: action.payload,
 			}
+
+		//Total scores
+
+		case ACTIONS.SET_PLAYER_TOTAL_SCORE:
+			console.log({
+				...state,
+				games: {
+					...state.games,
+					players: [...state.games.players].map((player, index) => {
+						if (index !== action.payload.index) {
+							return { ...player }
+						}
+						return {
+							...player,
+							totalScore: (player.totalScore += action.payload.score),
+						}
+					}),
+				},
+			})
+			return {
+				...state,
+				games: {
+					...state.games,
+					players: [...state.games.players].map((player, index) => {
+						if (index !== action.payload.index) {
+							return player
+						}
+						return {
+							...player,
+							totalScore: (player.totalScore += action.payload.score),
+						}
+					}),
+				},
+			}
+
+		//Player 1
+		case ACTIONS.SET_FIRST_PLAYER_TOTAL_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					players: [...state.games.players].map((player) => {
+						const { p1Id, p1Score } = action.payload
+						if (player.playerId === p1Id) {
+							return { ...player, totalScore: (player.totalScore += p1Score) }
+						}
+						return { ...player }
+					}),
+				},
+			}
+
+		//Player 2
+		case ACTIONS.SET_SECOND_PLAYER_TOTAL_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					players: [...state.games.players].map((player) => {
+						const { p2Id, p2Score } = action.payload
+						if (player.playerId === p2Id) {
+							return { ...player, totalScore: (player.totalScore += p2Score) }
+						}
+						return { ...player }
+					}),
+				},
+			}
+
+		//Player 3
+		case ACTIONS.SET_THIRD_PLAYER_TOTAL_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					players: [...state.games.players].map((player) => {
+						const { p3Id, p3Score } = action.payload
+						if (player.playerId === p3Id) {
+							return { ...player, totalScore: (player.totalScore += p3Score) }
+						}
+						return { ...player }
+					}),
+				},
+			}
+
+		//Player 4
+		case ACTIONS.SET_FOURTH_PLAYER_TOTAL_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					players: [...state.games.players].map((player) => {
+						const { p4Id, p4Score } = action.payload
+						if (player.playerId === p4Id) {
+							return { ...player, totalScore: (player.totalScore += p4Score) }
+						}
+						return { ...player }
+					}),
+				},
+			}
+
+		//Set scores on holes
 		case ACTIONS.DECREASE_HOLE1_SCORE:
 			return {
 				...state,
@@ -37,6 +137,11 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 						}
 						return { ...detail }
 					}),
+					// players: [...state.games.players].map((player) => {
+					// 	if (player.playerId === action.payload) {
+					// 		return { ...player, totalScore: (player.totalScore -= 1)}
+					// 	}
+					// })
 				},
 			}
 		case ACTIONS.INCREASE_HOLE1_SCORE:
@@ -50,6 +155,11 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 						}
 						return { ...detail }
 					}),
+					// players: [...state.games.players].map((player) => {
+					// 	if (player.playerId === action.payload) {
+					// 		return { ...player, totalScore: (player.totalScore += 1)}
+					// 	}
+					// })
 				},
 			}
 		case ACTIONS.DECREASE_HOLE2_SCORE:

@@ -21,7 +21,8 @@ type Prop = {
 
 const Scoreboard: React.FC<Prop> = ({ data }) => {
 	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
-	console.log(players)
+	const hole1 = useSelector((state: IReduxStore) => state.gameroom.games.hole1)
+	console.log(hole1)
 	const dispatch = useDispatch()
 	const handleClose = () => dispatch(openScoreModalAction(false))
 

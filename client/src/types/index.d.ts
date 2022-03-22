@@ -38,6 +38,7 @@ interface IProps {
 }
 
 interface IPlayer {
+    playerId: string
     _id: string // new id is given to a player who joined the game
     player: string
     name?: string
@@ -129,4 +130,9 @@ interface ISingleHole {
 
 interface ISubmitScores {
     hole: ISingleHole[]
+}
+interface ITotalScore {
+    index?: number
+    id?: string
+    score?: number
 }
