@@ -12,8 +12,8 @@ import Typography from '@mui/material/Typography/Typography'
 export default function Profile() {
 	const player = useSelector((state: IReduxStore) => state.user.currentUser)
 	return (
-		<Container sx={{ display: 'flex', justifyContent: 'center', textAlign: 'center', paddingTop: '50px' }}>
-			<Box sx={{ zIndex: 1 }}>
+		<Container sx={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}>
+			<Box sx={{ zIndex: 1, marginTop: 4, marginBottom: 10 }}>
 				<Avatar sx={{ width: 100, height: 100 }} alt='avatar' src={player.avatar} />
 				<Typography variant='button' gutterBottom component='div'>
 					{player.name}

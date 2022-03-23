@@ -32,12 +32,14 @@ export const containerStyle = {
 	display: 'flex',
 	flexDirection: 'column',
 	textAlign: 'center ',
-	height: '50vh',
+	height: '100vh',
 	justifyContent: 'center',
 }
 
 export const buttonMargin = {
-	m: 1,
+	marginLeft: 1,
+	marginRight: 1,
+	marginTop: 2,
 }
 
 export const containerStyleLobby = {

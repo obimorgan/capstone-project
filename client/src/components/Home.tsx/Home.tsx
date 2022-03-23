@@ -12,6 +12,7 @@ import { io } from 'socket.io-client'
 import { reRenderLobbyAction, setAHostAction, setCurrentGameDetailsAction } from '../../redux/actions'
 import Profile from './Profile'
 import { buttonMargin, containerStyle, modalStyle } from '../style'
+import BurgerMenu from '../BurgerMenu'
 
 // const { REACT_APP_SERVER_URL } = process.env
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
@@ -104,8 +105,8 @@ export default function Home() {
 
 	return (
 		<>
-			<Profile />
 			<Container sx={containerStyle}>
+				<Profile />
 				<Button
 					sx={buttonMargin}
 					variant='contained'
@@ -117,6 +118,7 @@ export default function Home() {
 				>
 					Create a new Game
 				</Button>
+
 				<Button
 					sx={buttonMargin}
 					variant='contained'
@@ -128,12 +130,13 @@ export default function Home() {
 				>
 					join a game
 				</Button>
-				<Button sx={buttonMargin} variant='outlined' color='primary' onClick={handleOpen}>
-					Profile
-				</Button>
-				<Button sx={buttonMargin} variant='outlined' color='primary' onClick={handleOpen}>
-					Dashboard
-				</Button>
+
+				{/* <Button sx={buttonMargin} variant='outlined' color='primary' onClick={handleOpen}>
+						Profile
+					</Button>
+					<Button sx={buttonMargin} variant='outlined' color='primary' onClick={handleOpen}>
+						Dashboard
+					</Button> */}
 
 				{/* Create game modal */}
 				<Modal
@@ -166,6 +169,7 @@ export default function Home() {
 						)}
 					</>
 				</Modal>
+				<BurgerMenu />
 			</Container>
 		</>
 	)
