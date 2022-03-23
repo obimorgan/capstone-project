@@ -9,23 +9,24 @@ import LeaderboardSharpIcon from '@mui/icons-material/LeaderboardSharp'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import LocalBarIcon from '@mui/icons-material/LocalBar'
 import LocalPizzaIcon from '@mui/icons-material/LocalPizza'
-import ShareIcon from '@mui/icons-material/Share'
+import MenuOpenIcon from '@mui/icons-material/MenuOpen'
+import { color } from '@mui/system'
 
 const actions = [
-	{ icon: <LocalBarIcon />, name: 'Drinks' },
-	{ icon: <LocalPizzaIcon />, name: 'Food' },
-	{ icon: <AccountCircleIcon />, name: 'Account' },
-	{ icon: <LeaderboardSharpIcon />, name: 'LeaderBoard' },
+	{ icon: <LocalBarIcon sx={{ fontSize: 'large' }} />, name: 'Drinks' },
+	{ icon: <LocalPizzaIcon sx={{ fontSize: 'large' }} />, name: 'Food' },
+	{ icon: <AccountCircleIcon sx={{ fontSize: 'large' }} />, name: 'Account' },
+	{ icon: <LeaderboardSharpIcon sx={{ fontSize: 'large' }} />, name: 'LeaderBoard' },
 ]
 
 export default function BasicSpeedDial() {
 	return (
-		<Box sx={{ height: 100, transform: 'translateZ(1px)', marginTop: 10 }}>
+		<Box sx={{ height: 100, transform: 'translateZ(1px)', marginTop: 8, marginRight: -1 }}>
 			<SpeedDial
 				direction='left'
 				ariaLabel='SpeedDial basic example'
-				sx={{ position: 'absolute', bottom: 16, right: 16 }}
-				icon={<SpeedDialIcon />}
+				sx={{ position: 'absolute', bottom: 2, right: 2 }}
+				icon={<MenuOpenIcon />}
 			>
 				{actions.map((action) => (
 					<SpeedDialAction key={action.name} icon={action.icon} tooltipTitle={action.name} />

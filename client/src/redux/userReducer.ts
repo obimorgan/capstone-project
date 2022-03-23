@@ -6,12 +6,12 @@ import { initialState } from './store'
 
 const userReducer = (state = initialState.user, action: AnyAction) => {
 	switch (action.type) {
-		//after a user registered
-		// case ACTIONS.SET_USER_CREDENTIALS:
-		// 	return {
-		// 		...state,
-		// 		currentUserCredential: true,
-		// 	}
+		//Set users best Scores
+		case ACTIONS.SET_USERS_BEST_SCORES:
+			return {
+				...state,
+				usersBestScores: action.payload,
+			}
 		case ACTIONS.SET_CURRENT_USER:
 			return {
 				...state,

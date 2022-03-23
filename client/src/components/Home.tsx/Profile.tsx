@@ -13,11 +13,19 @@ export default function Profile() {
 	const player = useSelector((state: IReduxStore) => state.user.currentUser)
 	return (
 		<Container sx={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}>
-			<Box sx={{ zIndex: 1, marginTop: 4, marginBottom: 10 }}>
+			<Box sx={{ zIndex: 1, marginTop: 4, marginBottom: 5 }}>
 				<Avatar sx={{ width: 100, height: 100 }} alt='avatar' src={player.avatar} />
-				<Typography variant='button' gutterBottom component='div'>
+				<Typography variant='h6' gutterBottom component='div'>
 					{player.name}
 				</Typography>
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Typography variant='button' gutterBottom component='div'>
+						Best score:
+					</Typography>
+					<Typography variant='button' gutterBottom component='div'>
+						{player.bestScore}
+					</Typography>
+				</Box>
 			</Box>
 			<WallPaper />
 		</Container>

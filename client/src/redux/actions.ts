@@ -15,6 +15,7 @@ export const ACTIONS = {
 	RE_RENDER_LOBBY: 'RE_RENDER_LOBBY',
 	SET_HOLE1_ACTION: 'SET_HOLE1_ACTION',
 	ADD_PLAYER_TO_HOLES: 'ADD_PLAYER_TO_HOLES',
+	SET_USERS_BEST_SCORES: 'SET_USERS_BEST_SCORES',
 
 	SET_FIRST_PLAYER_TOTAL_SCORE: 'SET_FIRST_PLAYER_TOTAL_SCORE',
 	SET_SECOND_PLAYER_TOTAL_SCORE: 'SET_SECOND_PLAYER_TOTAL_SCORE',
@@ -76,8 +77,12 @@ export const addPlayerToHolesAction = (data: ISingleHole) => ({
 	payload: data,
 })
 
-// Set Total Scores //
+export const setUsersBestScoresAction = (data: IUserBestScores) => ({
+	type: ACTIONS.SET_USERS_BEST_SCORES,
+	payload: data,
+})
 
+// Set Total Scores //
 export const setPlayerTotalScoreAction = (data: ITotalScore) => ({
 	type: ACTIONS.SET_PLAYER_TOTAL_SCORE,
 	payload: data,
@@ -91,8 +96,8 @@ export const setPlayerTotalScoreAction = (data: ITotalScore) => ({
 // 		p1Score: player1.score,
 // 	},
 // })
-// Set Holes Scores //
 
+// Set Holes Scores //
 export const decHole1ScoreAction = (userId: string) => {
 	return {
 		type: ACTIONS.DECREASE_HOLE1_SCORE,
