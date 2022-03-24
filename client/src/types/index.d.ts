@@ -82,7 +82,7 @@ interface IReduxGameroom {
 	currentHoleStatus: ISingleHole[]
 	openScoreModal: boolean
 	reRenderLobby: boolean
-	holesCompleted: hole[]
+	holesCompleted: ICompletedHole[]
 }
 
 interface IGameDetails {
@@ -108,6 +108,7 @@ interface ITotalScore {
 	id?: string
 	score?: number
 }
-interface hole {
-	hole: string
+
+interface ICompletedHole {
+	holeComplete: string
 }

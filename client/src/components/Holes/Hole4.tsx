@@ -17,6 +17,7 @@ import {
 	decHole4ScoreAction,
 	incHole4ScoreAction,
 	openScoreModalAction,
+	setCompletedHolesAction,
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
 import Scorepreview from '../Scorepreview'
@@ -52,6 +53,7 @@ const Hole4 = () => {
 				if (!response) throw new Error('Could not submit hole 4 scores')
 				setTotalScores()
 				navigate('/scoreboard')
+				dispatch(setCompletedHolesAction('hole4'))
 			} catch (error) {
 				console.log(error)
 			}
@@ -74,22 +76,20 @@ const Hole4 = () => {
 					</TableHead>
 					<TableBody>
 						{hole4?.map((player, i) => (
-							<>
-								<TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-									<TableCell component='th' scope='column'>
-										{player.name}
-									</TableCell>
-									<TableCell align='right'>
-										<Button onClick={(e) => dispatch(decHole4ScoreAction(player.playerId))}>
-											<RemoveCircleOutlinedIcon />
-										</Button>
-										{player.score}
-										<Button onClick={(e) => dispatch(incHole4ScoreAction(player.playerId))}>
-											<AddCircleOutlinedIcon />
-										</Button>
-									</TableCell>
-								</TableRow>
-							</>
+							<TableRow key={player.playerId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+								<TableCell component='th' scope='column'>
+									{player.name}
+								</TableCell>
+								<TableCell align='right'>
+									<Button onClick={(e) => dispatch(decHole4ScoreAction(player.playerId))}>
+										<RemoveCircleOutlinedIcon />
+									</Button>
+									{player.score}
+									<Button onClick={(e) => dispatch(incHole4ScoreAction(player.playerId))}>
+										<AddCircleOutlinedIcon />
+									</Button>
+								</TableCell>
+							</TableRow>
 						))}
 					</TableBody>
 				</Table>

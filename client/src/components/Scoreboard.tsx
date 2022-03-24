@@ -15,16 +15,47 @@ import { strictEqual } from 'assert'
 import { useDispatch, useSelector } from 'react-redux'
 import { openScoreModalAction } from '../redux/actions'
 import { containerStyle, scorePreview, WallPaper } from './style'
+import { io } from 'socket.io-client'
 
-type Prop = {
-	data: ISingleHole[]
-}
+const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
-const Scoreboard: React.FC<Prop> = ({ data }) => {
+const Scoreboard = () => {
+	const myId = useSelector((state: IReduxStore) => state.user.currentUser._id)
+	const currentBestScore = useSelector((state: IReduxStore) => state.user.currentUser.bestScore)
 	const gameName = useSelector((state: IReduxStore) => state.gameroom.games.gameName)
 	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
 	const dispatch = useDispatch()
-	const handleClose = () => dispatch(openScoreModalAction(false))
+	const myTotalScore = players.find((player) => player.playerId === myId).totalScore
+
+	const handleSubmit = () => {
+		console.log(currentBestScore)
+		console.log(myTotalScore)
+		if (currentBestScore > myTotalScore) {
+			console.log('Set new best score')
+			socket.emit('submit my total score', {
+				myId: myId,
+				totalScore: myTotalScore,
+			})
+		} else {
+			return console.log('Current best score is not worth saving')
+		}
+	}
+
+	// const handleBestScore = () => {
+	// 	const submitHole1 = async () => {
+	// 		try {
+	// 			let response = await fetch(`http://localhost:3001/user`, {
+	// 				method: 'PUT',
+	// 				body: myTotalScore && JSON.stringify(myTotalScore),
+	// 				headers: { 'Content-Type': 'application/json', withCredentials: 'true', Accept: 'application/json' },
+	// 			})
+	// 			if (!response) throw new Error('Could not submit total scores')
+	// 		} catch (error) {
+	// 			console.log(error)
+	// 		}
+	// 	}
+	// 	submitHole1()
+	// }
 
 	return (
 		<Container sx={containerStyle}>
@@ -40,7 +71,7 @@ const Scoreboard: React.FC<Prop> = ({ data }) => {
 						<TableRow>
 							<TableCell>Rank</TableCell>
 							<TableCell>Players</TableCell>
-							<TableCell align='right'>Score</TableCell>
+							<TableCell align='right'>Total Score</TableCell>
 						</TableRow>
 					</TableHead>
 					{players &&
@@ -49,7 +80,7 @@ const Scoreboard: React.FC<Prop> = ({ data }) => {
 								return a.totalScore - b.totalScore
 							})
 							.map((player, index) => (
-								<TableBody>
+								<TableBody key={player._id}>
 									<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
 										<TableCell component='th' scope='row'>
 											{(index = index + 1)}
@@ -60,7 +91,7 @@ const Scoreboard: React.FC<Prop> = ({ data }) => {
 								</TableBody>
 							))}
 				</Table>
-				<Button onClick={handleClose}>Back to hole</Button>
+				<Button onClick={handleSubmit}>Back to hole</Button>
 			</TableContainer>
 			<WallPaper />
 		</Container>

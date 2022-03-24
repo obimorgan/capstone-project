@@ -18,6 +18,7 @@ import {
 	decHole2ScoreAction,
 	incHole2ScoreAction,
 	openScoreModalAction,
+	setCompletedHolesAction,
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
 import { containerStyle, WallPaper } from '../style'
@@ -53,6 +54,7 @@ const Hole2: React.FC = () => {
 				if (!response) throw new Error('Could not submit hole 2 scores')
 				setTotalScores()
 				navigate('/hole3')
+				dispatch(setCompletedHolesAction('hole2'))
 			} catch (error) {
 				console.log(error)
 			}

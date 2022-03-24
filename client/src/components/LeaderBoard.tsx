@@ -19,6 +19,10 @@ import { setUsersBestScoresAction } from '../redux/actions'
 import { containerStyle, scorePreview, WallPaper, Widget } from './style'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 
+import { io } from 'socket.io-client'
+
+const socket = io('http://localhost:3001', { transports: ['websocket'] })
+
 export default function LeaderBoard() {
 	const dispatch = useDispatch()
 	const scores = useSelector((state: IReduxStore) => state.user.usersBestScores)
@@ -36,6 +40,10 @@ export default function LeaderBoard() {
 		}
 		fetchUsersBestScore()
 	}, [])
+
+	socket.on('current best score updated', () => {
+		console.log('current best score updated')
+	})
 
 	const top3Array = []
 	const getTop3scors = scores
@@ -98,7 +106,7 @@ export default function LeaderBoard() {
 					<Table>
 						<TableHead>
 							<TableRow sx={{ '&:last-child td, &:last-child th': { borderTop: '1px solid' } }}>
-								<TableCell>RANK</TableCell>
+								{/* <TableCell>RANK</TableCell> */}
 								<TableCell>PLAYERS</TableCell>
 								<TableCell align='right'>SCORE</TableCell>
 							</TableRow>
@@ -110,15 +118,18 @@ export default function LeaderBoard() {
 								})
 								.slice(3, -5)
 								.map((player, index) => (
-									<TableBody>
+									<TableBody key={player._id}>
 										<TableRow>
 											{/* <TableCell component='th' scope='row'>
 											{(index = index + 1)}
 										</TableCell> */}
 											<TableCell align='left'>
-												<Avatar alt='avatar' src={player.avatar} />
+												<Stack direction='row'>
+													<Avatar alt='avatar' src={player.avatar} />
+													&nbsp;
+													<Typography sx={{ display: 'flex', fontWeight: 'bold', m: 'auto' }}>{player.name}</Typography>
+												</Stack>
 											</TableCell>
-											<TableCell align='left'>{player.name}</TableCell>
 											<TableCell align='right'>{player.bestScore}</TableCell>
 										</TableRow>
 									</TableBody>

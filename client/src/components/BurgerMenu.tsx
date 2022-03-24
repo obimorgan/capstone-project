@@ -1,16 +1,13 @@
 /** @format */
 
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import SpeedDial from '@mui/material/SpeedDial'
-import SpeedDialIcon from '@mui/material/SpeedDialIcon'
-import SpeedDialAction from '@mui/material/SpeedDialAction'
-import LeaderboardSharpIcon from '@mui/icons-material/LeaderboardSharp'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import LeaderboardSharpIcon from '@mui/icons-material/LeaderboardSharp'
 import LocalBarIcon from '@mui/icons-material/LocalBar'
 import LocalPizzaIcon from '@mui/icons-material/LocalPizza'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
-import { color } from '@mui/system'
+import Box from '@mui/material/Box'
+import SpeedDial from '@mui/material/SpeedDial'
+import SpeedDialAction from '@mui/material/SpeedDialAction'
 
 const actions = [
 	{ icon: <LocalBarIcon sx={{ fontSize: 'large' }} />, name: 'Drinks' },

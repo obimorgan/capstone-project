@@ -22,6 +22,7 @@ export const ACTIONS = {
 	SET_THIRD_PLAYER_TOTAL_SCORE: 'SET_THIRD_PLAYER_TOTAL_SCORE',
 	SET_FOURTH_PLAYER_TOTAL_SCORE: 'SET_FOURTH_PLAYER_TOTAL_SCORE',
 	SET_PLAYER_TOTAL_SCORE: 'SET_PLAYER_TOTAL_SCORE',
+	SET_COMPLETED_HOLES: 'SET_COMPLETED_HOLES',
 
 	DECREASE_HOLE1_SCORE: 'DECREASE_HOLE1_SCORE',
 	INCREASE_HOLE1_SCORE: 'INCREASE_HOLE1_SCORE',
@@ -79,6 +80,11 @@ export const addPlayerToHolesAction = (data: ISingleHole) => ({
 
 export const setUsersBestScoresAction = (data: IUserBestScores) => ({
 	type: ACTIONS.SET_USERS_BEST_SCORES,
+	payload: data,
+})
+
+export const setCompletedHolesAction = (data: string) => ({
+	type: ACTIONS.SET_COMPLETED_HOLES,
 	payload: data,
 })
 
