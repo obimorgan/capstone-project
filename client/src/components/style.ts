@@ -79,15 +79,15 @@ export const WallPaper = styled('div')({
 })
 
 export const Widget = styled('div')(({ theme }) => ({
-	padding: 16,
+	padding: 5,
 	borderRadius: 16,
-	width: 343,
+	width: 300,
 	maxWidth: '100%',
 	margin: 'auto',
 	position: 'relative',
 	zIndex: 1,
 	backgroundColor: theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)',
-	backdropFilter: 'blur(40px)',
+	backdropFilter: 'blur(120px)',
 }))
 
 export const CoverImage = styled('div')({

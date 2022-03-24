@@ -23,15 +23,13 @@ type Prop = {
 const Scoreboard: React.FC<Prop> = ({ data }) => {
 	const gameName = useSelector((state: IReduxStore) => state.gameroom.games.gameName)
 	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
-	const hole1 = useSelector((state: IReduxStore) => state.gameroom.games.hole1)
-	console.log(hole1)
 	const dispatch = useDispatch()
 	const handleClose = () => dispatch(openScoreModalAction(false))
 
 	return (
 		<Container sx={containerStyle}>
 			<Typography variant='h3' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
-				The Winner of Game: {gameName}
+				The Winner of Game{gameName}
 			</Typography>
 			<TableContainer component={Paper} sx={{ zIndex: 1 }}>
 				<Typography variant='h6' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
