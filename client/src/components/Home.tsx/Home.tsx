@@ -11,8 +11,9 @@ import { useNavigate } from 'react-router'
 import { io } from 'socket.io-client'
 import { reRenderLobbyAction, setAHostAction, setCurrentGameDetailsAction } from '../../redux/actions'
 import Profile from './Profile'
-import { buttonMargin, containerStyle, modalStyle } from '../style'
+import { squareBtn, containerStyle, modalStyle, Widget } from '../style'
 import BurgerMenu from '../BurgerMenu'
+import Typography from '@mui/material/Typography/Typography'
 
 // const { REACT_APP_SERVER_URL } = process.env
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
@@ -64,10 +65,10 @@ export default function Home() {
 	}
 
 	useEffect(() => {
-		// //Initial connection, trapping connection from  server
-		// socket.on('connect', () => {
-		// 	console.log('Connection is now established!')
-		// })
+		//Initial connection, trapping connection from  server
+		socket.on('connect', () => {
+			console.log('Connection is now established!')
+		})
 		socket.on('display game', (data) => {
 			// b|e is joining the user to an existing game!
 			const query = data._id
@@ -107,38 +108,38 @@ export default function Home() {
 		<>
 			<Container sx={containerStyle}>
 				<Profile />
-				<Button
-					sx={buttonMargin}
-					variant='contained'
-					color='success'
-					onClick={(e) => {
-						handleOpen()
-						setCreateGame(true)
-					}}
-				>
-					Create a new Game
-				</Button>
-
-				<Button
-					sx={buttonMargin}
-					variant='contained'
-					color='success'
-					onClick={(e) => {
-						handleOpen()
-						setCreateGame(false)
-					}}
-				>
-					join a game
-				</Button>
-
-				{/* <Button sx={buttonMargin} variant='outlined' color='primary' onClick={handleOpen}>
-						Profile
-					</Button>
-					<Button sx={buttonMargin} variant='outlined' color='primary' onClick={handleOpen}>
-						Dashboard
-					</Button> */}
-
-				{/* Create game modal */}
+				<Box>
+					<Widget sx={{ display: 'flex', direction: 'row', justifyContent: 'start' }}>
+						<Button
+							sx={squareBtn}
+							variant='contained'
+							color='success'
+							onClick={(e) => {
+								handleOpen()
+								setCreateGame(true)
+							}}
+						>
+							Create a new Game
+						</Button>
+						<Typography sx={{ m: 'auto' }}> Be in charge of the scoring.</Typography>
+					</Widget>
+				</Box>
+				<Box>
+					<Widget sx={{ display: 'flex', direction: 'row', justifyContent: 'end', mt: 1 }}>
+						<Typography sx={{ m: 'auto' }}>Swing and relax.</Typography>
+						<Button
+							sx={squareBtn}
+							variant='contained'
+							color='success'
+							onClick={(e) => {
+								handleOpen()
+								setCreateGame(false)
+							}}
+						>
+							join a game
+						</Button>
+					</Widget>
+				</Box>
 				<Modal
 					open={open}
 					onClose={handleClose}

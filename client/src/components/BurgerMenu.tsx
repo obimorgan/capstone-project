@@ -18,7 +18,7 @@ const actions = [
 
 export default function BasicSpeedDial() {
 	return (
-		<Box sx={{ height: 100, transform: 'translateZ(1px)', marginTop: 8, marginRight: -1 }}>
+		<Box sx={{ height: 100, transform: 'translateZ(1px)', mr: 1 }}>
 			<SpeedDial
 				direction='left'
 				ariaLabel='SpeedDial basic example'

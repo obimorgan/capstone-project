@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { buttonMargin, containerStyle, CoverImage, WallPaper, Widget } from './style'
+import { squareBtn, containerStyle, CoverImage, WallPaper, Widget } from './style'
 import { reRenderLobbyAction, setCurrentGameDetailsAction } from '../redux/actions'
 import { io } from 'socket.io-client'
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
@@ -85,7 +85,7 @@ export default function MusicPlayerSlider() {
 				</Widget>
 				<WallPaper />
 				{/* {isAhost && ( */}
-				<Button variant='contained' sx={buttonMargin} onClick={handleStartGame}>
+				<Button variant='contained' sx={squareBtn} onClick={handleStartGame}>
 					START GAME
 				</Button>
 				{/* )} */}

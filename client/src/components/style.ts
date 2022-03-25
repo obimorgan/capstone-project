@@ -36,10 +36,9 @@ export const containerStyle = {
 	justifyContent: 'center',
 }
 
-export const buttonMargin = {
-	marginLeft: 1,
-	marginRight: 1,
-	marginTop: 2,
+export const squareBtn = {
+	width: 130,
+	height: 130,
 }
 
 export const containerStyleLobby = {
