@@ -16,6 +16,7 @@ import { FormEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { userLoginAction } from '../redux/actions'
+import { Background, containerStyle, LogoImage } from './style'
 
 export default function Login() {
 	const navigate = useNavigate()
@@ -57,57 +58,71 @@ export default function Login() {
 	}
 
 	return (
-		<Container
-			sx={{ display: 'flex', flexDirection: 'column', textAlign: 'center ', height: '100vh', justifyContent: 'center' }}
-		>
-			<Box component='form'>
-				<TextField
-					id='outlined-start-adornment'
-					sx={{ m: 1, width: '27ch' }}
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position='start'>
-								<Mail />
-							</InputAdornment>
-						),
-					}}
-					value={credentials.email}
-					onChange={(e) => handleCredentials('email', e.target.value)}
-				/>
-				<TextField
-					id='outlined-start-adornment'
-					sx={{ m: 1, width: '27ch' }}
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position='start'>
-								<LockIcon />
-							</InputAdornment>
-						),
-					}}
-					value={credentials.password}
-					onChange={(e) => handleCredentials('password', e.target.value)}
-				/>
-				<Button onClick={handleSubmit} sx={{ m: 1, width: '35ch' }} variant='contained' color='success'>
-					Log In
-				</Button>
-				<Container sx={{ display: 'flex', textAlign: 'center ', justifyContent: 'center' }}>
-					<IconButton size='large'>
-						<Badge>
-							<FacebookIcon />
-						</Badge>
-					</IconButton>
-					<IconButton size='large'>
-						<Badge>
-							<GoogleIcon />
-						</Badge>
-					</IconButton>
-					<IconButton size='large'>
-						<Badge>
-							<InstagramIcon />
-						</Badge>
-					</IconButton>
+		<>
+			<Container sx={containerStyle}>
+				<Background />
+				<Container sx={{ display: 'flex', justifyContent: 'center', height: '200px', mb: 10 }}>
+					<LogoImage>
+						<img
+							src='https://www.undergroundgolf.no/wp-content/uploads/2021/05/PRINT-_raster_-UG-logo-_with-additional-info_-FULL-stylized-BG.svg'
+							alt='logImg'
+						/>
+					</LogoImage>
 				</Container>
-			</Box>
-		</Container>
+				<Box component='form' sx={{ mt: 10, mb: 15 }}>
+					<TextField
+						id='outlined-start-adornment'
+						sx={{ width: '30ch' }}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position='start'>
+									<Mail />
+								</InputAdornment>
+							),
+						}}
+						value={credentials.email}
+						onChange={(e) => handleCredentials('email', e.target.value)}
+					/>
+					<TextField
+						id='outlined-start-adornment'
+						sx={{ mt: 2, width: '30ch' }}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position='start'>
+									<LockIcon />
+								</InputAdornment>
+							),
+						}}
+						value={credentials.password}
+						onChange={(e) => handleCredentials('password', e.target.value)}
+					/>
+					<Button
+						onClick={handleSubmit}
+						sx={{ mt: 5, width: '31ch', height: '7ch' }}
+						variant='contained'
+						color='success'
+					>
+						Log In
+					</Button>
+					<Container sx={{ mt: 2 }}>
+						<IconButton size='large'>
+							<Badge>
+								<FacebookIcon />
+							</Badge>
+						</IconButton>
+						<IconButton size='large'>
+							<Badge>
+								<GoogleIcon />
+							</Badge>
+						</IconButton>
+						<IconButton size='large'>
+							<Badge>
+								<InstagramIcon />
+							</Badge>
+						</IconButton>
+					</Container>
+				</Box>
+			</Container>
+		</>
 	)
 }

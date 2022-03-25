@@ -13,7 +13,7 @@ import TableRow from '@mui/material/TableRow/TableRow'
 import Typography from '@mui/material/Typography/Typography'
 import { strictEqual } from 'assert'
 import { useDispatch, useSelector } from 'react-redux'
-import { openScoreModalAction } from '../redux/actions'
+import { openScoreModalAction, reRenderLobbyAction } from '../redux/actions'
 import { containerStyle, scorePreview, WallPaper } from './style'
 import { io } from 'socket.io-client'
 
@@ -36,26 +36,15 @@ const Scoreboard = () => {
 				myId: myId,
 				totalScore: myTotalScore,
 			})
+			dispatch(reRenderLobbyAction(true))
 		} else {
 			return console.log('Current best score is not worth saving')
 		}
 	}
 
-	// const handleBestScore = () => {
-	// 	const submitHole1 = async () => {
-	// 		try {
-	// 			let response = await fetch(`http://localhost:3001/user`, {
-	// 				method: 'PUT',
-	// 				body: myTotalScore && JSON.stringify(myTotalScore),
-	// 				headers: { 'Content-Type': 'application/json', withCredentials: 'true', Accept: 'application/json' },
-	// 			})
-	// 			if (!response) throw new Error('Could not submit total scores')
-	// 		} catch (error) {
-	// 			console.log(error)
-	// 		}
-	// 	}
-	// 	submitHole1()
-	// }
+	socket.on('current best score updated', () => {
+		console.log('current best score updated')
+	})
 
 	return (
 		<Container sx={containerStyle}>

@@ -15,16 +15,13 @@ import Typography from '@mui/material/Typography/Typography'
 import { textAlign } from '@mui/system'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUsersBestScoresAction } from '../redux/actions'
+import { reRenderLobbyAction, setUsersBestScoresAction } from '../redux/actions'
 import { containerStyle, scorePreview, WallPaper, Widget } from './style'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 
-import { io } from 'socket.io-client'
-
-const socket = io('http://localhost:3001', { transports: ['websocket'] })
-
 export default function LeaderBoard() {
 	const dispatch = useDispatch()
+	const reRenderLobby = useSelector((state: IReduxStore) => state.gameroom.reRenderLobby)
 	const scores = useSelector((state: IReduxStore) => state.user.usersBestScores)
 
 	useEffect(() => {
@@ -41,17 +38,14 @@ export default function LeaderBoard() {
 		fetchUsersBestScore()
 	}, [])
 
-	socket.on('current best score updated', () => {
-		console.log('current best score updated')
-	})
-
 	const top3Array = []
-	const getTop3scors = scores
+	const getTop3scores = scores
 		.sort((a, b) => a.bestScore - b.bestScore)
 		.slice(0, 3)
 		.map((score) => {
 			return top3Array.push(score)
 		})
+
 	return (
 		<Container sx={containerStyle}>
 			<Box sx={{ width: '100%', overflow: 'hidden' }}>

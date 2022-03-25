@@ -36,9 +36,10 @@ const Hole4 = () => {
 	})
 
 	const setTotalScores = () => {
-		playersArray.map((player, i) => {
-			dispatch(setPlayerTotalScoreAction(player))
-		})
+		if (playersArray.length > 1)
+			playersArray.map((player, i) => {
+				dispatch(setPlayerTotalScoreAction(player))
+			})
 	}
 
 	const handlePlayerScores = () => {
