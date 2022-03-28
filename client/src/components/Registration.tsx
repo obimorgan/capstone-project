@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { userLoginAction } from '../redux/actions'
 import { Background, containerStyle, LogoImage } from './style'
+import Stack from '@mui/material/Stack/Stack'
 
 export default function Registration() {
 	const navigate = useNavigate()
@@ -66,67 +67,69 @@ export default function Registration() {
 					/>
 				</LogoImage>
 			</Container>
-			<Box component='form' sx={{ mb: 4 }}>
-				<TextField
-					id='outlined-start-adornment'
-					sx={{ m: 1, width: '30ch' }}
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position='start'>
-								<AccountCircleIcon />
-							</InputAdornment>
-						),
-					}}
-					onChange={(e) => handleCredentials('name', e.target.value)}
-					value={credentials.name}
-				/>
-				<TextField
-					id='outlined-start-adornment'
-					sx={{ m: 1, width: '30ch' }}
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position='start'>
-								<Mail />
-							</InputAdornment>
-						),
-					}}
-					onChange={(e) => handleCredentials('email', e.target.value)}
-					value={credentials.email}
-				/>
-				<TextField
-					id='outlined-start-adornment'
-					sx={{ m: 1, width: '30ch' }}
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position='start'>
-								<LockIcon />
-							</InputAdornment>
-						),
-					}}
-					onChange={(e) => handleCredentials('password', e.target.value)}
-					value={credentials.password}
-				/>
-				<Button sx={{ m: 1, width: '31ch' }} variant='contained' color='success' onClick={handleSubmit}>
-					Register
-				</Button>
-				<Container sx={{ display: 'flex', textAlign: 'center ', justifyContent: 'center' }}>
-					<IconButton size='large'>
-						<Badge>
-							<FacebookIcon />
-						</Badge>
-					</IconButton>
-					<IconButton size='large'>
-						<Badge>
-							<GoogleIcon />
-						</Badge>
-					</IconButton>
-					<IconButton size='large'>
-						<Badge>
-							<InstagramIcon />
-						</Badge>
-					</IconButton>
-				</Container>
-			</Box>
+			<Container sx={{ display: 'flex', justifyContent: 'center' }}>
+				<Stack direction='column' component='form' sx={{ mb: 4 }}>
+					<TextField
+						id='outlined-start-adornment'
+						sx={{ m: 1, width: '30ch' }}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position='start'>
+									<AccountCircleIcon />
+								</InputAdornment>
+							),
+						}}
+						onChange={(e) => handleCredentials('name', e.target.value)}
+						value={credentials.name}
+					/>
+					<TextField
+						id='outlined-start-adornment'
+						sx={{ m: 1, width: '30ch' }}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position='start'>
+									<Mail />
+								</InputAdornment>
+							),
+						}}
+						onChange={(e) => handleCredentials('email', e.target.value)}
+						value={credentials.email}
+					/>
+					<TextField
+						id='outlined-start-adornment'
+						sx={{ m: 1, width: '30ch' }}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position='start'>
+									<LockIcon />
+								</InputAdornment>
+							),
+						}}
+						onChange={(e) => handleCredentials('password', e.target.value)}
+						value={credentials.password}
+					/>
+					<Button sx={{ m: 1, width: '31ch' }} variant='contained' color='success' onClick={handleSubmit}>
+						Register
+					</Button>
+					<Container sx={{ display: 'flex', textAlign: 'center ', justifyContent: 'center' }}>
+						<IconButton size='large'>
+							<Badge>
+								<FacebookIcon />
+							</Badge>
+						</IconButton>
+						<IconButton size='large'>
+							<Badge>
+								<GoogleIcon />
+							</Badge>
+						</IconButton>
+						<IconButton size='large'>
+							<Badge>
+								<InstagramIcon />
+							</Badge>
+						</IconButton>
+					</Container>
+				</Stack>
+			</Container>
 		</Container>
 	)
 }

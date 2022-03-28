@@ -9,7 +9,7 @@ export default function UserProvider({ children }: IProps) {
 	const dispatch = useDispatch()
 	const isLoggedIn = useSelector((state: IReduxStore) => state.user.isLoggedIn)
 
-	console.log('Is the user logged in?', isLoggedIn)
+	// console.log('Is the user logged in?', isLoggedIn)
 
 	const fetchCurrentUser = async () => {
 		try {

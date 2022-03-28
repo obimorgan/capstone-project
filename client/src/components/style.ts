@@ -20,7 +20,7 @@ export const scorePreview = {
 	top: '50%',
 	left: '50%',
 	transform: 'translate(-50%, -50%)',
-	width: 380,
+	width: 300,
 	bgcolor: 'background.paper',
 	border: '2px solid #000',
 	borderRadius: 2,
@@ -78,9 +78,9 @@ export const WallPaper = styled('div')({
 })
 
 export const Widget = styled('div')(({ theme }) => ({
-	padding: 5,
-	borderRadius: 16,
-	width: 300,
+	paddingTop: 10,
+	borderRadius: 2,
+	width: '100%',
 	maxWidth: '100%',
 	margin: 'auto',
 	position: 'relative',

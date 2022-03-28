@@ -16,31 +16,60 @@ import { useDispatch, useSelector } from 'react-redux'
 import { openScoreModalAction, reRenderLobbyAction } from '../redux/actions'
 import { containerStyle, scorePreview, WallPaper } from './style'
 import { io } from 'socket.io-client'
+import Box from '@mui/material/Box/Box'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
 const Scoreboard = () => {
+	const gameName = useSelector((state: IReduxStore) => state.gameroom.games.gameName)
+	const dispatch = useDispatch()
+
+	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
 	const myId = useSelector((state: IReduxStore) => state.user.currentUser._id)
 	const currentBestScore = useSelector((state: IReduxStore) => state.user.currentUser.bestScore)
-	const gameName = useSelector((state: IReduxStore) => state.gameroom.games.gameName)
-	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
-	const dispatch = useDispatch()
 	const myTotalScore = players.find((player) => player.playerId === myId).totalScore
 
+	console.log(players)
+
+	const playersId = players.map((player) => {
+		const id = player.playerId
+		console.log(id)
+	})
+
+	const playerstotalScore = players.map((player) => {
+		const scores = player.totalScore
+		console.log(scores)
+	})
+
 	const handleSubmit = () => {
-		console.log(currentBestScore)
-		console.log(myTotalScore)
-		if (currentBestScore > myTotalScore) {
-			console.log('Set new best score')
-			socket.emit('submit my total score', {
-				myId: myId,
-				totalScore: myTotalScore,
-			})
-			dispatch(reRenderLobbyAction(true))
-		} else {
-			return console.log('Current best score is not worth saving')
-		}
+		players.forEach((player) => {
+			if (currentBestScore > myTotalScore) {
+				console.log('Set new best score')
+				socket.emit('submit my total score', {
+					myId: player.playerId,
+					totalScore: player.totalScore,
+				})
+				// dispatch(reRenderLobbyAction(true))
+			} else {
+				return console.log('Current best score is not worth saving')
+			}
+		})
 	}
+
+	// const handleSubmit = () => {
+	// 	console.log(currentBestScore)
+	// 	console.log(myTotalScore)
+	// 	if (currentBestScore > myTotalScore) {
+	// 		console.log('Set new best score')
+	// 		socket.emit('submit my total score', {
+	// 			myId: myId,
+	// 			totalScore: myTotalScore,
+	// 		})
+	// 		dispatch(reRenderLobbyAction(true))
+	// 	} else {
+	// 		return console.log('Current best score is not worth saving')
+	// 	}
+	// }
 
 	socket.on('current best score updated', () => {
 		console.log('current best score updated')
@@ -48,13 +77,17 @@ const Scoreboard = () => {
 
 	return (
 		<Container sx={containerStyle}>
-			<Typography variant='h3' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
-				The Winner of Game{gameName}
-			</Typography>
-			<TableContainer component={Paper} sx={{ zIndex: 1 }}>
+			<Box sx={{ width: '100%', overflow: 'hidden', zIndex: 1 }}>
 				<Typography variant='h6' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
-					Leaderboard
+					The Winner of
 				</Typography>
+				<Typography variant='h4' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', mb: 5 }}>
+					{gameName}
+				</Typography>
+				{/* <TableContainer component={Paper} sx={{ zIndex: 1 }}> */}
+				{/* <Typography variant='h6' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
+					Leaderboard
+				</Typography> */}
 				<Table>
 					<TableHead>
 						<TableRow>
@@ -80,8 +113,18 @@ const Scoreboard = () => {
 								</TableBody>
 							))}
 				</Table>
-				<Button onClick={handleSubmit}>Back to hole</Button>
-			</TableContainer>
+				{/* </TableContainer> */}
+				<Box>
+					<Button
+						onClick={handleSubmit}
+						variant='contained'
+						color='success'
+						sx={{ m: 1, zIndex: 1, borderRadius: 100, height: 100, width: 100, mt: 5 }}
+					>
+						Submit Scores
+					</Button>
+				</Box>
+			</Box>
 			<WallPaper />
 		</Container>
 	)

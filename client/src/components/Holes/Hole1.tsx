@@ -11,6 +11,7 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import Box from '@mui/system/Box/Box'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -65,7 +66,7 @@ const Hole1 = () => {
 			<Typography variant='h1' sx={{ zIndex: 1 }}>
 				HOLE 1
 			</Typography>
-			<TableContainer component={Paper} sx={{ zIndex: 1 }}>
+			<TableContainer sx={{ zIndex: 1 }}>
 				<Table sx={{ minWidth: '100%' }} aria-label='simple table'>
 					<TableHead>
 						<TableRow>
@@ -97,9 +98,16 @@ const Hole1 = () => {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			<Button onClick={handlePlayerScores} variant='contained' sx={{ m: 1, zIndex: 1, color: 'success' }}>
-				Submit Scores
-			</Button>
+			<Box>
+				<Button
+					onClick={handlePlayerScores}
+					variant='contained'
+					color='success'
+					sx={{ m: 1, zIndex: 1, borderRadius: 100, height: 100, width: 100 }}
+				>
+					Submit Scores
+				</Button>
+			</Box>
 			<WallPaper />
 		</Container>
 	)

@@ -31,12 +31,13 @@ export default function LeaderBoard() {
 				if (!response) throw new Error('Fetch was unsuccessful')
 				const data = await response.json()
 				dispatch(setUsersBestScoresAction(data))
+				console.log('leaderboard')
 			} catch (error) {
 				console.log(error)
 			}
 		}
 		fetchUsersBestScore()
-	}, [])
+	}, [reRenderLobby])
 
 	const top3Array = []
 	const getTop3scores = scores
@@ -48,15 +49,15 @@ export default function LeaderBoard() {
 
 	return (
 		<Container sx={containerStyle}>
-			<Box sx={{ width: '100%', overflow: 'hidden' }}>
+			<Box sx={{ width: '100%', overflow: 'hidden', zIndex: 1 }}>
 				<Widget>
-					{/* <TableContainer component={Paper} sx={{ zIndex: 2 }}> */}
 					<Typography
 						variant='h5'
 						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', mt: 5, mb: 3, fontWeight: 'bold' }}
 					>
 						LEADERBOARD
 					</Typography>
+					{/* <TableContainer component={Paper} sx={{ zIndex: 2 }}> */}
 					<Container sx={{ display: 'flex', direction: 'row', justifyContent: 'center' }}>
 						<Stack>
 							<Stack direction='row'>
@@ -130,8 +131,8 @@ export default function LeaderBoard() {
 								))}
 					</Table>
 				</Widget>
-				<WallPaper />
 			</Box>
+			<WallPaper />
 		</Container>
 	)
 }

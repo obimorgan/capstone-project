@@ -67,7 +67,7 @@ const Hole2: React.FC = () => {
 			<Typography variant='h1' sx={{ zIndex: 1 }}>
 				HOLE 2
 			</Typography>
-			<TableContainer component={Paper} sx={{ zIndex: 1 }}>
+			<TableContainer sx={{ zIndex: 1 }}>
 				<Table sx={{ minWidth: '100%' }} aria-label='simple table'>
 					<TableHead>
 						<TableRow>

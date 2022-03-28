@@ -32,7 +32,7 @@ export default function Home() {
 	const handleOpen = () => {
 		setOpen(true)
 	}
-	console.log('Current user ID:', currentUser?._id)
+	// console.log('Current user ID:', currentUser?._id)
 	//2 Creatign a new game
 	const handleCreateAGame = async (e: FormEvent) => {
 		e.preventDefault()
@@ -52,6 +52,8 @@ export default function Home() {
 		navigate('/lobby')
 	}
 
+	// console.log('home')
+
 	// Joinning a game
 	const handleJoinGame = async (e: FormEvent) => {
 		e.preventDefault()
@@ -64,29 +66,34 @@ export default function Home() {
 		})
 	}
 
+	// socket.on('connect', () => {
+	// 	console.log('Connection is now established!')
+	// })
+
 	useEffect(() => {
 		//Initial connection, trapping connection from  server
 		socket.on('connect', () => {
 			console.log('Connection is now established!')
 		})
-		socket.on('display game', (data) => {
-			// b|e is joining the user to an existing game!
-			const query = data._id
-			console.log('GAME ID:', query)
-			console.log('current gamePin: ', data.gamePin)
-			fetchCurrentGame(query)
-			dispatch(reRenderLobbyAction(true))
-			navigate('/lobby')
-		})
-		// game pin from server.
-		socket.on('joining player', (data) => {
-			const query = data._id
-			fetchCurrentGame(query)
-			console.log('A NEW player is joining')
-			dispatch(reRenderLobbyAction(true))
-			navigate('/lobby')
-		})
 	}, [])
+
+	socket.on('display game', (data) => {
+		// b|e is joining the user to an existing game!
+		const query = data._id
+		console.log('GAME ID:', query)
+		console.log('current gamePin: ', data.gamePin)
+		fetchCurrentGame(query)
+		dispatch(reRenderLobbyAction(true))
+		navigate('/lobby')
+	})
+	// game pin from server.
+	socket.on('joining player', (data) => {
+		const query = data._id
+		fetchCurrentGame(query)
+		console.log('A NEW player is joining')
+		dispatch(reRenderLobbyAction(true))
+		navigate('/lobby')
+	})
 
 	const fetchCurrentGame = async (query: string) => {
 		try {
@@ -121,12 +128,17 @@ export default function Home() {
 						>
 							Create a new Game
 						</Button>
-						<Typography sx={{ m: 'auto' }}> Be in charge of the scoring.</Typography>
+						<Typography sx={{ m: 'auto', variant: 'h6', color: 'text.secondary', fontWeight: 500 }}>
+							{' '}
+							Be in charge of the scoring.
+						</Typography>
 					</Widget>
 				</Box>
 				<Box>
 					<Widget sx={{ display: 'flex', direction: 'row', justifyContent: 'end', mt: 1 }}>
-						<Typography sx={{ m: 'auto' }}>Swing and relax.</Typography>
+						<Typography sx={{ m: 'auto', variant: 'h6', color: 'text.secondary', fontWeight: 500 }}>
+							Swing and relax.
+						</Typography>
 						<Button
 							sx={squareBtn}
 							variant='contained'

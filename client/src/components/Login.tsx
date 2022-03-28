@@ -11,6 +11,7 @@ import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
+import Stack from '@mui/material/Stack/Stack'
 import TextField from '@mui/material/TextField/TextField'
 import { FormEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -69,59 +70,61 @@ export default function Login() {
 						/>
 					</LogoImage>
 				</Container>
-				<Box component='form' sx={{ mt: 10, mb: 15 }}>
-					<TextField
-						id='outlined-start-adornment'
-						sx={{ width: '30ch' }}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position='start'>
-									<Mail />
-								</InputAdornment>
-							),
-						}}
-						value={credentials.email}
-						onChange={(e) => handleCredentials('email', e.target.value)}
-					/>
-					<TextField
-						id='outlined-start-adornment'
-						sx={{ mt: 2, width: '30ch' }}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position='start'>
-									<LockIcon />
-								</InputAdornment>
-							),
-						}}
-						value={credentials.password}
-						onChange={(e) => handleCredentials('password', e.target.value)}
-					/>
-					<Button
-						onClick={handleSubmit}
-						sx={{ mt: 5, width: '31ch', height: '7ch' }}
-						variant='contained'
-						color='success'
-					>
-						Log In
-					</Button>
-					<Container sx={{ mt: 2 }}>
-						<IconButton size='large'>
-							<Badge>
-								<FacebookIcon />
-							</Badge>
-						</IconButton>
-						<IconButton size='large'>
-							<Badge>
-								<GoogleIcon />
-							</Badge>
-						</IconButton>
-						<IconButton size='large'>
-							<Badge>
-								<InstagramIcon />
-							</Badge>
-						</IconButton>
-					</Container>
-				</Box>
+				<Container sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Stack component='form' direction='column' sx={{ mt: 10, mb: 15 }}>
+						<TextField
+							id='outlined-start-adornment'
+							sx={{ width: '30ch' }}
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<Mail />
+									</InputAdornment>
+								),
+							}}
+							value={credentials.email}
+							onChange={(e) => handleCredentials('email', e.target.value)}
+						/>
+						<TextField
+							id='outlined-start-adornment'
+							sx={{ mt: 2, width: '30ch' }}
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<LockIcon />
+									</InputAdornment>
+								),
+							}}
+							value={credentials.password}
+							onChange={(e) => handleCredentials('password', e.target.value)}
+						/>
+						<Button
+							onClick={handleSubmit}
+							sx={{ mt: 5, width: '31ch', height: '7ch' }}
+							variant='contained'
+							color='success'
+						>
+							Log In
+						</Button>
+						<Container sx={{ mt: 2 }}>
+							<IconButton size='large'>
+								<Badge>
+									<FacebookIcon />
+								</Badge>
+							</IconButton>
+							<IconButton size='large'>
+								<Badge>
+									<GoogleIcon />
+								</Badge>
+							</IconButton>
+							<IconButton size='large'>
+								<Badge>
+									<InstagramIcon />
+								</Badge>
+							</IconButton>
+						</Container>
+					</Stack>
+				</Container>
 			</Container>
 		</>
 	)

@@ -65,7 +65,7 @@ const Hole3 = () => {
 			<Typography variant='h1' sx={{ zIndex: 1 }}>
 				HOLE 3
 			</Typography>
-			<TableContainer component={Paper} sx={{ zIndex: 1 }}>
+			<TableContainer sx={{ zIndex: 1 }}>
 				<Table sx={{ minWidth: '100%' }} aria-label='simple table'>
 					<TableHead>
 						<TableRow>
