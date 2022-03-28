@@ -53,17 +53,16 @@ export default function LeaderBoard() {
 				<Widget>
 					<Typography
 						variant='h5'
-						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', mt: 5, mb: 3, fontWeight: 'bold' }}
+						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', paddingTop: 8, mb: 3, fontWeight: 'bold' }}
 					>
 						LEADERBOARD
 					</Typography>
 					{/* <TableContainer component={Paper} sx={{ zIndex: 2 }}> */}
-					<Container sx={{ display: 'flex', direction: 'row', justifyContent: 'center' }}>
-						<Stack>
-							<Stack direction='row'>
-								<EmojiEventsIcon color='warning' />
-								<Avatar sx={{ m: 'auto' }} alt='second place' src={top3Array[0].avatar} />
-							</Stack>
+					<Container sx={{ display: 'flex', direction: 'row', justifyContent: 'center', mb: 2 }}>
+						<EmojiEventsIcon color='warning' fontSize='large' sx={{ position: 'relative', bottom: 15, right: 15 }} />
+						<Stack sx={{ m: 'auto', position: 'absolute', zIndex: -1 }}>
+							<Avatar alt='second place' src={top3Array[0].avatar} />
+
 							<Stack direction='row'>
 								<Typography sx={{ fontWeight: 'bold', textAlign: 'start' }}>{top3Array[0].name}</Typography>
 								&nbsp;

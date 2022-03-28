@@ -78,7 +78,7 @@ export const WallPaper = styled('div')({
 })
 
 export const Widget = styled('div')(({ theme }) => ({
-	paddingTop: 10,
+	// paddingTop: 10,
 	borderRadius: 2,
 	width: '100%',
 	maxWidth: '100%',
@@ -90,8 +90,8 @@ export const Widget = styled('div')(({ theme }) => ({
 }))
 
 export const CoverImage = styled('div')({
-	width: 100,
-	height: 100,
+	width: 50,
+	height: 50,
 	objectFit: 'cover',
 	overflow: 'hidden',
 	flexShrink: 0,

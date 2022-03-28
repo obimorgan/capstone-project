@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom'
 import { squareBtn, containerStyle, CoverImage, WallPaper, Widget } from './style'
 import { reRenderLobbyAction, setCurrentGameDetailsAction } from '../redux/actions'
 import { io } from 'socket.io-client'
+import Stack from '@mui/material/Stack/Stack'
+import zIndex from '@mui/material/styles/zIndex'
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
 // import { io } from 'socket.io-client'
@@ -58,38 +60,42 @@ export default function MusicPlayerSlider() {
 
 	return (
 		<Container sx={containerStyle}>
-			<Box sx={{ width: '100%', overflow: 'hidden' }}>
-				<Widget>
-					<h1>Welcome to game</h1>
-					<h1>{currentGame?.gameName}</h1>
-					<h2>Game-pin: {currentGame?.gamePin}</h2>
+			<Stack direction='column'>
+				<Box sx={{ zIndex: 1 }}>
+					{/* <Typography variant='h5' color='text.secondary' fontWeight={500}>
+						Welcome to game
+					</Typography> */}
+					<Typography variant='h4' color='text.secondary' fontWeight={500}>
+						{currentGame?.gameName}
+					</Typography>
+					<Typography variant='h3' color='text.primary' fontWeight={500}>
+						Game-pin: {currentGame?.gamePin}
+					</Typography>
 					<Typography variant='h6' color='text.secondary' fontWeight={500}>
 						{isAhost ? <b>Waiting for players to join...</b> : <b>Waiting for the host to start the game </b>}
 					</Typography>
-					{currentGame?.players.map((player, index) => (
-						<Box key={index} sx={{ display: 'flex', alignItems: 'center', m: 1, overflow: 'hidden' }}>
-							<CoverImage>
-								<img src={player.avatar} />
-							</CoverImage>
-							<Box sx={{ ml: 1.5, minWidth: 0 }}>
-								<Typography variant='h6' color='text.secondary' fontWeight={500}>
-									{player.name}
-								</Typography>
-								<Typography noWrap>
-									<b>Best score:</b>
-									{/* <span>{player.scores}</span> */}
-								</Typography>
-							</Box>
+				</Box>
+				{currentGame?.players.map((player, index) => (
+					// <Widget>
+					<Box key={index} sx={{ display: 'flex', alignItems: 'center', m: 2, zIndex: 1 }}>
+						<CoverImage>
+							<img src={player.avatar} />
+						</CoverImage>
+						<Box sx={{ m: 1.5 }}>
+							<Typography variant='h6' color='text.secondary' fontWeight={500}>
+								{player.name}
+							</Typography>
 						</Box>
-					))}
-				</Widget>
+					</Box>
+					// </Widget>
+				))}
 				<WallPaper />
 				{/* {isAhost && ( */}
-				<Button variant='contained' sx={squareBtn} onClick={handleStartGame}>
+				<Button variant='contained' onClick={handleStartGame}>
 					START GAME
 				</Button>
 				{/* )} */}
-			</Box>
+			</Stack>
 		</Container>
 	)
 }
