@@ -20,7 +20,7 @@ import {
 	decHole2ScoreAction,
 	incHole2ScoreAction,
 	openScoreModalAction,
-	setCompletedHolesAction,
+	setSoloPlayerTotalScoreAction,
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
 import Maps from '../Maps'
@@ -41,9 +41,14 @@ const Hole2 = () => {
 	console.log(playersArray)
 
 	const setTotalScores = () => {
-		playersArray.forEach((player, i) => {
-			dispatch(setPlayerTotalScoreAction(player))
-		})
+		if (playersArray.length > 1) {
+			playersArray.forEach((player, i) => {
+				dispatch(setPlayerTotalScoreAction(player))
+			})
+		} else {
+			return
+			dispatch(setSoloPlayerTotalScoreAction(hole2[0].score))
+		}
 	}
 
 	const handlePlayerScores = () => {
@@ -55,10 +60,9 @@ const Hole2 = () => {
 					body: hole2 && JSON.stringify(hole2),
 					headers: { 'Content-Type': 'application/json', withCredentials: 'true', Accept: 'application/json' },
 				})
-				if (!response) throw new Error('Could not submit hole 1 scores')
+				if (!response) throw new Error('Could not submit hole 2 scores')
 				setTotalScores()
-				navigate('/hole2')
-				dispatch(setCompletedHolesAction('hole2'))
+				navigate('/hole3')
 			} catch (error) {
 				console.log(error)
 			}

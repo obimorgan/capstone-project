@@ -41,7 +41,7 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 					...state.games,
 					players: [...state.games.players].map((player) => {
 						if (player.playerId === action.payload.playerId) {
-							return { totalScore: (player.totalScore += action.payload.score) }
+							return { ...player, totalScore: (player.totalScore += action.payload.score) }
 						}
 						return {
 							...player,
