@@ -41,13 +41,24 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 					...state.games,
 					players: [...state.games.players].map((player) => {
 						if (player.playerId === action.payload.playerId) {
-							return player
+							return { totalScore: (player.totalScore += action.payload.score) }
 						}
 						return {
 							...player,
-							totalScore: (player.totalScore += action.payload.score),
 						}
 					}),
+				},
+			}
+
+		case ACTIONS.SET_SOLO_PLAYER_TOTAL_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					players: {
+						...state.games.players,
+						totalScore: action.payload,
+					},
 				},
 			}
 
@@ -59,15 +70,10 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 					...state.games,
 					hole1: [...state.games.hole1].map((detail) => {
 						if (detail.playerId === action.payload) {
-							return { ...detail, score: (detail.score -= 1) }
+							return { ...detail, score: detail.score - 1 }
 						}
 						return { ...detail }
 					}),
-					// players: [...state.games.players].map((player) => {
-					// 	if (player.playerId === action.payload) {
-					// 		return { ...player, totalScore: (player.totalScore -= 1)}
-					// 	}
-					// })
 				},
 			}
 		case ACTIONS.INCREASE_HOLE1_SCORE:
@@ -77,15 +83,10 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 					...state.games,
 					hole1: [...state.games.hole1].map((detail) => {
 						if (detail.playerId === action.payload) {
-							return { ...detail, score: (detail.score += 1) }
+							return { ...detail, score: detail.score + 1 }
 						}
 						return { ...detail }
 					}),
-					// players: [...state.games.players].map((player) => {
-					// 	if (player.playerId === action.payload) {
-					// 		return { ...player, totalScore: (player.totalScore += 1)}
-					// 	}
-					// })
 				},
 			}
 		case ACTIONS.DECREASE_HOLE2_SCORE:
@@ -95,7 +96,7 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 					...state.games,
 					hole2: [...state.games.hole2].map((detail) => {
 						if (detail.playerId === action.payload) {
-							return { ...detail, score: (detail.score -= 1) }
+							return { ...detail, score: detail.score - 1 }
 						}
 						return { ...detail }
 					}),
@@ -108,7 +109,7 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 					...state.games,
 					hole2: [...state.games.hole2].map((detail) => {
 						if (detail.playerId === action.payload) {
-							return { ...detail, score: (detail.score += 1) }
+							return { ...detail, score: detail.score + 1 }
 						}
 						return { ...detail }
 					}),
@@ -121,7 +122,7 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 					...state.games,
 					hole3: [...state.games.hole3].map((detail) => {
 						if (detail.playerId === action.payload) {
-							return { ...detail, score: (detail.score -= 1) }
+							return { ...detail, score: detail.score - 1 }
 						}
 						return { ...detail }
 					}),
@@ -134,7 +135,7 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 					...state.games,
 					hole3: [...state.games.hole3].map((detail) => {
 						if (detail.playerId === action.payload) {
-							return { ...detail, score: (detail.score += 1) }
+							return { ...detail, score: detail.score + 1 }
 						}
 						return { ...detail }
 					}),
@@ -147,7 +148,7 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 					...state.games,
 					hole4: [...state.games.hole4].map((detail) => {
 						if (detail.playerId === action.payload) {
-							return { ...detail, score: (detail.score -= 1) }
+							return { ...detail, score: detail.score - 1 }
 						}
 						return { ...detail }
 					}),
@@ -160,7 +161,7 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 					...state.games,
 					hole4: [...state.games.hole4].map((detail) => {
 						if (detail.playerId === action.payload) {
-							return { ...detail, score: (detail.score += 1) }
+							return { ...detail, score: detail.score + 1 }
 						}
 						return { ...detail }
 					}),

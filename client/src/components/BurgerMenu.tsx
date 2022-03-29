@@ -8,15 +8,20 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import Box from '@mui/material/Box'
 import SpeedDial from '@mui/material/SpeedDial'
 import SpeedDialAction from '@mui/material/SpeedDialAction'
-
-const actions = [
-	{ icon: <LocalBarIcon sx={{ fontSize: 'large' }} />, name: 'Drinks' },
-	{ icon: <LocalPizzaIcon sx={{ fontSize: 'large' }} />, name: 'Food' },
-	{ icon: <AccountCircleIcon sx={{ fontSize: 'large' }} />, name: 'Account' },
-	{ icon: <LeaderboardSharpIcon sx={{ fontSize: 'large' }} />, name: 'LeaderBoard' },
-]
+import { useNavigate } from 'react-router-dom'
 
 export default function BasicSpeedDial() {
+	const navigate = useNavigate()
+
+	const actions = [
+		{ icon: <LocalBarIcon sx={{ fontSize: 'large' }} />, name: 'Drinks' },
+		{ icon: <LocalPizzaIcon sx={{ fontSize: 'large' }} />, name: 'Food' },
+		{ icon: <AccountCircleIcon sx={{ fontSize: 'large' }} />, name: 'Account' },
+		{
+			icon: <LeaderboardSharpIcon sx={{ fontSize: 'large' }} onClick={() => navigate('/leaderboard')} />,
+			name: 'LeaderBoard',
+		},
+	]
 	return (
 		<Box sx={{ height: 100, transform: 'translateZ(1px)', mr: 1 }}>
 			<SpeedDial

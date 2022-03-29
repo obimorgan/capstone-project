@@ -17,11 +17,13 @@ import { openScoreModalAction, reRenderLobbyAction } from '../redux/actions'
 import { containerStyle, scorePreview, WallPaper } from './style'
 import { io } from 'socket.io-client'
 import Box from '@mui/material/Box/Box'
+import { useNavigate } from 'react-router-dom'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
 const Scoreboard = () => {
-	const gameName = useSelector((state: IReduxStore) => state.gameroom.games.gameName)
+	const navigate = useNavigate()
+	const game = useSelector((state: IReduxStore) => state.gameroom.games)
 	const dispatch = useDispatch()
 
 	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
@@ -29,46 +31,33 @@ const Scoreboard = () => {
 	const currentBestScore = useSelector((state: IReduxStore) => state.user.currentUser.bestScore)
 	const myTotalScore = players.find((player) => player.playerId === myId).totalScore
 
-	console.log(players)
-
-	const playersId = players.map((player) => {
-		const id = player.playerId
-		console.log(id)
-	})
-
-	const playerstotalScore = players.map((player) => {
-		const scores = player.totalScore
-		console.log(scores)
-	})
-
 	const handleSubmit = () => {
 		players.forEach((player) => {
-			if (currentBestScore > myTotalScore) {
-				console.log('Set new best score')
-				socket.emit('submit my total score', {
-					myId: player.playerId,
-					totalScore: player.totalScore,
-				})
-				// dispatch(reRenderLobbyAction(true))
-			} else {
-				return console.log('Current best score is not worth saving')
-			}
+			// console.log('Set new best score')
+			socket.emit('submit my total score', {
+				myId: player.playerId,
+				totalScore: player.totalScore,
+			})
 		})
+		navigate('/leaderboard')
 	}
 
 	// const handleSubmit = () => {
-	// 	console.log(currentBestScore)
-	// 	console.log(myTotalScore)
-	// 	if (currentBestScore > myTotalScore) {
-	// 		console.log('Set new best score')
-	// 		socket.emit('submit my total score', {
-	// 			myId: myId,
-	// 			totalScore: myTotalScore,
-	// 		})
-	// 		dispatch(reRenderLobbyAction(true))
-	// 	} else {
-	// 		return console.log('Current best score is not worth saving')
-	// 	}
+	// 	players.forEach(async (player) => {
+	// 		const { playerId, totalScore } = player
+	// 		const gameId = game._id
+	// 		try {
+	// 			const response = await fetch(`http://localhost:3001/user/${playerId}`, {
+	// 				method: 'PUT',
+	// 				body: totalScore && JSON.stringify(totalScore),
+	// 				headers: { 'Content-Type': 'application/json', withCredentials: 'true', Accept: 'application/json' },
+	// 			})
+	// 			console.log(totalScore)
+	// 			if (!response) throw new Error('Fetch was unsuccessful')
+	// 		} catch (error) {
+	// 			console.log(error)
+	// 		}
+	// 	})
 	// }
 
 	socket.on('current best score updated', () => {
@@ -82,7 +71,7 @@ const Scoreboard = () => {
 					The Winner of
 				</Typography>
 				<Typography variant='h4' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', mb: 5 }}>
-					{gameName}
+					{game.gameName}
 				</Typography>
 				{/* <TableContainer component={Paper} sx={{ zIndex: 1 }}> */}
 				{/* <Typography variant='h6' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>

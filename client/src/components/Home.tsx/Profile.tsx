@@ -22,6 +22,7 @@ export default function Profile() {
 					<Typography variant='button' gutterBottom component='div'>
 						Best score:
 					</Typography>
+					&nbsp;
 					<Typography variant='button' gutterBottom component='div'>
 						{player.bestScore}
 					</Typography>

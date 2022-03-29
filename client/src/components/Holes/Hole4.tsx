@@ -36,10 +36,9 @@ const Hole4 = () => {
 	})
 
 	const setTotalScores = () => {
-		if (playersArray.length > 1)
-			playersArray.map((player, i) => {
-				dispatch(setPlayerTotalScoreAction(player))
-			})
+		playersArray.forEach((player, i) => {
+			dispatch(setPlayerTotalScoreAction(player))
+		})
 	}
 
 	const handlePlayerScores = () => {
@@ -98,7 +97,7 @@ const Hole4 = () => {
 			<Button onClick={handlePlayerScores} variant='contained' sx={{ m: 1, zIndex: 1, color: 'success' }}>
 				Submit Scores
 			</Button>
-			<Scorepreview data={hole3Ranking} hole='Hole3' />
+			{/* <Scorepreview data={hole3Ranking} hole='Hole3' /> */}
 			<WallPaper />
 		</Container>
 	)

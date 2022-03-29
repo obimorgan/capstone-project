@@ -13,6 +13,7 @@ import Hole2 from './components/Holes/Hole2'
 import Hole3 from './components/Holes/Hole3'
 import Hole4 from './components/Holes/Hole4'
 import LeaderBoard from './components/LeaderBoard'
+import Maps from './components/Maps'
 
 function App() {
 	return (

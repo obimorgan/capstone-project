@@ -1,23 +1,20 @@
 /** @format */
 
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import Avatar from '@mui/material/Avatar/Avatar'
 import Box from '@mui/material/Box/Box'
 import Container from '@mui/material/Container/Container'
-import Paper from '@mui/material/Paper/Paper'
 import Stack from '@mui/material/Stack/Stack'
 import Table from '@mui/material/Table/Table'
 import TableBody from '@mui/material/TableBody/TableBody'
 import TableCell from '@mui/material/TableCell/TableCell'
-import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead/TableHead'
 import TableRow from '@mui/material/TableRow/TableRow'
 import Typography from '@mui/material/Typography/Typography'
-import { textAlign } from '@mui/system'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { reRenderLobbyAction, setUsersBestScoresAction } from '../redux/actions'
-import { containerStyle, scorePreview, WallPaper, Widget } from './style'
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
+import { setUsersBestScoresAction } from '../redux/actions'
+import { containerStyle, WallPaper, Widget } from './style'
 
 export default function LeaderBoard() {
 	const dispatch = useDispatch()
@@ -57,12 +54,10 @@ export default function LeaderBoard() {
 					>
 						LEADERBOARD
 					</Typography>
-					{/* <TableContainer component={Paper} sx={{ zIndex: 2 }}> */}
 					<Container sx={{ display: 'flex', direction: 'row', justifyContent: 'center', mb: 2 }}>
 						<EmojiEventsIcon color='warning' fontSize='large' sx={{ position: 'relative', bottom: 15, right: 15 }} />
-						<Stack sx={{ m: 'auto', position: 'absolute', zIndex: -1 }}>
-							<Avatar alt='second place' src={top3Array[0].avatar} />
-
+						<Stack direction='column' sx={{ m: 'auto', position: 'absolute', zIndex: -1 }}>
+							<Avatar sx={{ m: 'auto' }} alt='second place' src={top3Array[0].avatar} />
 							<Stack direction='row'>
 								<Typography sx={{ fontWeight: 'bold', textAlign: 'start' }}>{top3Array[0].name}</Typography>
 								&nbsp;
@@ -100,7 +95,6 @@ export default function LeaderBoard() {
 					<Table>
 						<TableHead>
 							<TableRow sx={{ '&:last-child td, &:last-child th': { borderTop: '1px solid' } }}>
-								{/* <TableCell>RANK</TableCell> */}
 								<TableCell>PLAYERS</TableCell>
 								<TableCell align='right'>SCORE</TableCell>
 							</TableRow>
@@ -110,13 +104,10 @@ export default function LeaderBoard() {
 								.sort((a, b) => {
 									return a.bestScore - b.bestScore
 								})
-								.slice(3, -5)
+								.slice(3, -7)
 								.map((player, index) => (
 									<TableBody key={player._id}>
 										<TableRow>
-											{/* <TableCell component='th' scope='row'>
-											{(index = index + 1)}
-										</TableCell> */}
 											<TableCell align='left'>
 												<Stack direction='row'>
 													<Avatar alt='avatar' src={player.avatar} />

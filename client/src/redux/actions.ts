@@ -22,6 +22,7 @@ export const ACTIONS = {
 	SET_THIRD_PLAYER_TOTAL_SCORE: 'SET_THIRD_PLAYER_TOTAL_SCORE',
 	SET_FOURTH_PLAYER_TOTAL_SCORE: 'SET_FOURTH_PLAYER_TOTAL_SCORE',
 	SET_PLAYER_TOTAL_SCORE: 'SET_PLAYER_TOTAL_SCORE',
+	SET_SOLO_PLAYER_TOTAL_SCORE: 'SET_SOLO_PLAYER_TOTAL_SCORE',
 	SET_COMPLETED_HOLES: 'SET_COMPLETED_HOLES',
 
 	DECREASE_HOLE1_SCORE: 'DECREASE_HOLE1_SCORE',
@@ -94,14 +95,10 @@ export const setPlayerTotalScoreAction = (data: ITotalScore) => ({
 	payload: data,
 })
 
-//player 1 ======first attempt =====
-// export const setFirstPlayerTotalAction = (player1: ITotalScore) => ({
-// 	type: ACTIONS.SET_FIRST_PLAYER_TOTAL_SCORE,
-// 	payload: {
-// 		p1Id: player1.id,
-// 		p1Score: player1.score,
-// 	},
-// })
+export const setSoloPlayerTotalScoreAction = (data: number) => ({
+	type: ACTIONS.SET_SOLO_PLAYER_TOTAL_SCORE,
+	payload: data,
+})
 
 // Set Holes Scores //
 export const decHole1ScoreAction = (userId: string) => {
