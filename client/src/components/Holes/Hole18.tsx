@@ -24,6 +24,7 @@ import {
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
 import Maps from '../Maps'
+import Navigation from '../Navigation'
 import { containerStyle, WallPaper } from '../style'
 
 const Hole18 = () => {
@@ -68,7 +69,9 @@ const Hole18 = () => {
 	return (
 		<>
 			<Container sx={containerStyle}>
-				<Box sx={{ flexGrow: 1 }} />
+				<Box sx={{ flexGrow: 1 }}>
+					<Navigation />
+				</Box>
 				<Typography variant='h2' sx={{ zIndex: 1, textAlign: 'center' }}>
 					HOLE 18
 				</Typography>

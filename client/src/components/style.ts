@@ -82,7 +82,7 @@ export const Widget = styled('div')(({ theme }) => ({
 	borderRadius: 2,
 	width: '100%',
 	maxWidth: '100%',
-	margin: 'auto',
+	// margin: 'auto',
 	position: 'relative',
 	zIndex: 1,
 	backgroundColor: theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)',

@@ -19,7 +19,7 @@ import Container from '@mui/material/Container/Container'
 const drawerBleeding = 50
 
 const Root = styled('div')(({ theme }) => ({
-	height: '100%',
+	height: '90%',
 	// backgroundColor: theme.palette.mode === 'light' ? blue[100] : theme.palette.background.default,
 	backgroundColor: blue[100],
 }))
@@ -60,7 +60,7 @@ const SwipeableEdgeDrawer = (props: drawer) => {
 			<Global
 				styles={{
 					'.MuiDrawer-root > .MuiPaper-root': {
-						height: `calc(70% - ${drawerBleeding}px)`,
+						height: `calc(80% - ${drawerBleeding}px)`,
 						overflow: 'visible',
 					},
 				}}

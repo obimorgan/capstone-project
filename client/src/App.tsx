@@ -1,20 +1,19 @@
 /** @format */
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './components/Home.tsx/Home'
-import Login from './components/Login'
-import Registration from './components/Registration'
-import Profile from './components/Profile'
-import Lobby from './components/Lobby'
-import Scoreboard from './components/Scoreboard'
-import UserProvider from './components/UserProvider'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Hole1 from './components/Holes/Hole1'
+import Hole18 from './components/Holes/Hole18'
 import Hole2 from './components/Holes/Hole2'
 import Hole3 from './components/Holes/Hole3'
 import Hole4 from './components/Holes/Hole4'
+import Home from './components/Home.tsx/Home'
 import LeaderBoard from './components/LeaderBoard'
-import Maps from './components/Maps'
-import Hole18 from './components/Holes/Hole18'
+import Lobby from './components/Lobby'
+import Login from './components/Login'
+import Profile from './components/Profile'
+import Registration from './components/Registration'
+import Scoreboard from './components/Scoreboard'
+import UserProvider from './components/UserProvider'
 
 function App() {
 	return (

@@ -24,6 +24,7 @@ import {
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
 import Maps from '../Maps'
+import Navigation from '../Navigation'
 import { containerStyle, WallPaper } from '../style'
 
 const Hole2 = () => {
@@ -73,7 +74,9 @@ const Hole2 = () => {
 	return (
 		<>
 			<Container sx={containerStyle}>
-				<Box sx={{ flexGrow: 1 }} />
+				<Box sx={{ flexGrow: 1 }}>
+					<Navigation />
+				</Box>
 				<Typography variant='h2' sx={{ zIndex: 1, textAlign: 'center' }}>
 					HOLE 2
 				</Typography>
@@ -131,6 +134,7 @@ const Hole2 = () => {
 						</Table>
 					</Stack>
 				</TableContainer>
+				<Box sx={{ flexGrow: 1 }} />
 				<Box>
 					{/* <Button
 						sx={{ m: 1, zIndex: 1, borderRadius: 100, height: 100, width: 100 }}
@@ -150,7 +154,6 @@ const Hole2 = () => {
 					</Button>
 				</Box>
 				<WallPaper />
-				<Box sx={{ flexGrow: 1 }} />
 			</Container>
 			<Maps open={open} map={map2} name={'Hole 2 Map'} />
 		</>
