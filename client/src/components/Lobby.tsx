@@ -56,7 +56,7 @@ export default function MusicPlayerSlider() {
 		window.location.reload()
 		console.log('REFRESH PAGE')
 	}
-	setInterval(refreshPage, 3000)
+	setInterval(refreshPage, 5000)
 
 	return (
 		<Container sx={containerStyle}>

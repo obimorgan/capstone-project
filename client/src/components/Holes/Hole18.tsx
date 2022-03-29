@@ -15,59 +15,54 @@ import * as React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import map1 from '../../Assets/map1.png'
+import map18 from '../../Assets/map18.png'
 import {
-	decHole1ScoreAction,
-	incHole1ScoreAction,
-	setSoloPlayerTotalScoreAction,
+	decHole18ScoreAction,
+	incHole18ScoreAction,
+	openScoreModalAction,
 	setCompletedHolesAction,
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
 import Maps from '../Maps'
 import { containerStyle, WallPaper } from '../style'
 
-const Hole1 = () => {
+const Hole18 = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const [open, setOpen] = useState(false)
 	const gameId = useSelector((state: IReduxStore) => state.gameroom.games._id)
-	const hole1 = useSelector((state: IReduxStore) => state.gameroom.games.hole1)
+	const hole18 = useSelector((state: IReduxStore) => state.gameroom.games.hole18)
 	const total = useSelector((state: IReduxStore) => state.gameroom.games.players)
 
 	let playersArray = []
-	const mapping = hole1.map((player) => {
+	const mapping = hole18.map((player) => {
 		return playersArray.push(player)
 	})
 	console.log(playersArray)
 
 	const setTotalScores = () => {
-		if (playersArray.length > 1) {
-			playersArray.forEach((player, i) => {
-				dispatch(setPlayerTotalScoreAction(player))
-			})
-		} else {
-			return
-			dispatch(setSoloPlayerTotalScoreAction(hole1[0].score))
-		}
+		playersArray.forEach((player, i) => {
+			dispatch(setPlayerTotalScoreAction(player))
+		})
 	}
 
 	const handlePlayerScores = () => {
-		const submitHole1 = async () => {
+		dispatch(openScoreModalAction(true))
+		const submitHole18 = async () => {
 			try {
-				let response = await fetch(`http://localhost:3001/games/${gameId}/hole1`, {
+				let response = await fetch(`http://localhost:3001/games/${gameId}/hole18`, {
 					method: 'PUT',
-					body: hole1 && JSON.stringify(hole1),
+					body: hole18 && JSON.stringify(hole18),
 					headers: { 'Content-Type': 'application/json', withCredentials: 'true', Accept: 'application/json' },
 				})
 				if (!response) throw new Error('Could not submit hole 1 scores')
 				setTotalScores()
-				navigate('/hole2')
-				dispatch(setCompletedHolesAction('hole1'))
+				navigate('/scoreboard')
 			} catch (error) {
 				console.log(error)
 			}
 		}
-		submitHole1()
+		submitHole18()
 	}
 
 	return (
@@ -75,7 +70,7 @@ const Hole1 = () => {
 			<Container sx={containerStyle}>
 				<Box sx={{ flexGrow: 1 }} />
 				<Typography variant='h2' sx={{ zIndex: 1, textAlign: 'center' }}>
-					HOLE 1
+					HOLE 18
 				</Typography>
 				<Box sx={{ flexGrow: 1 }} />
 				<TableContainer sx={{ zIndex: 1 }}>
@@ -88,8 +83,8 @@ const Hole1 = () => {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{hole1 &&
-									hole1.map((player, i) => (
+								{hole18 &&
+									hole18.map((player, i) => (
 										<TableRow key={player.playerId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 											<TableCell align='left' component='th' scope='column'>
 												{player.name}
@@ -98,13 +93,13 @@ const Hole1 = () => {
 											<TableCell align='center'>
 												<Button
 													onClick={(e) => {
-														dispatch(decHole1ScoreAction(player.playerId))
+														dispatch(decHole18ScoreAction(player.playerId))
 													}}
 												>
 													<RemoveCircleOutlinedIcon />
 												</Button>
 												{player.score}
-												<Button onClick={(e) => dispatch(incHole1ScoreAction(player.playerId))}>
+												<Button onClick={(e) => dispatch(incHole18ScoreAction(player.playerId))}>
 													<AddCircleOutlinedIcon />
 												</Button>
 											</TableCell>
@@ -146,15 +141,15 @@ const Hole1 = () => {
 						color='success'
 						sx={{ m: 1, zIndex: 1, borderRadius: 100, height: 80, width: 80 }}
 					>
-						next hole
+						end game
 					</Button>
 				</Box>
 				<WallPaper />
 				<Box sx={{ flexGrow: 1 }} />
 			</Container>
-			<Maps open={open} map={map1} name={'Hole 1 Map'} />
+			<Maps open={open} map={map18} name={'Hole 18 Map'} />
 		</>
 	)
 }
 
-export default Hole1
+export default Hole18

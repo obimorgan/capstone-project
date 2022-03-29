@@ -57,7 +57,7 @@ const Hole3 = () => {
 				})
 				if (!response) throw new Error('Could not submit hole 1 scores')
 				setTotalScores()
-				navigate('/hole3')
+				navigate('/hole4')
 				dispatch(setCompletedHolesAction('hole3'))
 			} catch (error) {
 				console.log(error)
@@ -140,9 +140,9 @@ const Hole3 = () => {
 						onClick={handlePlayerScores}
 						variant='contained'
 						color='success'
-						sx={{ m: 1, zIndex: 1, borderRadius: 100, height: 100, width: 100 }}
+						sx={{ m: 1, zIndex: 1, borderRadius: 100, height: 80, width: 80 }}
 					>
-						Submit Scores
+						next hole
 					</Button>
 				</Box>
 				<WallPaper />

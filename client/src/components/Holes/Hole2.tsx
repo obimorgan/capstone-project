@@ -15,7 +15,7 @@ import * as React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import map1 from '../../Assets/map1.png'
+import map2 from '../../Assets/map2.png'
 import {
 	decHole2ScoreAction,
 	incHole2ScoreAction,
@@ -144,15 +144,15 @@ const Hole2 = () => {
 						onClick={handlePlayerScores}
 						variant='contained'
 						color='success'
-						sx={{ m: 1, zIndex: 1, borderRadius: 100, height: 100, width: 100 }}
+						sx={{ m: 1, zIndex: 1, borderRadius: 100, height: 80, width: 80 }}
 					>
-						Submit Scores
+						next hole
 					</Button>
 				</Box>
 				<WallPaper />
 				<Box sx={{ flexGrow: 1 }} />
 			</Container>
-			<Maps open={open} map={map1} name={'Hole 2 Map'} />
+			<Maps open={open} map={map2} name={'Hole 2 Map'} />
 		</>
 	)
 }

@@ -36,6 +36,9 @@ export const ACTIONS = {
 
 	DECREASE_HOLE4_SCORE: 'DECREASE_HOLE4_SCORE',
 	INCREASE_HOLE4_SCORE: 'INCREASE_HOLE4_SCORE',
+
+	DECREASE_HOLE18_SCORE: 'DECREASE_HOLE18_SCORE',
+	INCREASE_HOLE18_SCORE: 'INCREASE_HOLE18_SCORE',
 }
 
 export const setCurrentUserAction = (myInfo: IUser) => ({
@@ -153,6 +156,20 @@ export const decHole4ScoreAction = (userId: string) => {
 export const incHole4ScoreAction = (userId: string) => {
 	return {
 		type: ACTIONS.INCREASE_HOLE4_SCORE,
+		payload: userId,
+	}
+}
+
+export const decHole18ScoreAction = (userId: string) => {
+	return {
+		type: ACTIONS.DECREASE_HOLE18_SCORE,
+		payload: userId,
+	}
+}
+
+export const incHole18ScoreAction = (userId: string) => {
+	return {
+		type: ACTIONS.INCREASE_HOLE18_SCORE,
 		payload: userId,
 	}
 }

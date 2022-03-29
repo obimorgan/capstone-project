@@ -14,6 +14,7 @@ import Hole3 from './components/Holes/Hole3'
 import Hole4 from './components/Holes/Hole4'
 import LeaderBoard from './components/LeaderBoard'
 import Maps from './components/Maps'
+import Hole18 from './components/Holes/Hole18'
 
 function App() {
 	return (
@@ -37,6 +38,7 @@ function App() {
 				<Route path='/hole2' element={<Hole2 />} />
 				<Route path='/hole3' element={<Hole3 />} />
 				<Route path='/hole4' element={<Hole4 />} />
+				<Route path='/hole18' element={<Hole18 />} />
 			</Routes>
 		</BrowserRouter>
 	)

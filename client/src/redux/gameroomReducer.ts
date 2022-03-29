@@ -168,6 +168,33 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				},
 			}
 
+		case ACTIONS.DECREASE_HOLE18_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					hole18: [...state.games.hole18].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: detail.score - 1 }
+						}
+						return { ...detail }
+					}),
+				},
+			}
+		case ACTIONS.INCREASE_HOLE18_SCORE:
+			return {
+				...state,
+				games: {
+					...state.games,
+					hole18: [...state.games.hole18].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: detail.score + 1 }
+						}
+						return { ...detail }
+					}),
+				},
+			}
+
 		default:
 			return state
 	}
