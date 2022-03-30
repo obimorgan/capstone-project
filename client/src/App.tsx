@@ -1,6 +1,7 @@
 /** @format */
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Dashboard from './components/Dashboard/Dashboard'
 import Hole1 from './components/Holes/Hole1'
 import Hole18 from './components/Holes/Hole18'
 import Hole2 from './components/Holes/Hole2'
@@ -33,6 +34,7 @@ function App() {
 				<Route path='/lobby' element={<Lobby />} />
 				<Route path='/scoreboard' element={<Scoreboard />} />
 				<Route path='/leaderboard' element={<LeaderBoard />} />
+				<Route path='/dashboard' element={<Dashboard />} />
 				<Route path='/hole1' element={<Hole1 />} />
 				<Route path='/hole2' element={<Hole2 />} />
 				<Route path='/hole3' element={<Hole3 />} />

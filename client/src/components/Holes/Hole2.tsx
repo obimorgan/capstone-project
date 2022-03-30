@@ -134,13 +134,12 @@ const Hole2 = () => {
 						</Table>
 					</Stack>
 				</TableContainer>
-				<Box sx={{ flexGrow: 1 }} />
 				<Box>
 					{/* <Button
 						sx={{ m: 1, zIndex: 1, borderRadius: 100, height: 100, width: 100 }}
 						variant='contained'
 						onClick={(e) => setOpen(true)}
-					>
+						>
 						Open
 					</Button> */}
 
@@ -154,6 +153,7 @@ const Hole2 = () => {
 					</Button>
 				</Box>
 				<WallPaper />
+				<Box sx={{ flexGrow: 1 }} />
 			</Container>
 			<Maps open={open} map={map2} name={'Hole 2 Map'} />
 		</>

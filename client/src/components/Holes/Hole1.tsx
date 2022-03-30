@@ -74,6 +74,7 @@ const Hole1 = () => {
 	return (
 		<>
 			<Container sx={containerStyle}>
+				{/* <Box sx={{ width: '100%', flexGrow: 1 }}> */}
 				<Box sx={{ flexGrow: 1 }}>
 					<Navigation />
 				</Box>
@@ -154,6 +155,7 @@ const Hole1 = () => {
 				</Box>
 				<WallPaper />
 				<Box sx={{ flexGrow: 1 }} />
+				{/* </Box> */}
 			</Container>
 			<Maps open={open} map={map1} name={'Hole 1 Map'} />
 		</>

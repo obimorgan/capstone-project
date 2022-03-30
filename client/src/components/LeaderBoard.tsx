@@ -66,7 +66,7 @@ export default function LeaderBoard() {
 					<Container sx={{ display: 'flex', direction: 'row', justifyContent: 'center', mb: 2 }}>
 						<EmojiEventsIcon color='warning' fontSize='large' sx={{ position: 'relative', bottom: 15, right: 15 }} />
 						<Stack direction='column' sx={{ m: 'auto', position: 'absolute', zIndex: -1 }}>
-							<Avatar sx={{ m: 'auto' }} alt='second place' src={top3Array[0].avatar} />
+							<Avatar sx={{ m: 'auto' }} alt='first place' src={top3Array[0].avatar} />
 							<Stack direction='row'>
 								<Typography sx={{ fontWeight: 'bold', textAlign: 'start' }}>{top3Array[0].name}</Typography>
 								&nbsp;
@@ -93,7 +93,7 @@ export default function LeaderBoard() {
 							</Stack>
 						</Stack>
 						<Stack>
-							<Avatar sx={{ m: 'auto' }} alt='second place' src={top3Array[2].avatar} />
+							<Avatar sx={{ m: 'auto' }} alt='third place' src={top3Array[2].avatar} />
 							<Stack direction='row'>
 								<Typography sx={{ fontWeight: 'bold', textAlign: 'start' }}>{top3Array[2].name}</Typography>
 								&nbsp;

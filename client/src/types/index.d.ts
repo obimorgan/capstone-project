@@ -24,6 +24,7 @@ interface IUser {
 	password: string
 	avatar: string
 	bestScore: number
+	createdAt: Date
 }
 
 interface IUserBestScores {

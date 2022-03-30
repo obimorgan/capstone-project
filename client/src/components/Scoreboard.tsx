@@ -20,11 +20,8 @@ const Scoreboard = () => {
 	const navigate = useNavigate()
 	const game = useSelector((state: IReduxStore) => state.gameroom.games)
 	const dispatch = useDispatch()
-
 	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
 	const myId = useSelector((state: IReduxStore) => state.user.currentUser._id)
-	const currentBestScore = useSelector((state: IReduxStore) => state.user.currentUser.bestScore)
-	const myTotalScore = players.find((player) => player.playerId === myId).totalScore
 
 	const handleSubmit = () => {
 		players.forEach((player) => {
@@ -42,7 +39,7 @@ const Scoreboard = () => {
 
 	return (
 		<Container sx={containerStyle}>
-			<Box sx={{ width: '100%', overflow: 'hidden', zIndex: 1 }}>
+			<Box sx={{ width: '100%', height: '100%', overflow: 'hidden', zIndex: 1 }}>
 				<Typography variant='button' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
 					THE FINAL SCORES OF GAME:
 				</Typography>

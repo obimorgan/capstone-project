@@ -11,25 +11,26 @@ import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize'
 import FaceRetouchingNaturalSharpIcon from '@mui/icons-material/FaceRetouchingNaturalSharp'
 import Button from '@mui/material/Button/Button'
 import { useNavigate } from 'react-router-dom'
+import zIndex from '@mui/material/styles/zIndex'
 
 export default function Navigation() {
 	const navigate = useNavigate()
 	return (
 		<>
 			<Box sx={{ mx: -2, position: 'static' }}>
-				<Widget>
-					<Box
-						sx={{
-							display: 'flex',
-							direction: 'row',
-							justifyContent: 'space-between',
-							height: 40,
-							alignItems: 'center',
-						}}
-					>
-						<Button onClick={(e) => navigate(-1)}>
-							<ArrowCircleLeftIcon />
-						</Button>
+				<Box
+					sx={{
+						display: 'flex',
+						direction: 'row',
+						justifyContent: 'space-between',
+						height: 40,
+						alignItems: 'center',
+					}}
+				>
+					<Button sx={{ zIndex: 1 }} onClick={(e) => navigate(-1)}>
+						<ArrowCircleLeftIcon />
+					</Button>
+					<Widget>
 						<Button onClick={(e) => navigate(-1)}>
 							<HomeIcon />
 						</Button>
@@ -39,11 +40,11 @@ export default function Navigation() {
 						<Button onClick={(e) => navigate(-1)}>
 							<FaceRetouchingNaturalSharpIcon />
 						</Button>
-						<Button onClick={(e) => navigate(-1)}>
-							<ArrowCircleRightIcon />
-						</Button>
-					</Box>
-				</Widget>
+					</Widget>
+					<Button sx={{ zIndex: 1 }} onClick={(e) => navigate(-1)}>
+						<ArrowCircleRightIcon />
+					</Button>
+				</Box>
 			</Box>
 		</>
 	)

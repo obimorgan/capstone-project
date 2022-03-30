@@ -34,6 +34,7 @@ export const containerStyle = {
 	textAlign: 'center ',
 	height: '100vh',
 	justifyContent: 'center',
+	overflow: 'hidden',
 }
 
 export const squareBtn = {
@@ -79,7 +80,7 @@ export const WallPaper = styled('div')({
 
 export const Widget = styled('div')(({ theme }) => ({
 	// paddingTop: 10,
-	borderRadius: 2,
+	borderRadius: 50,
 	width: '100%',
 	maxWidth: '100%',
 	// margin: 'auto',
@@ -92,6 +93,19 @@ export const Widget = styled('div')(({ theme }) => ({
 export const CoverImage = styled('div')({
 	width: 50,
 	height: 50,
+	objectFit: 'cover',
+	overflow: 'hidden',
+	flexShrink: 0,
+	borderRadius: 8,
+	backgroundColor: 'rgba(0,0,0,0.08)',
+	'& > img': {
+		width: '100%',
+	},
+})
+
+export const MapImage = styled('div')({
+	width: 50,
+	height: 70,
 	objectFit: 'cover',
 	overflow: 'hidden',
 	flexShrink: 0,
