@@ -1,31 +1,29 @@
 /** @format */
 
-import HolesStats from './HolesStats'
-import * as React from 'react'
-import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles'
-import Box from '@mui/material/Box'
-import MuiDrawer from '@mui/material/Drawer'
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import List from '@mui/material/List'
-import CssBaseline from '@mui/material/CssBaseline'
-import Typography from '@mui/material/Typography'
-import Divider from '@mui/material/Divider'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import GolfCourseIcon from '@mui/icons-material/GolfCourse'
+import LeaderboardIcon from '@mui/icons-material/Leaderboard'
+import MenuIcon from '@mui/icons-material/Menu'
+import PeopleIcon from '@mui/icons-material/People'
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import CssBaseline from '@mui/material/CssBaseline'
+import Divider from '@mui/material/Divider'
+import MuiDrawer from '@mui/material/Drawer'
+import IconButton from '@mui/material/IconButton'
+import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
-import Users from './Users'
-import PeopleIcon from '@mui/icons-material/People'
-import GolfCourseIcon from '@mui/icons-material/GolfCourse'
-import LeaderboardIcon from '@mui/icons-material/Leaderboard'
-import LeaderBoard from '../LeaderBoard'
+import { CSSObject, styled, Theme, useTheme } from '@mui/material/styles'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import * as React from 'react'
 import { useState } from 'react'
+import LeaderBoard from '../LeaderBoard'
+import HolesStats from './HolesStats'
+import Users from './Users'
 
 const drawerWidth = 240
 
@@ -99,7 +97,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function Dashboard() {
 	const theme = useTheme()
 	const [open, setOpen] = useState(false)
-	const [openUsers, setOpenUsers] = useState(false)
+	const [openUsers, setOpenUsers] = useState(true)
 	const [openLeaderBoard, setOpenLeaderBoard] = useState(false)
 	const [openHoleStats, setOpenHoleStats] = useState(false)
 

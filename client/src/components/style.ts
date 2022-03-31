@@ -37,6 +37,15 @@ export const containerStyle = {
 	overflow: 'hidden',
 }
 
+export const dashboardContainer = {
+	display: 'flex',
+	flexDirection: 'column',
+	textAlign: 'center ',
+	height: '100vh',
+	justifyContent: 'start',
+	overflow: 'hidden',
+}
+
 export const squareBtn = {
 	width: 130,
 	height: 130,
