@@ -18,6 +18,7 @@ interface IReduxLobby {
 }
 
 interface IUser {
+	playerId: string
 	_id: string
 	name: string
 	email: string
