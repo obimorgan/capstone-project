@@ -21,9 +21,11 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import * as React from 'react'
 import { useState } from 'react'
-import LeaderBoard from '../LeaderBoard'
+import LeaderBoard from '../Leaderboards/Alltime'
 import HolesStats from './HolesStats'
 import Users from './Users'
+import HomeIcon from '@mui/icons-material/Home'
+import { useNavigate } from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -96,6 +98,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function Dashboard() {
 	const theme = useTheme()
+	const navigate = useNavigate()
 	const [open, setOpen] = useState(false)
 	const [openUsers, setOpenUsers] = useState(true)
 	const [openLeaderBoard, setOpenLeaderBoard] = useState(false)
@@ -157,6 +160,16 @@ export default function Dashboard() {
 				</DrawerHeader>
 				<Divider />
 				<List>
+					<ListItem
+						onClick={() => {
+							navigate('/')
+						}}
+					>
+						<ListItemIcon>
+							<HomeIcon />
+						</ListItemIcon>
+						<ListItemText primary='Home' />
+					</ListItem>
 					<ListItem
 						onClick={() => {
 							handleUsers()

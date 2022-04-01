@@ -8,7 +8,9 @@ import Hole2 from './components/Holes/Hole2'
 import Hole3 from './components/Holes/Hole3'
 import Hole4 from './components/Holes/Hole4'
 import Home from './components/Home.tsx/Home'
-import LeaderBoard from './components/LeaderBoard'
+import Alltime from './components/Leaderboards/Alltime'
+import LeaderBoard from './components/Leaderboards/Alltime'
+import Todays from './components/Leaderboards/Todays'
 import Lobby from './components/Lobby'
 import Login from './components/Login'
 import Profile from './components/Profile'
@@ -33,7 +35,8 @@ function App() {
 				<Route path='/profile' element={<Profile />} />
 				<Route path='/lobby' element={<Lobby />} />
 				<Route path='/scoreboard' element={<Scoreboard />} />
-				<Route path='/leaderboard' element={<LeaderBoard />} />
+				<Route path='/leaderboard' element={<Alltime />} />
+				<Route path='/todays' element={<Todays />} />
 				<Route path='/dashboard' element={<Dashboard />} />
 				<Route path='/hole1' element={<Hole1 />} />
 				<Route path='/hole2' element={<Hole2 />} />

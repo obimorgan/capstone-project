@@ -13,14 +13,14 @@ import TableRow from '@mui/material/TableRow/TableRow'
 import Typography from '@mui/material/Typography/Typography'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUsersBestScoresAction } from '../redux/actions'
-import { containerStyle, WallPaper, Widget } from './style'
+import { setUsersBestScoresAction } from '../../redux/actions'
+import { containerStyle, WallPaper, Widget } from '../style'
 import { io } from 'socket.io-client'
-import Navigation from './Navigation'
+import Navigation from '../Navigation'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
-export default function LeaderBoard() {
+export default function Alltime() {
 	const dispatch = useDispatch()
 	const reRenderLobby = useSelector((state: IReduxStore) => state.gameroom.reRenderLobby)
 	const scores = useSelector((state: IReduxStore) => state.user.usersBestScores)
@@ -56,7 +56,6 @@ export default function LeaderBoard() {
 		<>
 			<Container sx={containerStyle}>
 				<Box sx={{ width: '100%', zIndex: 1, flexGrow: 1 }}>
-					<Navigation />
 					<Typography
 						variant='h5'
 						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', paddingTop: 8, mb: 3, fontWeight: 'bold' }}
