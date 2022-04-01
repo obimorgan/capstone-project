@@ -48,6 +48,7 @@ export const initialState: IReduxStore = {
 		reRenderLobby: false,
 		holesCompleted: [],
 		openRules: false,
+		openEditProfile: false,
 	},
 }
 

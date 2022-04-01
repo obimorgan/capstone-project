@@ -8,13 +8,13 @@ import Box from '@mui/material/Box/Box'
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize'
-import FaceRetouchingNaturalSharpIcon from '@mui/icons-material/FaceRetouchingNaturalSharp'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Button from '@mui/material/Button/Button'
 import { useNavigate } from 'react-router-dom'
 import zIndex from '@mui/material/styles/zIndex'
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
 import { useDispatch } from 'react-redux'
-import { openRulesAction } from '../redux/actions'
+import { openEditProfileAction, openRulesAction } from '../redux/actions'
 
 type Prop = {
 	open: boolean
@@ -26,6 +26,11 @@ const Navigation: React.FC<Prop> = ({ open }) => {
 
 	const handleOpenRules = () => {
 		dispatch(openRulesAction(true))
+		window.location.reload()
+	}
+
+	const handleOpenEditProfile = () => {
+		dispatch(openEditProfileAction(true))
 		window.location.reload()
 	}
 	return (
@@ -51,8 +56,12 @@ const Navigation: React.FC<Prop> = ({ open }) => {
 							<Button onClick={(e) => navigate('/leaderboard')}>
 								<DashboardCustomizeIcon />
 							</Button>
-							<Button onClick={(e) => navigate('/')}>
-								<FaceRetouchingNaturalSharpIcon />
+							<Button
+								onClick={(e) => {
+									handleOpenEditProfile()
+								}}
+							>
+								<AccountCircleIcon />
 							</Button>
 							<Button
 								onClick={(e) => {

@@ -23,6 +23,7 @@ import {
 	setCompletedHolesAction,
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
+import EditProfile from '../EditProfile'
 import Maps from '../Maps'
 import Navigation from '../Navigation'
 import Rules from '../Rules'
@@ -72,6 +73,7 @@ const Hole1 = () => {
 	return (
 		<>
 			<Rules />
+			<EditProfile />
 			<Container sx={containerStyle}>
 				{/* <Box sx={{ width: '100%', flexGrow: 1 }}> */}
 				<Box sx={{ flexGrow: 1 }}>
@@ -80,6 +82,17 @@ const Hole1 = () => {
 				<Typography variant='h2' sx={{ zIndex: 1, textAlign: 'center' }}>
 					HOLE 1
 				</Typography>
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Stack direction='row'>
+						<Typography variant='body1' sx={{ zIndex: 1, textAlign: 'center' }}>
+							Average strokes:
+						</Typography>
+						&nbsp;
+						<Typography variant='body1' fontWeight='bold' sx={{ zIndex: 1, textAlign: 'center' }}>
+							3
+						</Typography>
+					</Stack>
+				</Box>
 				<Box sx={{ flexGrow: 1 }} />
 				<TableContainer sx={{ zIndex: 1 }}>
 					<Stack direction='row'>

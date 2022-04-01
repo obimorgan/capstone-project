@@ -39,6 +39,12 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				openRules: action.payload,
 			}
 
+		case ACTIONS.OPEN_EDIT_PROFILE:
+			return {
+				...state,
+				openEditProfile: action.payload,
+			}
+
 		//Total scores
 		case ACTIONS.SET_PLAYER_TOTAL_SCORE:
 			return {
