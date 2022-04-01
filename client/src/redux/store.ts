@@ -47,6 +47,7 @@ export const initialState: IReduxStore = {
 		openScoreModal: false,
 		reRenderLobby: false,
 		holesCompleted: [],
+		openRules: false,
 	},
 }
 

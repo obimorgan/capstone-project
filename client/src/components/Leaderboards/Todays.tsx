@@ -47,13 +47,14 @@ export default function LeaderBoardToday() {
 
 	return (
 		<>
+			<Navigation open={true} />
 			<Container sx={containerStyle}>
 				<Box sx={{ width: '100%', zIndex: 1, flexGrow: 1 }}>
 					<Typography
 						variant='h5'
-						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', paddingTop: 8, mb: 3, fontWeight: 'bold' }}
+						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', mb: 3, fontWeight: 'bold' }}
 					>
-						TODAYS LEADERBOARD
+						TODAY'S LEADERBOARD
 					</Typography>
 					<EmojiEventsIcon color='warning' fontSize='large' sx={{ position: 'absolute', right: 220 }} />
 					<Box sx={{ position: 'relative' }}>
@@ -81,25 +82,26 @@ export default function LeaderBoardToday() {
 								<TableCell align='right'>SCORE</TableCell>
 							</TableRow>
 						</TableHead>
-						{todaysGames
-							.sort((a, b) => {
-								return a.totalScore - b.totalScore
-							})
-							.slice(3, -1)
-							.map((player, index) => (
-								<TableBody key={player._id}>
-									<TableRow>
-										<TableCell align='left'>
-											<Stack direction='row'>
-												<Avatar alt='avatar' src={player.avatar} />
-												&nbsp;
-												<Typography sx={{ display: 'flex', fontWeight: 'bold', m: 'auto' }}>{player.name}</Typography>
-											</Stack>
-										</TableCell>
-										<TableCell align='right'>{player.totalScore}</TableCell>
-									</TableRow>
-								</TableBody>
-							))}
+						{todaysGames.length >= 7 &&
+							todaysGames
+								.sort((a, b) => {
+									return a.totalScore - b.totalScore
+								})
+								.slice(3, -1)
+								.map((player, index) => (
+									<TableBody key={player._id}>
+										<TableRow>
+											<TableCell align='left'>
+												<Stack direction='row'>
+													<Avatar alt='avatar' src={player.avatar} />
+													&nbsp;
+													<Typography sx={{ display: 'flex', fontWeight: 'bold', m: 'auto' }}>{player.name}</Typography>
+												</Stack>
+											</TableCell>
+											<TableCell align='right'>{player.totalScore}</TableCell>
+										</TableRow>
+									</TableBody>
+								))}
 					</Table>
 				</Box>
 				<WallPaper />

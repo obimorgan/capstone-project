@@ -33,6 +33,12 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				holesCompleted: action.payload,
 			}
 
+		case ACTIONS.OPEN_RULES:
+			return {
+				...state,
+				openRules: action.payload,
+			}
+
 		//Total scores
 		case ACTIONS.SET_PLAYER_TOTAL_SCORE:
 			return {

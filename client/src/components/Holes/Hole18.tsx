@@ -70,7 +70,7 @@ const Hole18 = () => {
 		<>
 			<Container sx={containerStyle}>
 				<Box sx={{ flexGrow: 1 }}>
-					<Navigation />
+					<Navigation open={false} />
 				</Box>
 				<Typography variant='h2' sx={{ zIndex: 1, textAlign: 'center' }}>
 					HOLE 18

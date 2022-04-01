@@ -11,18 +11,17 @@ import TableCell from '@mui/material/TableCell/TableCell'
 import TableHead from '@mui/material/TableHead/TableHead'
 import TableRow from '@mui/material/TableRow/TableRow'
 import Typography from '@mui/material/Typography/Typography'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUsersBestScoresAction } from '../../redux/actions'
-import { containerStyle, WallPaper, Widget } from '../style'
 import { io } from 'socket.io-client'
+import { setUsersBestScoresAction } from '../../redux/actions'
 import Navigation from '../Navigation'
+import { containerStyle, WallPaper } from '../style'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
 export default function Alltime() {
 	const dispatch = useDispatch()
-	const reRenderLobby = useSelector((state: IReduxStore) => state.gameroom.reRenderLobby)
 	const scores = useSelector((state: IReduxStore) => state.user.usersBestScores)
 
 	const fetchUsersBestScore = async () => {
@@ -54,11 +53,12 @@ export default function Alltime() {
 
 	return (
 		<>
+			<Navigation open={true} />
 			<Container sx={containerStyle}>
 				<Box sx={{ width: '100%', zIndex: 1, flexGrow: 1 }}>
 					<Typography
 						variant='h5'
-						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', paddingTop: 8, mb: 3, fontWeight: 'bold' }}
+						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', mb: 3, fontWeight: 'bold' }}
 					>
 						LEADERBOARD
 					</Typography>

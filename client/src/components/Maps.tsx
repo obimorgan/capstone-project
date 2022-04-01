@@ -93,10 +93,10 @@ const SwipeableEdgeDrawer = (props: drawer) => {
 				>
 					<Stack direction='column'>
 						<Stack direction='row' sx={{ p: 2, color: 'text.primary', display: 'flex', justifyContent: 'center' }}>
-							<InfoRoundedIcon sx={{ color: grey[100] }} />
-							&nbsp;
+							{/* <InfoRoundedIcon sx={{ color: grey[100] }} />
+							&nbsp; */}
 							<Typography variant='button' fontWeight='bold' sx={{ color: grey[100] }}>
-								Rules
+								Map
 							</Typography>
 						</Stack>
 					</Stack>

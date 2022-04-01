@@ -85,6 +85,7 @@ interface IReduxGameroom {
 	openScoreModal: boolean
 	reRenderLobby: boolean
 	holesCompleted: ICompletedHole[]
+	openRules: boolean
 }
 
 interface IGameDetails {

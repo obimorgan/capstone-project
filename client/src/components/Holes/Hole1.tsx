@@ -25,6 +25,7 @@ import {
 } from '../../redux/actions'
 import Maps from '../Maps'
 import Navigation from '../Navigation'
+import Rules from '../Rules'
 import { containerStyle, WallPaper } from '../style'
 
 const Hole1 = () => {
@@ -46,9 +47,6 @@ const Hole1 = () => {
 			playersArray.forEach((player, i) => {
 				dispatch(setPlayerTotalScoreAction(player))
 			})
-		} else {
-			return
-			dispatch(setSoloPlayerTotalScoreAction(hole1[0].score))
 		}
 	}
 
@@ -73,10 +71,11 @@ const Hole1 = () => {
 
 	return (
 		<>
+			<Rules />
 			<Container sx={containerStyle}>
 				{/* <Box sx={{ width: '100%', flexGrow: 1 }}> */}
 				<Box sx={{ flexGrow: 1 }}>
-					<Navigation />
+					<Navigation open={false} />
 				</Box>
 				<Typography variant='h2' sx={{ zIndex: 1, textAlign: 'center' }}>
 					HOLE 1

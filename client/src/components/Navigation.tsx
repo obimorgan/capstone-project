@@ -1,7 +1,7 @@
 /** @format */
 
 import Container from '@mui/material/Container/Container'
-import React from 'react'
+import React, { useState } from 'react'
 import { Widget } from './style'
 import HomeIcon from '@mui/icons-material/Home'
 import Box from '@mui/material/Box/Box'
@@ -12,9 +12,22 @@ import FaceRetouchingNaturalSharpIcon from '@mui/icons-material/FaceRetouchingNa
 import Button from '@mui/material/Button/Button'
 import { useNavigate } from 'react-router-dom'
 import zIndex from '@mui/material/styles/zIndex'
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
+import { useDispatch } from 'react-redux'
+import { openRulesAction } from '../redux/actions'
 
-export default function Navigation() {
+type Prop = {
+	open: boolean
+}
+const Navigation: React.FC<Prop> = ({ open }) => {
+	const [isLeaderboard, isSetLeaderBoard] = useState(open)
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
+	const handleOpenRules = () => {
+		dispatch(openRulesAction(true))
+		window.location.reload()
+	}
 	return (
 		<>
 			<Box sx={{ mx: -2, position: 'static' }}>
@@ -30,17 +43,26 @@ export default function Navigation() {
 					<Button sx={{ zIndex: 1 }} onClick={(e) => navigate(-1)}>
 						<ArrowCircleLeftIcon />
 					</Button>
-					<Widget>
-						<Button onClick={(e) => navigate(-1)}>
-							<HomeIcon />
-						</Button>
-						<Button onClick={(e) => navigate(-1)}>
-							<DashboardCustomizeIcon />
-						</Button>
-						<Button onClick={(e) => navigate(-1)}>
-							<FaceRetouchingNaturalSharpIcon />
-						</Button>
-					</Widget>
+					{!isLeaderboard ? (
+						<Widget>
+							<Button onClick={(e) => navigate('/')}>
+								<HomeIcon />
+							</Button>
+							<Button onClick={(e) => navigate('/leaderboard')}>
+								<DashboardCustomizeIcon />
+							</Button>
+							<Button onClick={(e) => navigate('/')}>
+								<FaceRetouchingNaturalSharpIcon />
+							</Button>
+							<Button
+								onClick={(e) => {
+									handleOpenRules()
+								}}
+							>
+								<InfoRoundedIcon />
+							</Button>
+						</Widget>
+					) : null}
 					<Button sx={{ zIndex: 1 }} onClick={(e) => navigate(-1)}>
 						<ArrowCircleRightIcon />
 					</Button>
@@ -49,3 +71,5 @@ export default function Navigation() {
 		</>
 	)
 }
+
+export default Navigation

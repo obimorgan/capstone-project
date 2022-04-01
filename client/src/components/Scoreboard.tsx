@@ -33,10 +33,6 @@ const Scoreboard = () => {
 		navigate('/leaderboard')
 	}
 
-	// socket.on('current best score updated', () => {
-	// 	console.log('current best score updated')
-	// })
-
 	return (
 		<Container sx={containerStyle}>
 			<Box sx={{ width: '100%', height: '100%', overflow: 'hidden', zIndex: 1 }}>

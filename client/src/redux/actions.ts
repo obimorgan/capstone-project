@@ -16,6 +16,7 @@ export const ACTIONS = {
 	SET_HOLE1_ACTION: 'SET_HOLE1_ACTION',
 	ADD_PLAYER_TO_HOLES: 'ADD_PLAYER_TO_HOLES',
 	SET_USERS_BEST_SCORES: 'SET_USERS_BEST_SCORES',
+	OPEN_RULES: 'OPEN_RULES',
 
 	SET_FIRST_PLAYER_TOTAL_SCORE: 'SET_FIRST_PLAYER_TOTAL_SCORE',
 	SET_SECOND_PLAYER_TOTAL_SCORE: 'SET_SECOND_PLAYER_TOTAL_SCORE',
@@ -89,6 +90,11 @@ export const setUsersBestScoresAction = (data: IUserBestScores) => ({
 
 export const setCompletedHolesAction = (data: string) => ({
 	type: ACTIONS.SET_COMPLETED_HOLES,
+	payload: data,
+})
+
+export const openRulesAction = (data: boolean) => ({
+	type: ACTIONS.OPEN_RULES,
 	payload: data,
 })
 
