@@ -14,6 +14,7 @@ import Profile from './Profile'
 import { squareBtn, containerStyle, modalStyle, Widget } from '../style'
 import BurgerMenu from '../BurgerMenu'
 import Typography from '@mui/material/Typography/Typography'
+import GameInProgress from '../GameInProgress'
 
 // const { REACT_APP_SERVER_URL } = process.env
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
@@ -27,6 +28,7 @@ export default function Home() {
 	const [open, setOpen] = useState(false)
 	const handleClose = () => setOpen(false)
 	const currentUser = useSelector((state: IReduxStore) => state.user.currentUser)
+	const [gameInProgress, setGameInProgress] = useState(true)
 
 	// when a user clicks on "create a new game"
 	const handleOpen = () => {
@@ -115,43 +117,51 @@ export default function Home() {
 		<>
 			<Container sx={containerStyle}>
 				<Profile />
-				<Box>
-					<Widget sx={{ display: 'flex', direction: 'row', justifyContent: 'start' }}>
-						<Button
-							sx={squareBtn}
-							variant='contained'
-							color='success'
-							onClick={(e) => {
-								handleOpen()
-								setCreateGame(true)
-							}}
-						>
-							Create a new Game
-						</Button>
-						<Typography sx={{ m: 'auto', variant: 'h6', color: 'text.secondary', fontWeight: 500 }}>
-							{' '}
-							Be in charge of the scoring.
-						</Typography>
-					</Widget>
-				</Box>
-				<Box>
-					<Widget sx={{ display: 'flex', direction: 'row', justifyContent: 'end', mt: 1 }}>
-						<Typography sx={{ m: 'auto', variant: 'h6', color: 'text.secondary', fontWeight: 500 }}>
-							Swing and relax.
-						</Typography>
-						<Button
-							sx={squareBtn}
-							variant='contained'
-							color='success'
-							onClick={(e) => {
-								handleOpen()
-								setCreateGame(false)
-							}}
-						>
-							join a game
-						</Button>
-					</Widget>
-				</Box>
+				{gameInProgress ? (
+					<>
+						<Box>
+							<Widget sx={{ display: 'flex', direction: 'row', justifyContent: 'start' }}>
+								<Button
+									sx={squareBtn}
+									variant='contained'
+									color='success'
+									onClick={(e) => {
+										handleOpen()
+										setCreateGame(true)
+									}}
+								>
+									Create a new Game
+								</Button>
+								<Typography sx={{ m: 'auto', variant: 'h6', color: 'text.secondary', fontWeight: 500 }}>
+									{' '}
+									Be in charge of the scoring.
+								</Typography>
+							</Widget>
+						</Box>
+						<Box>
+							<Widget sx={{ display: 'flex', direction: 'row', justifyContent: 'end', mt: 1 }}>
+								<Typography sx={{ m: 'auto', variant: 'h6', color: 'text.secondary', fontWeight: 500 }}>
+									Swing and relax.
+								</Typography>
+								<Button
+									sx={squareBtn}
+									variant='contained'
+									color='success'
+									onClick={(e) => {
+										handleOpen()
+										setCreateGame(false)
+									}}
+								>
+									join a game
+								</Button>
+							</Widget>
+						</Box>
+					</>
+				) : (
+					<GameInProgress />
+				)}
+				<BurgerMenu />
+
 				<Modal
 					open={open}
 					onClose={handleClose}
@@ -182,7 +192,6 @@ export default function Home() {
 						)}
 					</>
 				</Modal>
-				<BurgerMenu />
 			</Container>
 		</>
 	)

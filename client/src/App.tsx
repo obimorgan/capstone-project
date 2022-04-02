@@ -2,6 +2,7 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Dashboard from './components/Dashboard/Dashboard'
+import GameInProgress from './components/GameInProgress'
 import Hole1 from './components/Holes/Hole1'
 import Hole18 from './components/Holes/Hole18'
 import Hole2 from './components/Holes/Hole2'
@@ -15,6 +16,7 @@ import Lobby from './components/Lobby'
 import Login from './components/Login'
 import Registration from './components/Registration'
 import Scoreboard from './components/Scoreboard'
+import ScoreCard from './components/ScoreCard'
 import UserProvider from './components/UserProvider'
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
 				<Route path='/hole3' element={<Hole3 />} />
 				<Route path='/hole4' element={<Hole4 />} />
 				<Route path='/hole18' element={<Hole18 />} />
+				<Route path='/scorecard' element={<ScoreCard />} />
+				<Route path='/gameinprogress' element={<GameInProgress />} />
 			</Routes>
 		</BrowserRouter>
 	)
