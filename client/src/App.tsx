@@ -13,7 +13,6 @@ import LeaderBoard from './components/Leaderboards/Alltime'
 import Todays from './components/Leaderboards/Todays'
 import Lobby from './components/Lobby'
 import Login from './components/Login'
-import Profile from './components/Profile'
 import Registration from './components/Registration'
 import Scoreboard from './components/Scoreboard'
 import UserProvider from './components/UserProvider'
@@ -32,7 +31,6 @@ function App() {
 				/>
 				<Route path='/login' element={<Login />} />
 				<Route path='/registration' element={<Registration />} />
-				<Route path='/profile' element={<Profile />} />
 				<Route path='/lobby' element={<Lobby />} />
 				<Route path='/scoreboard' element={<Scoreboard />} />
 				<Route path='/leaderboard' element={<Alltime />} />

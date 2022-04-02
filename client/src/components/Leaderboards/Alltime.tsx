@@ -58,7 +58,7 @@ export default function Alltime() {
 				<Box sx={{ width: '100%', zIndex: 1, flexGrow: 1 }}>
 					<Typography
 						variant='h5'
-						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', mb: 3, fontWeight: 'bold' }}
+						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', my: 3, fontWeight: 'bold' }}
 					>
 						LEADERBOARD
 					</Typography>

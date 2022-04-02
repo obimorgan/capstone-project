@@ -18,6 +18,7 @@ export const ACTIONS = {
 	SET_USERS_BEST_SCORES: 'SET_USERS_BEST_SCORES',
 	OPEN_RULES: 'OPEN_RULES',
 	OPEN_EDIT_PROFILE: 'OPEN_EDIT_PROFILE',
+	UPDATE_PROFILE_PICTURE: 'UPDATE_PROFILE_PICTURE',
 
 	SET_FIRST_PLAYER_TOTAL_SCORE: 'SET_FIRST_PLAYER_TOTAL_SCORE',
 	SET_SECOND_PLAYER_TOTAL_SCORE: 'SET_SECOND_PLAYER_TOTAL_SCORE',
@@ -104,6 +105,11 @@ export const openEditProfileAction = (data: boolean) => ({
 	payload: data,
 })
 
+export const updateProfilePImgAction = (data: string) => ({
+	type: ACTIONS.UPDATE_PROFILE_PICTURE,
+	payload: data,
+})
+
 // Set Total Scores //
 export const setPlayerTotalScoreAction = (data: ITotalScore) => ({
 	type: ACTIONS.SET_PLAYER_TOTAL_SCORE,
@@ -175,13 +181,19 @@ export const incHole4ScoreAction = (userId: string) => {
 export const decHole18ScoreAction = (userId: string) => {
 	return {
 		type: ACTIONS.DECREASE_HOLE18_SCORE,
-		payload: userId,
+		payload: {
+			userId: userId,
+			score: 2,
+		},
 	}
 }
 
 export const incHole18ScoreAction = (userId: string) => {
 	return {
 		type: ACTIONS.INCREASE_HOLE18_SCORE,
-		payload: userId,
+		payload: {
+			userId: userId,
+			score: 1,
+		},
 	}
 }

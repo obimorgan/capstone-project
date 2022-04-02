@@ -27,6 +27,14 @@ const userReducer = (state = initialState.user, action: AnyAction) => {
 				...state,
 				isAHost: true,
 			}
+		case ACTIONS.UPDATE_PROFILE_PICTURE:
+			return {
+				...state,
+				currentUser: {
+					...state.currentUser,
+					avatar: action.payload,
+				},
+			}
 		default:
 			return state
 	}

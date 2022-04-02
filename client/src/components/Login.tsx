@@ -73,6 +73,7 @@ export default function Login() {
 				<Container sx={{ display: 'flex', justifyContent: 'center' }}>
 					<Stack component='form' direction='column' sx={{ mt: 10, mb: 15 }}>
 						<TextField
+							type='email'
 							id='outlined-start-adornment'
 							sx={{ width: '30ch' }}
 							InputProps={{
@@ -86,6 +87,7 @@ export default function Login() {
 							onChange={(e) => handleCredentials('email', e.target.value)}
 						/>
 						<TextField
+							type='password'
 							id='outlined-start-adornment'
 							sx={{ mt: 2, width: '30ch' }}
 							InputProps={{

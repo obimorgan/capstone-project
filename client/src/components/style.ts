@@ -105,7 +105,7 @@ export const CoverImage = styled('div')({
 	objectFit: 'cover',
 	overflow: 'hidden',
 	flexShrink: 0,
-	borderRadius: 8,
+	borderRadius: 150,
 	backgroundColor: 'rgba(0,0,0,0.08)',
 	'& > img': {
 		width: '100%',

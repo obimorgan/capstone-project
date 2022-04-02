@@ -2,7 +2,7 @@
 
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined'
 import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined'
-import { Button, Stack, Typography } from '@mui/material'
+import { Button, Checkbox, FormControlLabel, Stack, Typography } from '@mui/material'
 import Container from '@mui/material/Container/Container'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -64,6 +64,7 @@ const Hole18 = () => {
 			}
 		}
 		submitHole18()
+		navigate('/scoreboard')
 	}
 
 	return (
@@ -82,7 +83,8 @@ const Hole18 = () => {
 							<TableHead>
 								<TableRow>
 									<TableCell align='left'>Players</TableCell>
-									<TableCell align='center'>Score</TableCell>
+									<TableCell align='left'>Hole in 1</TableCell>
+									<TableCell align='left'></TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
@@ -91,20 +93,18 @@ const Hole18 = () => {
 										<TableRow key={player.playerId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 											<TableCell align='left' component='th' scope='column'>
 												{player.name}
-												{/* <input type='text' value={player.name} /> */}
 											</TableCell>
 											<TableCell align='center'>
-												<Button
-													onClick={(e) => {
-														dispatch(decHole18ScoreAction(player.playerId))
-													}}
-												>
-													<RemoveCircleOutlinedIcon />
-												</Button>
-												{player.score}
-												<Button onClick={(e) => dispatch(incHole18ScoreAction(player.playerId))}>
-													<AddCircleOutlinedIcon />
-												</Button>
+												<FormControlLabel
+													control={<Checkbox onChange={() => dispatch(decHole18ScoreAction(player.playerId))} />}
+													label='-2'
+												/>
+											</TableCell>
+											<TableCell align='center'>
+												<FormControlLabel
+													control={<Checkbox onChange={() => dispatch(incHole18ScoreAction(player.playerId))} />}
+													label='+1'
+												/>
 											</TableCell>
 										</TableRow>
 									))}
@@ -130,14 +130,6 @@ const Hole18 = () => {
 					</Stack>
 				</TableContainer>
 				<Box>
-					{/* <Button
-						sx={{ m: 1, zIndex: 1, borderRadius: 100, height: 100, width: 100 }}
-						variant='contained'
-						onClick={(e) => setOpen(true)}
-					>
-						Open
-					</Button> */}
-
 					<Button
 						onClick={handlePlayerScores}
 						variant='contained'

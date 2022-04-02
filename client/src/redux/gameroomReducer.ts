@@ -185,11 +185,13 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				...state,
 				games: {
 					...state.games,
-					hole18: [...state.games.hole18].map((detail) => {
-						if (detail.playerId === action.payload) {
-							return { ...detail, score: detail.score - 1 }
+					players: [...state.games.players].map((player) => {
+						if (player.playerId === action.payload.playerId) {
+							return { ...player, totalScore: (player.totalScore -= 2) }
 						}
-						return { ...detail }
+						return {
+							...player,
+						}
 					}),
 				},
 			}
@@ -198,11 +200,13 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				...state,
 				games: {
 					...state.games,
-					hole18: [...state.games.hole18].map((detail) => {
-						if (detail.playerId === action.payload) {
-							return { ...detail, score: detail.score + 1 }
+					players: [...state.games.players].map((player) => {
+						if (player.playerId === action.payload.playerId) {
+							return { ...player, totalScore: (player.totalScore += 1) }
 						}
-						return { ...detail }
+						return {
+							...player,
+						}
 					}),
 				},
 			}

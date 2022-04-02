@@ -18,7 +18,6 @@ const Rules = () => {
 			if (!response) throw new Error('Fetching rules failed')
 			const rules = await response.json()
 			setData(rules)
-			console.log(rules)
 		} catch (error) {
 			console.log(error)
 		}
