@@ -27,6 +27,7 @@ import EditProfile from '../EditProfile'
 import Maps from '../Maps'
 import Navigation from '../Navigation'
 import Rules from '../Rules'
+import ScoreCard from '../ScoreCard'
 import { containerStyle, WallPaper } from '../style'
 
 const Hole1 = () => {
@@ -74,6 +75,7 @@ const Hole1 = () => {
 		<>
 			<Rules />
 			<EditProfile />
+			<ScoreCard />
 			<Container sx={containerStyle}>
 				{/* <Box sx={{ width: '100%', flexGrow: 1 }}> */}
 				<Box sx={{ flexGrow: 1 }}>

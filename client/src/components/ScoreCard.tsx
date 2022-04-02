@@ -24,7 +24,7 @@ const ScoreCard = () => {
 	return (
 		<>
 			<Modal
-				open={true}
+				open={openModal}
 				onClose={handleClose}
 				aria-labelledby='modal-modal-title'
 				aria-describedby='modal-modal-description'
@@ -39,9 +39,9 @@ const ScoreCard = () => {
 								<TableRow>
 									<TableCell></TableCell>
 									<TableCell align='left'>{game.hole1[0]?.name}</TableCell>
-									{game.hole1.length === 2 ? <TableCell align='left'>{game.hole1[1]?.name}</TableCell> : ''}
-									{game.hole1.length === 3 ? <TableCell align='left'>{game.hole1[2]?.name}</TableCell> : ''}
-									{game.hole1.length === 4 ? <TableCell align='left'>{game.hole1[3]?.name}</TableCell> : ''}
+									{game.hole1.length >= 1 && <TableCell align='center'>{game.hole1[1]?.name}</TableCell>}
+									{game.hole1.length >= 2 && <TableCell align='center'>{game.hole1[2]?.name}</TableCell>}
+									{game.hole1.length >= 4 && <TableCell align='center'>{game.hole1[3]?.name}</TableCell>}
 								</TableRow>
 							</TableHead>
 							<TableBody>
@@ -52,7 +52,7 @@ const ScoreCard = () => {
 									{game.hole1 &&
 										game.hole1.map((player) => (
 											<>
-												<TableCell align='left'>{player.score}</TableCell>
+												<TableCell align='center'>{player.score}</TableCell>
 											</>
 										))}
 								</TableRow>
@@ -63,7 +63,7 @@ const ScoreCard = () => {
 									{game.hole2 &&
 										game.hole2.map((player) => (
 											<>
-												<TableCell align='left'>{player.score}</TableCell>
+												<TableCell align='center'>{player.score}</TableCell>
 											</>
 										))}
 								</TableRow>
@@ -74,7 +74,7 @@ const ScoreCard = () => {
 									{game.hole3 &&
 										game.hole3.map((player) => (
 											<>
-												<TableCell align='left'>{player.score}</TableCell>
+												<TableCell align='center'>{player.score}</TableCell>
 											</>
 										))}
 								</TableRow>
@@ -85,7 +85,7 @@ const ScoreCard = () => {
 									{game.hole4 &&
 										game.hole4.map((player) => (
 											<>
-												<TableCell align='left'>{player.score}</TableCell>
+												<TableCell align='center'>{player.score}</TableCell>
 											</>
 										))}
 								</TableRow>
@@ -96,13 +96,13 @@ const ScoreCard = () => {
 									{game.hole18 &&
 										game.hole18.map((player) => (
 											<>
-												<TableCell align='left'>{player.score}</TableCell>
+												<TableCell align='center'>{player.score}</TableCell>
 											</>
 										))}
 								</TableRow>
 							</TableBody>
 						</Table>
-						<Button onClick={handleClose}>close</Button>
+						<Button onClick={() => dispatch(openScoreModalAction(false))}>close</Button>
 						{/* </TableContainer> */}
 					</Container>
 				</Widget>

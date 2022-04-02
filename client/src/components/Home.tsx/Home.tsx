@@ -28,14 +28,12 @@ export default function Home() {
 	const [open, setOpen] = useState(false)
 	const handleClose = () => setOpen(false)
 	const currentUser = useSelector((state: IReduxStore) => state.user.currentUser)
-	const [gameInProgress, setGameInProgress] = useState(true)
+	const [gameInProgress, setGameInProgress] = useState(false)
 
-	// when a user clicks on "create a new game"
 	const handleOpen = () => {
 		setOpen(true)
 	}
-	// console.log('Current user ID:', currentUser?._id)
-	//2 Creatign a new game
+
 	const handleCreateAGame = async (e: FormEvent) => {
 		e.preventDefault()
 		dispatch(setAHostAction())
@@ -48,15 +46,10 @@ export default function Home() {
 			avatar: currentUser?.avatar,
 			name: currentUser?.name,
 		})
-		// b|e is creating a new game!
 		console.log('Creating a new Game called: ', gameName)
-		// navigate to lobby - where the host waits for other palyers to join
 		navigate('/lobby')
 	}
 
-	// console.log('home')
-
-	// Joinning a game
 	const handleJoinGame = async (e: FormEvent) => {
 		e.preventDefault()
 		const gamePin = parseInt(joiningGamePin)
@@ -66,35 +59,30 @@ export default function Home() {
 			avatar: currentUser?.avatar,
 			name: currentUser?.name,
 		})
+		setGameInProgress(true)
+		dispatch(reRenderLobbyAction())
 	}
 
-	// socket.on('connect', () => {
-	// 	console.log('Connection is now established!')
-	// })
-
 	useEffect(() => {
-		//Initial connection, trapping connection from  server
 		socket.on('connect', () => {
 			console.log('Connection is now established!')
 		})
 	}, [])
 
 	socket.on('display game', (data) => {
-		// b|e is joining the user to an existing game!
 		const query = data._id
 		console.log('GAME ID:', query)
 		console.log('current gamePin: ', data.gamePin)
 		fetchCurrentGame(query)
-		dispatch(reRenderLobbyAction(true))
+		dispatch(reRenderLobbyAction())
 		navigate('/lobby')
 	})
-	// game pin from server.
 	socket.on('joining player', (data) => {
 		const query = data._id
 		fetchCurrentGame(query)
 		console.log('A NEW player is joining')
-		dispatch(reRenderLobbyAction(true))
-		navigate('/lobby')
+		dispatch(reRenderLobbyAction())
+		setOpen(false)
 	})
 
 	const fetchCurrentGame = async (query: string) => {
@@ -117,7 +105,7 @@ export default function Home() {
 		<>
 			<Container sx={containerStyle}>
 				<Profile />
-				{gameInProgress ? (
+				{!gameInProgress ? (
 					<>
 						<Box>
 							<Widget sx={{ display: 'flex', direction: 'row', justifyContent: 'start' }}>

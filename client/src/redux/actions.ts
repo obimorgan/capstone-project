@@ -62,10 +62,9 @@ export const setCurrentGameDetailsAction = (gameDetails: IGameDetails) => ({
 	payload: gameDetails,
 })
 
-export const reRenderLobbyAction = (data: boolean) => {
+export const reRenderLobbyAction = () => {
 	return {
 		type: ACTIONS.RE_RENDER_LOBBY,
-		payload: data,
 	}
 }
 export const openScoreModalAction = (data: boolean) => {

@@ -1,20 +1,19 @@
 /** @format */
 
-import Container from '@mui/material/Container/Container'
-import React, { useState } from 'react'
-import { Widget } from './style'
-import HomeIcon from '@mui/icons-material/Home'
-import Box from '@mui/material/Box/Box'
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
-import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import Button from '@mui/material/Button/Button'
-import { useNavigate } from 'react-router-dom'
-import zIndex from '@mui/material/styles/zIndex'
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
+import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize'
+import HomeIcon from '@mui/icons-material/Home'
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
+import Box from '@mui/material/Box/Box'
+import Button from '@mui/material/Button/Button'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { openEditProfileAction, openRulesAction } from '../redux/actions'
+import { useNavigate } from 'react-router-dom'
+import { openEditProfileAction, openRulesAction, openScoreModalAction } from '../redux/actions'
+import { Widget } from './style'
 
 type Prop = {
 	open: boolean
@@ -35,14 +34,15 @@ const Navigation: React.FC<Prop> = ({ open }) => {
 	}
 	return (
 		<>
-			<Box sx={{ mx: -2, position: 'static' }}>
+			<Box sx={{ mx: -2, mt: 3, position: 'static' }}>
 				<Box
 					sx={{
 						display: 'flex',
 						direction: 'row',
-						justifyContent: 'space-between',
+						justifyContent: 'space-around',
 						height: 40,
 						alignItems: 'center',
+						padding: 0,
 					}}
 				>
 					<Button sx={{ zIndex: 1 }} onClick={(e) => navigate(-1)}>
@@ -50,13 +50,14 @@ const Navigation: React.FC<Prop> = ({ open }) => {
 					</Button>
 					{!isLeaderboard ? (
 						<Widget>
-							<Button onClick={(e) => navigate('/')}>
+							<Button sx={{ mx: -1 }} onClick={(e) => navigate('/')}>
 								<HomeIcon />
 							</Button>
-							<Button onClick={(e) => navigate('/leaderboard')}>
+							<Button sx={{ mx: -1 }} onClick={(e) => navigate('/leaderboard')}>
 								<DashboardCustomizeIcon />
 							</Button>
 							<Button
+								sx={{ mx: -1 }}
 								onClick={(e) => {
 									handleOpenEditProfile()
 								}}
@@ -64,14 +65,34 @@ const Navigation: React.FC<Prop> = ({ open }) => {
 								<AccountCircleIcon />
 							</Button>
 							<Button
+								sx={{ mx: -1 }}
 								onClick={(e) => {
 									handleOpenRules()
 								}}
 							>
 								<InfoRoundedIcon />
 							</Button>
+							<Button
+								sx={{ mx: -1 }}
+								onClick={(e) => {
+									dispatch(openScoreModalAction(true))
+								}}
+							>
+								<MenuBookIcon />
+							</Button>
 						</Widget>
-					) : null}
+					) : // <Widget>
+					// 	<HomeIcon />
+
+					// 	<DashboardCustomizeIcon />
+
+					// 	<AccountCircleIcon />
+
+					// 	<InfoRoundedIcon />
+
+					// 	<MenuBookIcon />
+					// </Widget>
+					null}
 					<Button sx={{ zIndex: 1 }} onClick={(e) => navigate(-1)}>
 						<ArrowCircleRightIcon />
 					</Button>
