@@ -47,7 +47,6 @@ export default function Login() {
 				credentials: 'include',
 			})
 			if (response.status === 201) {
-				localStorage.setItem('token', 'Hello')
 				dispatch(userLoginAction())
 				navigate('/')
 			} else {

@@ -22,14 +22,17 @@ const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
 export default function Alltime() {
 	const dispatch = useDispatch()
-	const scores = useSelector((state: IReduxStore) => state.user.usersBestScores)
+	// const scores = useSelector((state: IReduxStore) => state.user.usersBestScores)
+	const [scores, setScores] = useState([])
 
 	const fetchUsersBestScore = async () => {
 		try {
 			const response = await fetch('http://localhost:3001/user')
 			if (!response) throw new Error('Fetch was unsuccessful')
 			const data = await response.json()
-			dispatch(setUsersBestScoresAction(data))
+			// dispatch(setUsersBestScoresAction(data))
+			setScores(data)
+			console.log(data)
 		} catch (error) {
 			console.log(error)
 		}
@@ -54,84 +57,88 @@ export default function Alltime() {
 	return (
 		<>
 			<Navigation open={true} />
-			<Container sx={containerStyle}>
-				<Box sx={{ width: '100%', zIndex: 1, flexGrow: 1 }}>
-					<Typography
-						variant='h5'
-						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', my: 3, fontWeight: 'bold' }}
-					>
-						LEADERBOARD
-					</Typography>
-					<Container sx={{ display: 'flex', direction: 'row', justifyContent: 'center', mb: 2 }}>
-						<EmojiEventsIcon color='warning' fontSize='large' sx={{ position: 'relative', bottom: 15, right: 15 }} />
-						<Stack direction='column' sx={{ m: 'auto', position: 'absolute', zIndex: -1 }}>
-							<Avatar sx={{ m: 'auto' }} alt='first place' src={top3Array[0].avatar} />
-							<Stack direction='row'>
-								<Typography sx={{ fontWeight: 'bold', textAlign: 'start' }}>{top3Array[0].name}</Typography>
-								&nbsp;
-								<Typography sx={{ fontWeight: 'medium', textAlign: 'end' }}>{top3Array[0].bestScore}</Typography>
+			{scores.length !== 0 && (
+				<Container sx={containerStyle}>
+					<Box sx={{ width: '100%', zIndex: 1, flexGrow: 1, mt: 10 }}>
+						<Typography
+							variant='h5'
+							sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', my: 3, fontWeight: 'bold' }}
+						>
+							LEADERBOARD
+						</Typography>
+						<Container sx={{ display: 'flex', direction: 'row', justifyContent: 'center', mb: 2 }}>
+							<EmojiEventsIcon color='warning' fontSize='large' sx={{ position: 'relative', bottom: 15, right: 15 }} />
+							<Stack direction='column' sx={{ m: 'auto', position: 'absolute', zIndex: -1 }}>
+								<Avatar sx={{ m: 'auto' }} alt='first place' src={top3Array[0].avatar} />
+								<Stack direction='row'>
+									<Typography sx={{ fontWeight: 'bold', textAlign: 'start' }}>{top3Array[0].name}</Typography>
+									&nbsp;
+									<Typography sx={{ fontWeight: 'medium', textAlign: 'end' }}>{top3Array[0].bestScore}</Typography>
+								</Stack>
 							</Stack>
-						</Stack>
-					</Container>
-					<Box
-						sx={{
-							display: 'flex',
-							direction: 'row',
-							justifyContent: 'space-around',
-							width: '100%',
-							fontWeight: 'bold',
-							mb: 2,
-						}}
-					>
-						<Stack>
-							<Avatar sx={{ m: 'auto' }} alt='second place' src={top3Array[1].avatar} />
-							<Stack direction='row'>
-								<Typography sx={{ fontWeight: 'bold', textAlign: 'start' }}>{top3Array[1].name}</Typography>
-								&nbsp;
-								<Typography sx={{ fontWeight: 'medium', textAlign: 'end' }}>{top3Array[1].bestScore}</Typography>
+						</Container>
+						<Box
+							sx={{
+								display: 'flex',
+								direction: 'row',
+								justifyContent: 'space-around',
+								width: '100%',
+								fontWeight: 'bold',
+								mb: 2,
+							}}
+						>
+							<Stack>
+								<Avatar sx={{ m: 'auto' }} alt='second place' src={top3Array[1].avatar} />
+								<Stack direction='row'>
+									<Typography sx={{ fontWeight: 'bold', textAlign: 'start' }}>{top3Array[1].name}</Typography>
+									&nbsp;
+									<Typography sx={{ fontWeight: 'medium', textAlign: 'end' }}>{top3Array[1].bestScore}</Typography>
+								</Stack>
 							</Stack>
-						</Stack>
-						<Stack>
-							<Avatar sx={{ m: 'auto' }} alt='third place' src={top3Array[2].avatar} />
-							<Stack direction='row'>
-								<Typography sx={{ fontWeight: 'bold', textAlign: 'start' }}>{top3Array[2].name}</Typography>
-								&nbsp;
-								<Typography sx={{ fontWeight: 'medium', textAlign: 'end' }}>{top3Array[2].bestScore}</Typography>
+							<Stack>
+								<Avatar sx={{ m: 'auto' }} alt='third place' src={top3Array[2].avatar} />
+								<Stack direction='row'>
+									<Typography sx={{ fontWeight: 'bold', textAlign: 'start' }}>{top3Array[2].name}</Typography>
+									&nbsp;
+									<Typography sx={{ fontWeight: 'medium', textAlign: 'end' }}>{top3Array[2].bestScore}</Typography>
+								</Stack>
 							</Stack>
-						</Stack>
+						</Box>
+						<Table>
+							<TableHead>
+								<TableRow sx={{ '&:last-child td, &:last-child th': { borderTop: '1px solid' } }}>
+									<TableCell>PLAYERS</TableCell>
+									<TableCell align='right'>SCORE</TableCell>
+								</TableRow>
+							</TableHead>
+							{scores &&
+								scores
+									.sort((a, b) => {
+										return a.bestScore - b.bestScore
+									})
+									.slice(3, -10)
+									.map((player, index) => (
+										<TableBody key={player._id}>
+											<TableRow>
+												<TableCell align='left'>
+													<Stack direction='row'>
+														<Avatar alt='avatar' src={player.avatar} />
+														&nbsp;
+														<Typography sx={{ display: 'flex', fontWeight: 'bold', m: 'auto' }}>
+															{player.name}
+														</Typography>
+													</Stack>
+												</TableCell>
+												<TableCell align='right'>{player.bestScore}</TableCell>
+											</TableRow>
+										</TableBody>
+									))}
+						</Table>
+						{/* </Widget> */}
 					</Box>
-					<Table>
-						<TableHead>
-							<TableRow sx={{ '&:last-child td, &:last-child th': { borderTop: '1px solid' } }}>
-								<TableCell>PLAYERS</TableCell>
-								<TableCell align='right'>SCORE</TableCell>
-							</TableRow>
-						</TableHead>
-						{scores &&
-							scores
-								.sort((a, b) => {
-									return a.bestScore - b.bestScore
-								})
-								.slice(3, -7)
-								.map((player, index) => (
-									<TableBody key={player._id}>
-										<TableRow>
-											<TableCell align='left'>
-												<Stack direction='row'>
-													<Avatar alt='avatar' src={player.avatar} />
-													&nbsp;
-													<Typography sx={{ display: 'flex', fontWeight: 'bold', m: 'auto' }}>{player.name}</Typography>
-												</Stack>
-											</TableCell>
-											<TableCell align='right'>{player.bestScore}</TableCell>
-										</TableRow>
-									</TableBody>
-								))}
-					</Table>
-					{/* </Widget> */}
-				</Box>
-				<WallPaper />
-			</Container>
+					<WallPaper />
+				</Container>
+			)}
 		</>
 	)
 }

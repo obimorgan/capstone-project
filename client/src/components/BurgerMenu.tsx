@@ -2,23 +2,57 @@
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import LeaderboardSharpIcon from '@mui/icons-material/LeaderboardSharp'
+import HomeIcon from '@mui/icons-material/Home'
 import LocalBarIcon from '@mui/icons-material/LocalBar'
 import LocalPizzaIcon from '@mui/icons-material/LocalPizza'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import Box from '@mui/material/Box'
 import SpeedDial from '@mui/material/SpeedDial'
 import SpeedDialAction from '@mui/material/SpeedDialAction'
+import { openEditProfileAction, setGameInProgressAction } from '../redux/actions'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 export default function BasicSpeedDial() {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
+	const handleOpenEditProfile = () => {
+		dispatch(openEditProfileAction(true))
+		window.location.reload()
+	}
+
+	const handleHome = () => {
+		dispatch(setGameInProgressAction(false))
+		navigate('/')
+	}
 	const actions = [
 		{ icon: <LocalBarIcon sx={{ fontSize: 'large' }} />, name: 'Drinks' },
 		{ icon: <LocalPizzaIcon sx={{ fontSize: 'large' }} />, name: 'Food' },
-		{ icon: <AccountCircleIcon sx={{ fontSize: 'large' }} />, name: 'Account' },
+		{
+			icon: (
+				<AccountCircleIcon
+					sx={{ fontSize: 'large' }}
+					onClick={() => {
+						handleOpenEditProfile()
+					}}
+				/>
+			),
+			name: 'Account',
+		},
 		{
 			icon: <LeaderboardSharpIcon sx={{ fontSize: 'large' }} onClick={() => navigate('/leaderboard')} />,
+			name: 'LeaderBoard',
+		},
+		{
+			icon: (
+				<HomeIcon
+					sx={{ fontSize: 'large' }}
+					onClick={() => {
+						handleHome()
+					}}
+				/>
+			),
 			name: 'LeaderBoard',
 		},
 	]

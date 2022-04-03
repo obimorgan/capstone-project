@@ -11,27 +11,27 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				...state,
 				games: action.payload,
 			}
-		case ACTIONS.SET_CURRENT_HOLE_STATUS:
-			return {
-				...state,
-				currentHoleStatus: action.payload,
-			}
+		// case ACTIONS.SET_CURRENT_HOLE_STATUS:
+		// 	return {
+		// 		...state,
+		// 		currentHoleStatus: action.payload,
+		// 	}
 		case ACTIONS.OPEN_SCORE_MODAL:
 			return {
 				...state,
 				openScoreModal: action.payload,
 			}
-		case ACTIONS.RE_RENDER_LOBBY:
+		case ACTIONS.SET_GAME_IN_PROGRESS:
 			return {
 				...state,
-				reRenderLobby: action.payload,
+				setGameInProgress: action.payload,
 			}
 
-		case ACTIONS.SET_COMPLETED_HOLES:
-			return {
-				...state,
-				holesCompleted: action.payload,
-			}
+		// case ACTIONS.SET_COMPLETED_HOLES:
+		// 	return {
+		// 		...state,
+		// 		holesCompleted: action.payload,
+		// 	}
 
 		case ACTIONS.OPEN_RULES:
 			return {

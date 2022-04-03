@@ -50,7 +50,7 @@ export default function LeaderBoardToday() {
 				<Box sx={{ width: '100%', zIndex: 1, flexGrow: 1 }}>
 					<Typography
 						variant='h5'
-						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', mb: 3, fontWeight: 'bold' }}
+						sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', my: 3, fontWeight: 'bold' }}
 					>
 						TODAY'S LEADERBOARD
 					</Typography>
@@ -62,6 +62,7 @@ export default function LeaderBoardToday() {
 					<Box sx={{ position: 'relative' }}>
 						{todaysGames.length &&
 							todaysGames
+								.filter((game) => game.totalScore > 0)
 								.sort((a, b) => a.totalScore - b.totalScore)
 								.slice(0, 3)
 								.map((player) => (
@@ -86,6 +87,7 @@ export default function LeaderBoardToday() {
 						</TableHead>
 						{todaysGames &&
 							todaysGames
+								.filter((game) => game.totalScore > 0)
 								.sort((a, b) => {
 									return a.totalScore - b.totalScore
 								})

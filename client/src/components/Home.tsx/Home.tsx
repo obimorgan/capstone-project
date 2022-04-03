@@ -9,26 +9,27 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { io } from 'socket.io-client'
-import { reRenderLobbyAction, setAHostAction, setCurrentGameDetailsAction } from '../../redux/actions'
+import { setGameInProgressAction, setAHostAction, setCurrentGameDetailsAction } from '../../redux/actions'
 import Profile from './Profile'
 import { squareBtn, containerStyle, modalStyle, Widget } from '../style'
 import BurgerMenu from '../BurgerMenu'
 import Typography from '@mui/material/Typography/Typography'
 import GameInProgress from '../GameInProgress'
+import EditProfile from '../EditProfile'
 
-// const { REACT_APP_SERVER_URL } = process.env
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
 
 export default function Home() {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+	const gameInProgress = useSelector((state: IReduxStore) => state.gameroom.setGameInProgress)
+	const [isGuest, setIsGuest] = useState(false)
 	const [gameName, setGameName] = useState<string>()
 	const [joiningGamePin, setJoiningGamePin] = useState('')
 	const [createGame, setCreateGame] = useState(false)
 	const [open, setOpen] = useState(false)
 	const handleClose = () => setOpen(false)
 	const currentUser = useSelector((state: IReduxStore) => state.user.currentUser)
-	const [gameInProgress, setGameInProgress] = useState(false)
 
 	const handleOpen = () => {
 		setOpen(true)
@@ -47,7 +48,7 @@ export default function Home() {
 			name: currentUser?.name,
 		})
 		console.log('Creating a new Game called: ', gameName)
-		navigate('/lobby')
+		// navigate('/lobby')
 	}
 
 	const handleJoinGame = async (e: FormEvent) => {
@@ -59,8 +60,6 @@ export default function Home() {
 			avatar: currentUser?.avatar,
 			name: currentUser?.name,
 		})
-		setGameInProgress(true)
-		// dispatch(reRenderLobbyAction())
 	}
 
 	useEffect(() => {
@@ -73,37 +72,39 @@ export default function Home() {
 		const query = data._id
 		console.log('GAME ID:', query)
 		console.log('current gamePin: ', data.gamePin)
-		// fetchCurrentGame(query)
-		// dispatch(reRenderLobbyAction())
+		fetchCurrentGame(query)
 		navigate('/lobby')
 	})
 	socket.on('joining player', (data) => {
 		const query = data._id
-		// fetchCurrentGame(query)
+		fetchCurrentGame(query)
 		console.log('A NEW player is joining')
-		// dispatch(reRenderLobbyAction())
 		setOpen(false)
+		dispatch(setGameInProgressAction(true))
+		console.log()
+		setIsGuest(true)
 	})
 
-	// const fetchCurrentGame = async (query: string) => {
-	// 	try {
-	// 		let response = await fetch(`http://localhost:3001/games/${query}`)
-	// 		if (response.ok) {
-	// 			let data = await response.json()
-	// 			dispatch(setCurrentGameDetailsAction(data))
-	// 			console.log(data)
-	// 			console.log('setting game details..')
-	// 		} else {
-	// 			throw new Error()
-	// 		}
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 	}
-	// }
+	const fetchCurrentGame = async (query: string) => {
+		try {
+			let response = await fetch(`http://localhost:3001/games/${query}`)
+			if (response.ok) {
+				let data = await response.json()
+				dispatch(setCurrentGameDetailsAction(data))
+				console.log(data)
+				console.log('setting game details..')
+			} else {
+				throw new Error()
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	return (
 		<>
 			<Container sx={containerStyle}>
+				<EditProfile />
 				<Profile />
 				{!gameInProgress ? (
 					<>

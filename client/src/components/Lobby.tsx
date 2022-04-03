@@ -1,19 +1,16 @@
 /** @format */
 
+import Avatar from '@mui/material/Avatar/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button/Button'
 import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { squareBtn, containerStyle, CoverImage, WallPaper, Widget } from './style'
-import { reRenderLobbyAction, setCurrentGameDetailsAction } from '../redux/actions'
-import { io } from 'socket.io-client'
 import Stack from '@mui/material/Stack/Stack'
-import zIndex from '@mui/material/styles/zIndex'
-import Avatar from '@mui/material/Avatar/Avatar'
+import Typography from '@mui/material/Typography'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { setCurrentGameDetailsAction } from '../redux/actions'
+import { containerStyle, WallPaper } from './style'
 
 export default function MusicPlayerSlider() {
 	const currentGame = useSelector((state: IReduxStore) => state.gameroom.games)
@@ -34,8 +31,6 @@ export default function MusicPlayerSlider() {
 			if (response.ok) {
 				let data = await response.json()
 				dispatch(setCurrentGameDetailsAction(data))
-				dispatch(reRenderLobbyAction())
-
 				console.log('setting game details AT THE LOBBY', data)
 			} else {
 				throw new Error()
@@ -50,15 +45,11 @@ export default function MusicPlayerSlider() {
 		// window.location.reload()
 	}, [])
 
-	// useEffect(() => {
-	// 	window.location.reload()
-	// }, [])
-
-	// function refreshPage() {
-	// 	window.location.reload()
-	// 	console.log('REFRESH PAGE')
-	// }
-	// setInterval(refreshPage, 5000)
+	function refreshPage() {
+		window.location.reload()
+		console.log('REFRESH PAGE')
+	}
+	setInterval(refreshPage, 5000)
 
 	return (
 		<Container sx={containerStyle}>

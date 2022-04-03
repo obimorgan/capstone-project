@@ -82,10 +82,10 @@ interface IReduxGameroom {
 		hole17: ISingleHole[]
 		hole18: ISingleHole[]
 	} | null
-	currentHoleStatus: ISingleHole[]
+	// currentHoleStatus: ISingleHole[]
 	openScoreModal: boolean
-	reRenderLobby: boolean
-	holesCompleted: ICompletedHole[]
+	setGameInProgress: boolean
+	// holesCompleted: ICompletedHole[]
 	openRules: boolean
 	openEditProfile: boolean
 }

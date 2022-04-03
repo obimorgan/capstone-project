@@ -51,6 +51,8 @@ const Hole1 = () => {
 		}
 	}
 
+	console.log(total)
+
 	const handlePlayerScores = () => {
 		const submitHole1 = async () => {
 			try {

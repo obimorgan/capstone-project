@@ -1,5 +1,6 @@
 /** @format */
 
+import EditIcon from '@mui/icons-material/Edit'
 import {
 	Avatar,
 	Box,
@@ -13,14 +14,10 @@ import {
 	TextField,
 	Typography,
 } from '@mui/material'
-import React, { FormEventHandler, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { openEditProfileAction, updateProfilePImgAction } from '../redux/actions'
-import { containerStyle, CoverImage, Widget } from './style'
-import EditIcon from '@mui/icons-material/Edit'
-import SpeedDialAction from '@mui/lab/SpeedDialAction/SpeedDialAction'
-import { display } from '@mui/system'
-import zIndex from '@mui/material/styles/zIndex'
+import { containerStyle, Widget } from './style'
 
 const EditProfile = () => {
 	const openEditProfile = useSelector((state: IReduxStore) => state.gameroom.openEditProfile)
@@ -60,6 +57,7 @@ const EditProfile = () => {
 			})
 			if (!response) throw new Error('User not found')
 			console.log('user profile has been edited')
+			window.location.reload()
 		} catch (error) {
 			console.log(error)
 		}
@@ -117,19 +115,19 @@ const EditProfile = () => {
 							</label>
 							<Stack component='form' direction='column'>
 								<TextField
-									type='name'
+									type='text'
 									id='outlined-start-adornment'
 									sx={{ width: '30ch' }}
-									// label={profile.name}
+									label={profile.name}
 									value={inputs.name}
 									onChange={(e) => handleInputs('name', e.target.value)}
 								/>
 
 								<TextField
-									type='email'
+									type='text'
 									id='outlined-start-adornment'
 									sx={{ mt: 2, width: '30ch' }}
-									// label={profile.email}
+									label='email'
 									value={inputs.email}
 									onChange={(e) => handleInputs('email', e.target.value)}
 								/>

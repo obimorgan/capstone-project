@@ -12,7 +12,7 @@ export const ACTIONS = {
 	SET_HOLE_ONE_SCORE: 'SET_HOLE_ONE_SCORE',
 	SET_CURRENT_HOLE_STATUS: 'SET_CURRENT_HOLE_STATUS',
 	OPEN_SCORE_MODAL: 'OPEN_SCORE_MODAL',
-	RE_RENDER_LOBBY: 'RE_RENDER_LOBBY',
+	SET_GAME_IN_PROGRESS: 'SET_GAME_IN_PROGRESS',
 	SET_HOLE1_ACTION: 'SET_HOLE1_ACTION',
 	ADD_PLAYER_TO_HOLES: 'ADD_PLAYER_TO_HOLES',
 	SET_USERS_BEST_SCORES: 'SET_USERS_BEST_SCORES',
@@ -62,9 +62,10 @@ export const setCurrentGameDetailsAction = (gameDetails: IGameDetails) => ({
 	payload: gameDetails,
 })
 
-export const reRenderLobbyAction = () => {
+export const setGameInProgressAction = (data: boolean) => {
 	return {
-		type: ACTIONS.RE_RENDER_LOBBY,
+		type: ACTIONS.SET_GAME_IN_PROGRESS,
+		payload: data,
 	}
 }
 export const openScoreModalAction = (data: boolean) => {

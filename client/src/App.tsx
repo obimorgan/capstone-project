@@ -59,62 +59,13 @@ function App() {
 						</UserProvider>
 					}
 				/>
-				<Route
-					path='/hole1'
-					element={
-						<UserProvider>
-							<Hole1 />
-						</UserProvider>
-					}
-				/>
-				<Route
-					path='/hole2'
-					element={
-						<UserProvider>
-							<Hole2 />
-						</UserProvider>
-					}
-				/>
-				<Route
-					path='/hole3'
-					element={
-						<UserProvider>
-							<Hole3 />
-						</UserProvider>
-					}
-				/>
-				<Route
-					path='/hole4'
-					element={
-						<UserProvider>
-							<Hole4 />
-						</UserProvider>
-					}
-				/>
-				<Route
-					path='/hole18'
-					element={
-						<UserProvider>
-							<Hole18 />
-						</UserProvider>
-					}
-				/>
-				<Route
-					path='/scorecard'
-					element={
-						<UserProvider>
-							<ScoreCard />
-						</UserProvider>
-					}
-				/>
-				<Route
-					path='/gameinprogress'
-					element={
-						<UserProvider>
-							<GameInProgress />
-						</UserProvider>
-					}
-				/>
+				<Route path='/hole1' element={<Hole1 />} />
+				<Route path='/hole2' element={<Hole2 />} />
+				<Route path='/hole3' element={<Hole3 />} />
+				<Route path='/hole4' element={<Hole4 />} />
+				<Route path='/hole18' element={<Hole18 />} />
+				<Route path='/scorecard' element={<ScoreCard />} />
+				<Route path='/gameinprogress' element={<GameInProgress />} />
 			</Routes>
 		</BrowserRouter>
 	)
