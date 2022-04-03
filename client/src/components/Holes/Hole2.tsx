@@ -23,8 +23,11 @@ import {
 	setSoloPlayerTotalScoreAction,
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
+import EditProfile from '../EditProfile'
 import Maps from '../Maps'
 import Navigation from '../Navigation'
+import Rules from '../Rules'
+import ScoreCard from '../ScoreCard'
 import { containerStyle, WallPaper } from '../style'
 
 const Hole2 = () => {
@@ -73,6 +76,9 @@ const Hole2 = () => {
 
 	return (
 		<>
+			<Rules />
+			<EditProfile />
+			<ScoreCard />
 			<Container sx={containerStyle}>
 				<Box sx={{ flexGrow: 1 }}>
 					<Navigation open={false} />

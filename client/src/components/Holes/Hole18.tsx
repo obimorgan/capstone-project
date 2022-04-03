@@ -1,7 +1,5 @@
 /** @format */
 
-import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined'
-import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined'
 import { Button, Checkbox, FormControlLabel, Stack, Typography } from '@mui/material'
 import Container from '@mui/material/Container/Container'
 import Table from '@mui/material/Table'
@@ -20,11 +18,13 @@ import {
 	decHole18ScoreAction,
 	incHole18ScoreAction,
 	openScoreModalAction,
-	setCompletedHolesAction,
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
+import EditProfile from '../EditProfile'
 import Maps from '../Maps'
 import Navigation from '../Navigation'
+import Rules from '../Rules'
+import ScoreCard from '../ScoreCard'
 import { containerStyle, WallPaper } from '../style'
 
 const Hole18 = () => {
@@ -69,6 +69,9 @@ const Hole18 = () => {
 
 	return (
 		<>
+			<Rules />
+			<EditProfile />
+			<ScoreCard />
 			<Container sx={containerStyle}>
 				<Box sx={{ flexGrow: 1 }}>
 					<Navigation open={false} />

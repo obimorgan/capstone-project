@@ -4,6 +4,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import Avatar from '@mui/material/Avatar/Avatar'
 import Box from '@mui/material/Box/Box'
 import Container from '@mui/material/Container/Container'
+import Fab from '@mui/material/Fab/Fab'
 import Stack from '@mui/material/Stack/Stack'
 import Table from '@mui/material/Table/Table'
 import TableBody from '@mui/material/TableBody/TableBody'
@@ -11,12 +12,9 @@ import TableCell from '@mui/material/TableCell/TableCell'
 import TableHead from '@mui/material/TableHead/TableHead'
 import TableRow from '@mui/material/TableRow/TableRow'
 import Typography from '@mui/material/Typography/Typography'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { setUsersBestScoresAction } from '../../redux/actions'
-import { containerStyle, WallPaper, Widget } from '../style'
+import React, { useEffect, useState } from 'react'
 import Navigation from '../Navigation'
-import { useState } from 'react'
+import { containerStyle, WallPaper } from '../style'
 
 export default function LeaderBoardToday() {
 	const [todaysGames, setTodaysGames] = useState([])
@@ -26,7 +24,7 @@ export default function LeaderBoardToday() {
 			const response = await fetch('http://localhost:3001/games/todays')
 			if (!response) throw new Error('Fetch was unsuccessful')
 			const data = await response.json()
-			console.log(data)
+			// console.log(data)
 			setTodaysGames(data)
 		} catch (error) {
 			console.log(error)
@@ -56,9 +54,13 @@ export default function LeaderBoardToday() {
 					>
 						TODAY'S LEADERBOARD
 					</Typography>
-					<EmojiEventsIcon color='warning' fontSize='large' sx={{ position: 'absolute', right: 220 }} />
+					{todaysGames ? (
+						<Fab sx={{ position: 'absolute', left: 20, zIndex: 1, top: 105, width: 35, height: 25 }}>
+							<EmojiEventsIcon color='warning' fontSize='large' />
+						</Fab>
+					) : null}
 					<Box sx={{ position: 'relative' }}>
-						{todaysGames.length >= 7 &&
+						{todaysGames.length &&
 							todaysGames
 								.sort((a, b) => a.totalScore - b.totalScore)
 								.slice(0, 3)
@@ -82,12 +84,12 @@ export default function LeaderBoardToday() {
 								<TableCell align='right'>SCORE</TableCell>
 							</TableRow>
 						</TableHead>
-						{todaysGames.length >= 7 &&
+						{todaysGames &&
 							todaysGames
 								.sort((a, b) => {
 									return a.totalScore - b.totalScore
 								})
-								.slice(3, -1)
+								.slice(3)
 								.map((player, index) => (
 									<TableBody key={player._id}>
 										<TableRow>

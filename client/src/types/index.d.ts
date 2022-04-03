@@ -45,6 +45,7 @@ interface ILoginCredentials {
 
 interface IProps {
 	children: JSX.Element
+	children: JSX.Element
 }
 
 interface IPlayer {

@@ -19,7 +19,6 @@ import map1 from '../../Assets/map1.png'
 import {
 	decHole1ScoreAction,
 	incHole1ScoreAction,
-	setSoloPlayerTotalScoreAction,
 	setCompletedHolesAction,
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'

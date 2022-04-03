@@ -81,18 +81,7 @@ const Navigation: React.FC<Prop> = ({ open }) => {
 								<MenuBookIcon />
 							</Button>
 						</Widget>
-					) : // <Widget>
-					// 	<HomeIcon />
-
-					// 	<DashboardCustomizeIcon />
-
-					// 	<AccountCircleIcon />
-
-					// 	<InfoRoundedIcon />
-
-					// 	<MenuBookIcon />
-					// </Widget>
-					null}
+					) : null}
 					<Button sx={{ zIndex: 1 }} onClick={(e) => navigate(-1)}>
 						<ArrowCircleRightIcon />
 					</Button>

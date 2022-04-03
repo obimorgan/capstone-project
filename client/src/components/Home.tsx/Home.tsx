@@ -60,7 +60,7 @@ export default function Home() {
 			name: currentUser?.name,
 		})
 		setGameInProgress(true)
-		dispatch(reRenderLobbyAction())
+		// dispatch(reRenderLobbyAction())
 	}
 
 	useEffect(() => {
@@ -73,33 +73,33 @@ export default function Home() {
 		const query = data._id
 		console.log('GAME ID:', query)
 		console.log('current gamePin: ', data.gamePin)
-		fetchCurrentGame(query)
-		dispatch(reRenderLobbyAction())
+		// fetchCurrentGame(query)
+		// dispatch(reRenderLobbyAction())
 		navigate('/lobby')
 	})
 	socket.on('joining player', (data) => {
 		const query = data._id
-		fetchCurrentGame(query)
+		// fetchCurrentGame(query)
 		console.log('A NEW player is joining')
-		dispatch(reRenderLobbyAction())
+		// dispatch(reRenderLobbyAction())
 		setOpen(false)
 	})
 
-	const fetchCurrentGame = async (query: string) => {
-		try {
-			let response = await fetch(`http://localhost:3001/games/${query}`)
-			if (response.ok) {
-				let data = await response.json()
-				dispatch(setCurrentGameDetailsAction(data))
-				console.log(data)
-				console.log('setting game details..')
-			} else {
-				throw new Error()
-			}
-		} catch (error) {
-			console.log(error)
-		}
-	}
+	// const fetchCurrentGame = async (query: string) => {
+	// 	try {
+	// 		let response = await fetch(`http://localhost:3001/games/${query}`)
+	// 		if (response.ok) {
+	// 			let data = await response.json()
+	// 			dispatch(setCurrentGameDetailsAction(data))
+	// 			console.log(data)
+	// 			console.log('setting game details..')
+	// 		} else {
+	// 			throw new Error()
+	// 		}
+	// 	} catch (error) {
+	// 		console.log(error)
+	// 	}
+	// }
 
 	return (
 		<>
