@@ -9,9 +9,11 @@ import TableCell from '@mui/material/TableCell/TableCell'
 import TableHead from '@mui/material/TableHead/TableHead'
 import TableRow from '@mui/material/TableRow/TableRow'
 import Typography from '@mui/material/Typography/Typography'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
+import { setGameInProgressAction } from '../redux/actions'
 import { containerStyle, WallPaper } from './style'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
@@ -30,8 +32,21 @@ const Scoreboard = () => {
 				totalScore: player.totalScore,
 			})
 		})
+
+		socket.emit('set total score', {
+			gameId: game._id,
+			totalScores: players,
+		})
+
 		navigate('/todays')
 	}
+
+	useEffect(() => {
+		socket.on('current best score updated', () => {
+			console.log('current best score updated')
+			dispatch(setGameInProgressAction(false))
+		})
+	}, [])
 
 	return (
 		<Container sx={containerStyle}>
@@ -85,3 +100,6 @@ const Scoreboard = () => {
 }
 
 export default Scoreboard
+function reRenderLobbyAction(arg0: boolean): any {
+	throw new Error('Function not implemented.')
+}

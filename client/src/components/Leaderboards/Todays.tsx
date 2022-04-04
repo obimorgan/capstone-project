@@ -22,6 +22,7 @@ import { containerStyle, WallPaper } from '../style'
 export default function LeaderBoardToday() {
 	const [todaysGames, setTodaysGames] = useState([])
 	const isAhost = useSelector((state: IReduxStore) => state.user.isAHost)
+	const reRender = useSelector((state: IReduxStore) => state.gameroom.setGameInProgress)
 	const navigate = useNavigate()
 
 	const fetchTodaysGames = async () => {
@@ -29,7 +30,7 @@ export default function LeaderBoardToday() {
 			const response = await fetch('http://localhost:3001/games/todays')
 			if (!response) throw new Error('Fetch was unsuccessful')
 			const data = await response.json()
-			// console.log(data)
+			console.log('fetching todays games')
 			setTodaysGames(data)
 		} catch (error) {
 			console.log(error)
@@ -37,7 +38,7 @@ export default function LeaderBoardToday() {
 	}
 	useEffect(() => {
 		fetchTodaysGames()
-	}, [])
+	}, [reRender])
 
 	console.log(todaysGames)
 	let top3Array = []
@@ -59,7 +60,7 @@ export default function LeaderBoardToday() {
 					>
 						TODAY'S LEADERBOARD
 					</Typography>
-					{todaysGames.length > 1 ? (
+					{todaysGames.length > 1 && todaysGames[0].totalScore.value > 0 ? (
 						<Fab sx={{ position: 'absolute', left: 25, zIndex: 1, top: 125, width: 30, height: 5 }}>
 							<EmojiEventsIcon color='warning' fontSize='small' />
 						</Fab>
@@ -110,7 +111,7 @@ export default function LeaderBoardToday() {
 								.sort((a, b) => {
 									return a.totalScore - b.totalScore
 								})
-								.slice(3)
+								.slice(2)
 								.map((player, index) => (
 									<TableBody key={player._id}>
 										<TableRow>
@@ -118,7 +119,9 @@ export default function LeaderBoardToday() {
 												<Stack direction='row'>
 													<Avatar alt='avatar' src={player.avatar} />
 													&nbsp;
-													<Typography sx={{ display: 'flex', fontWeight: 'bold', m: 'auto' }}>{player.name}</Typography>
+													<Typography sx={{ display: 'flex', fontWeight: 'bold', m: 'auto' }}>
+														{player?.name}
+													</Typography>
 												</Stack>
 											</TableCell>
 											<TableCell align='right'>{player.totalScore}</TableCell>
@@ -126,12 +129,15 @@ export default function LeaderBoardToday() {
 									</TableBody>
 								))}
 					</Table>
+					<Box sx={{ flexGrow: 1 }} />
+					{isAhost && (
+						<Box sx={{ position: 'relative', bottom: -450, zIndex: 1 }}>
+							<Button variant='contained' onClick={() => navigate('/hole1')}>
+								START GAME
+							</Button>
+						</Box>
+					)}
 				</Box>
-				{isAhost && (
-					<Button variant='contained' onClick={() => navigate('/hole1')}>
-						START GAME
-					</Button>
-				)}
 				<WallPaper />
 			</Container>
 		</>

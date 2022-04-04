@@ -46,7 +46,7 @@ export default function Registration() {
 				headers: { 'content-type': 'application/json' },
 			})
 			if (response.status === 201) {
-				dispatch(userLoginAction())
+				dispatch(userLoginAction(true))
 				navigate('/')
 			} else {
 				throw new Error()

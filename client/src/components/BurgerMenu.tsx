@@ -28,7 +28,8 @@ export default function BasicSpeedDial() {
 	}
 
 	const handleSignOut = () => {
-		dispatch(logOutUserAction())
+		dispatch(logOutUserAction(false))
+		dispatch(setGameInProgressAction(false))
 	}
 	const actions = [
 		{

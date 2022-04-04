@@ -47,7 +47,7 @@ export default function Login() {
 				credentials: 'include',
 			})
 			if (response.status === 201) {
-				dispatch(userLoginAction())
+				dispatch(userLoginAction(true))
 				navigate('/')
 			} else {
 				throw new Error()
@@ -55,6 +55,11 @@ export default function Login() {
 		} catch (error) {
 			console.log(error)
 		}
+	}
+
+	const handleGoogleLogin = () => {
+		dispatch(userLoginAction(true))
+		redirect('http://localhost:3001/oauth/google')
 	}
 
 	return (
@@ -108,27 +113,35 @@ export default function Login() {
 							Log In
 						</Button>
 						<Container sx={{ mt: 2 }}>
-							{/* <IconButton size='large'>
+							<IconButton size='large'>
 								<Badge>
 									<FacebookIcon />
 								</Badge>
-							</IconButton> */}
+							</IconButton>
 							<a href='http://localhost:3001/oauth/google'>
-								<IconButton size='large'>
+								<IconButton
+									size='large'
+									onClick={() => {
+										handleGoogleLogin()
+									}}
+								>
 									<Badge>
 										<GoogleIcon />
 									</Badge>
 								</IconButton>
 							</a>
-							{/* <IconButton size='large'>
+							<IconButton size='large'>
 								<Badge>
 									<InstagramIcon />
 								</Badge>
-							</IconButton> */}
+							</IconButton>
 						</Container>
 					</Stack>
 				</Container>
 			</Container>
 		</>
 	)
+}
+function redirect(arg0: string) {
+	throw new Error('Function not implemented.')
 }

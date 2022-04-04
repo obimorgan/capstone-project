@@ -10,13 +10,13 @@ import Box from '@mui/material/Box/Box'
 import Typography from '@mui/material/Typography/Typography'
 
 export default function Profile() {
-	const player = useSelector((state: IReduxStore) => state.user.currentUser)
+	const player = useSelector((state: IReduxStore) => state.user?.currentUser)
 	return (
 		<Container sx={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}>
 			<Box sx={{ zIndex: 1, marginTop: 4, marginBottom: 5 }}>
-				<Avatar sx={{ width: 100, height: 100 }} alt='avatar' src={player.avatar} />
+				<Avatar sx={{ width: 100, height: 100 }} alt='avatar' src={player?.avatar} />
 				<Typography variant='h6' gutterBottom component='div'>
-					{player.name}
+					{player?.name}
 				</Typography>
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 					<Typography variant='button' gutterBottom component='div'>
@@ -24,7 +24,7 @@ export default function Profile() {
 					</Typography>
 					&nbsp;
 					<Typography variant='button' gutterBottom component='div'>
-						{player.bestScore}
+						{player?.bestScore}
 					</Typography>
 				</Box>
 			</Box>

@@ -33,32 +33,11 @@ function App() {
 				/>
 				<Route path='/login' element={<Login />} />
 				<Route path='/registration' element={<Registration />} />
-				<Route
-					path='/lobby'
-					element={
-						<UserProvider>
-							<Lobby />
-						</UserProvider>
-					}
-				/>
-				<Route
-					path='/scoreboard'
-					element={
-						<UserProvider>
-							<Scoreboard />
-						</UserProvider>
-					}
-				/>
+				<Route path='/lobby' element={<Lobby />} />
+				<Route path='/scoreboard' element={<Scoreboard />} />
 				<Route path='/leaderboard' element={<Alltime />} />
 				<Route path='/todays' element={<Todays />} />
-				<Route
-					path='/dashboard'
-					element={
-						<UserProvider>
-							<Dashboard />
-						</UserProvider>
-					}
-				/>
+				<Route path='/dashboard' element={<Dashboard />} />
 				<Route path='/hole1' element={<Hole1 />} />
 				<Route path='/hole2' element={<Hole2 />} />
 				<Route path='/hole3' element={<Hole3 />} />

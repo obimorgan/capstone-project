@@ -50,12 +50,16 @@ export const setCurrentUserAction = (myInfo: IUser) => ({
 	payload: myInfo,
 })
 
-export const userLoginAction = () => {
-	return { type: ACTIONS.USER_LOGIN }
+export const userLoginAction = (data: boolean) => {
+	return {
+		type: ACTIONS.USER_LOGIN,
+		payload: data,
+	}
 }
 
-export const logOutUserAction = () => ({
+export const logOutUserAction = (data: boolean) => ({
 	type: ACTIONS.LOG_OUT_USER,
+	paload: data,
 })
 
 export const setAHostAction = () => {

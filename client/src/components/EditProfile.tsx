@@ -20,8 +20,8 @@ import { openEditProfileAction, updateProfilePImgAction } from '../redux/actions
 import { containerStyle, Widget } from './style'
 
 const EditProfile = () => {
-	const openEditProfile = useSelector((state: IReduxStore) => state.gameroom.openEditProfile)
-	const profile = useSelector((state: IReduxStore) => state.user.currentUser)
+	const openEditProfile = useSelector((state: IReduxStore) => state.gameroom?.openEditProfile)
+	const profile = useSelector((state: IReduxStore) => state.user?.currentUser)
 	const dispatch = useDispatch()
 	const [open, setOpen] = useState(openEditProfile)
 	const [isLoading, setIsLoading] = useState(false)
@@ -47,7 +47,7 @@ const EditProfile = () => {
 		console.log('upload')
 	}
 
-	const userId = profile._id
+	const userId = profile?._id
 	const editProfile = async () => {
 		try {
 			const response = await fetch(`http://localhost:3001/user/${userId}/editprofile`, {
@@ -95,7 +95,7 @@ const EditProfile = () => {
 							Edit Profile
 						</Typography>
 						<Stack sx={{ zIndex: 1, display: 'column', alignItems: 'center' }}>
-							<Avatar sx={{ width: 200, height: 200 }} alt='avatar' src={profile.avatar} />
+							<Avatar sx={{ width: 200, height: 200 }} alt='avatar' src={profile?.avatar} />
 							<label htmlFor='upload-photo' style={{ marginLeft: '180px', marginTop: '5px', marginBottom: '5px' }}>
 								<Input
 									style={{ display: 'none' }}
@@ -119,7 +119,7 @@ const EditProfile = () => {
 									id='outlined-start-adornment'
 									sx={{ width: '30ch' }}
 									label='name'
-									value={inputs.name}
+									value={inputs?.name}
 									onChange={(e) => handleInputs('name', e.target.value)}
 								/>
 
@@ -128,7 +128,7 @@ const EditProfile = () => {
 									id='outlined-start-adornment'
 									sx={{ mt: 2, width: '30ch' }}
 									label='email'
-									value={inputs.email}
+									value={inputs?.email}
 									onChange={(e) => handleInputs('email', e.target.value)}
 								/>
 								<Button
