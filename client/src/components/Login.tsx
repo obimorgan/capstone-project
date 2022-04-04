@@ -108,21 +108,23 @@ export default function Login() {
 							Log In
 						</Button>
 						<Container sx={{ mt: 2 }}>
-							<IconButton size='large'>
+							{/* <IconButton size='large'>
 								<Badge>
 									<FacebookIcon />
 								</Badge>
-							</IconButton>
-							<IconButton size='large'>
-								<Badge>
-									<GoogleIcon />
-								</Badge>
-							</IconButton>
-							<IconButton size='large'>
+							</IconButton> */}
+							<a href='http://localhost:3001/oauth/google'>
+								<IconButton size='large'>
+									<Badge>
+										<GoogleIcon />
+									</Badge>
+								</IconButton>
+							</a>
+							{/* <IconButton size='large'>
 								<Badge>
 									<InstagramIcon />
 								</Badge>
-							</IconButton>
+							</IconButton> */}
 						</Container>
 					</Stack>
 				</Container>

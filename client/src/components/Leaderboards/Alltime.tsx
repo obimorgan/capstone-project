@@ -59,7 +59,7 @@ export default function Alltime() {
 			<Navigation open={true} />
 			{scores.length !== 0 && (
 				<Container sx={containerStyle}>
-					<Box sx={{ width: '100%', zIndex: 1, flexGrow: 1, mt: 10 }}>
+					<Box sx={{ width: '100%', zIndex: 1, flexGrow: 1, mt: 1 }}>
 						<Typography
 							variant='h5'
 							sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', my: 3, fontWeight: 'bold' }}
@@ -116,7 +116,7 @@ export default function Alltime() {
 									.sort((a, b) => {
 										return a.bestScore - b.bestScore
 									})
-									.slice(3, -10)
+									.slice(3, 10)
 									.map((player, index) => (
 										<TableBody key={player._id}>
 											<TableRow>

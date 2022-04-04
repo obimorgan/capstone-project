@@ -118,7 +118,7 @@ const EditProfile = () => {
 									type='text'
 									id='outlined-start-adornment'
 									sx={{ width: '30ch' }}
-									label={profile.name}
+									label='name'
 									value={inputs.name}
 									onChange={(e) => handleInputs('name', e.target.value)}
 								/>
@@ -137,7 +137,7 @@ const EditProfile = () => {
 									variant='contained'
 									color='info'
 								>
-									Edit User
+									Save
 								</Button>
 								<Button
 									onClick={handleClose}

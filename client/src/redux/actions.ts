@@ -19,6 +19,7 @@ export const ACTIONS = {
 	OPEN_RULES: 'OPEN_RULES',
 	OPEN_EDIT_PROFILE: 'OPEN_EDIT_PROFILE',
 	UPDATE_PROFILE_PICTURE: 'UPDATE_PROFILE_PICTURE',
+	LOG_OUT_USER: 'LOG_OUT_USER',
 
 	SET_FIRST_PLAYER_TOTAL_SCORE: 'SET_FIRST_PLAYER_TOTAL_SCORE',
 	SET_SECOND_PLAYER_TOTAL_SCORE: 'SET_SECOND_PLAYER_TOTAL_SCORE',
@@ -52,6 +53,10 @@ export const setCurrentUserAction = (myInfo: IUser) => ({
 export const userLoginAction = () => {
 	return { type: ACTIONS.USER_LOGIN }
 }
+
+export const logOutUserAction = () => ({
+	type: ACTIONS.LOG_OUT_USER,
+})
 
 export const setAHostAction = () => {
 	return { type: ACTIONS.SET_HOST }

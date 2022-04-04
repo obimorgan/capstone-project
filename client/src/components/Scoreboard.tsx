@@ -30,22 +30,18 @@ const Scoreboard = () => {
 				totalScore: player.totalScore,
 			})
 		})
-		navigate('/leaderboard')
+		navigate('/todays')
 	}
 
 	return (
 		<Container sx={containerStyle}>
-			<Box sx={{ width: '100%', height: '100%', overflow: 'hidden', zIndex: 1 }}>
+			<Box sx={{ width: '100%', height: '100%', overflow: 'hidden', zIndex: 1, mt: 10 }}>
 				<Typography variant='button' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
 					THE FINAL SCORES OF GAME:
 				</Typography>
 				<Typography variant='h4' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center', mb: 5 }}>
 					{game.gameName}
 				</Typography>
-				{/* <TableContainer component={Paper} sx={{ zIndex: 1 }}> */}
-				{/* <Typography variant='h6' sx={{ zIndex: 1, display: 'flex', justifyContent: 'center' }}>
-					Leaderboard
-				</Typography> */}
 				<Table>
 					<TableHead>
 						<TableRow>
@@ -72,7 +68,7 @@ const Scoreboard = () => {
 							))}
 				</Table>
 				{/* </TableContainer> */}
-				<Box>
+				<Box sx={{ flexGrow: 1 }}>
 					<Button
 						onClick={handleSubmit}
 						variant='contained'

@@ -19,7 +19,7 @@ export default function MusicPlayerSlider() {
 	const dispatch = useDispatch()
 
 	const handleStartGame = () => {
-		navigate('/hole1')
+		navigate('/todays')
 	}
 	console.log('AT THE LOBBY')
 

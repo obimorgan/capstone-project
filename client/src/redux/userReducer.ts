@@ -35,6 +35,13 @@ const userReducer = (state = initialState.user, action: AnyAction) => {
 					avatar: action.payload,
 				},
 			}
+		case ACTIONS.LOG_OUT_USER:
+			return {
+				...state,
+				isLoggedIn: false,
+				currentUser: null,
+			}
+
 		default:
 			return state
 	}
