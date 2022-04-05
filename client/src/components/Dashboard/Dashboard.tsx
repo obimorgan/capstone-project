@@ -100,8 +100,8 @@ export default function Dashboard() {
 	const theme = useTheme()
 	const navigate = useNavigate()
 	const [open, setOpen] = useState(false)
-	const [openUsers, setOpenUsers] = useState(true)
-	const [openLeaderBoard, setOpenLeaderBoard] = useState(false)
+	const [openUsers, setOpenUsers] = useState(false)
+	const [openLeaderBoard, setOpenLeaderBoard] = useState(true)
 	const [openHoleStats, setOpenHoleStats] = useState(false)
 
 	const handleDrawerOpen = () => {

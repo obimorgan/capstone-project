@@ -49,6 +49,7 @@ export const initialState: IReduxStore = {
 		// holesCompleted: [],
 		openRules: false,
 		openEditProfile: false,
+		isEndOfGame: false,
 	},
 }
 

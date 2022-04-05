@@ -20,6 +20,7 @@ export const ACTIONS = {
 	OPEN_EDIT_PROFILE: 'OPEN_EDIT_PROFILE',
 	UPDATE_PROFILE_PICTURE: 'UPDATE_PROFILE_PICTURE',
 	LOG_OUT_USER: 'LOG_OUT_USER',
+	SET_END_GAME: 'SET_END_GAME',
 
 	SET_FIRST_PLAYER_TOTAL_SCORE: 'SET_FIRST_PLAYER_TOTAL_SCORE',
 	SET_SECOND_PLAYER_TOTAL_SCORE: 'SET_SECOND_PLAYER_TOTAL_SCORE',
@@ -27,7 +28,7 @@ export const ACTIONS = {
 	SET_FOURTH_PLAYER_TOTAL_SCORE: 'SET_FOURTH_PLAYER_TOTAL_SCORE',
 	SET_PLAYER_TOTAL_SCORE: 'SET_PLAYER_TOTAL_SCORE',
 	SET_SOLO_PLAYER_TOTAL_SCORE: 'SET_SOLO_PLAYER_TOTAL_SCORE',
-	SET_COMPLETED_HOLES: 'SET_COMPLETED_HOLES',
+	// SET_COMPLETED_HOLES: 'SET_COMPLETED_HOLES',
 
 	DECREASE_HOLE1_SCORE: 'DECREASE_HOLE1_SCORE',
 	INCREASE_HOLE1_SCORE: 'INCREASE_HOLE1_SCORE',
@@ -84,10 +85,10 @@ export const openScoreModalAction = (data: boolean) => {
 	}
 }
 
-export const setCurrentHoleStatusAction = (data: ISingleHole) => ({
-	type: ACTIONS.SET_CURRENT_HOLE_STATUS,
-	payload: data,
-})
+// export const setCurrentHoleStatusAction = (data: ISingleHole) => ({
+// 	type: ACTIONS.SET_CURRENT_HOLE_STATUS,
+// 	payload: data,
+// })
 
 export const addPlayerToHolesAction = (data: ISingleHole) => ({
 	type: ACTIONS.ADD_PLAYER_TO_HOLES,
@@ -99,10 +100,10 @@ export const setUsersBestScoresAction = (data: IUserBestScores) => ({
 	payload: data,
 })
 
-export const setCompletedHolesAction = (data: string) => ({
-	type: ACTIONS.SET_COMPLETED_HOLES,
-	payload: data,
-})
+// export const setCompletedHolesAction = (data: string) => ({
+// 	type: ACTIONS.SET_COMPLETED_HOLES,
+// 	payload: data,
+// })
 
 export const openRulesAction = (data: boolean) => ({
 	type: ACTIONS.OPEN_RULES,
@@ -127,6 +128,11 @@ export const setPlayerTotalScoreAction = (data: ITotalScore) => ({
 
 export const setSoloPlayerTotalScoreAction = (data: number) => ({
 	type: ACTIONS.SET_SOLO_PLAYER_TOTAL_SCORE,
+	payload: data,
+})
+
+export const setEndGameAction = (data: boolean) => ({
+	type: ACTIONS.SET_END_GAME,
 	payload: data,
 })
 

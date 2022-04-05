@@ -88,6 +88,7 @@ interface IReduxGameroom {
 	// holesCompleted: ICompletedHole[]
 	openRules: boolean
 	openEditProfile: boolean
+	isEndOfGame: boolean
 }
 
 interface IGameDetails {

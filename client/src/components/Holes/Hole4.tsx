@@ -20,7 +20,7 @@ import {
 	decHole4ScoreAction,
 	incHole4ScoreAction,
 	openScoreModalAction,
-	setCompletedHolesAction,
+	// setCompletedHolesAction,
 	setPlayerTotalScoreAction,
 } from '../../redux/actions'
 import EditProfile from '../EditProfile'
@@ -62,7 +62,7 @@ const Hole4 = () => {
 				if (!response) throw new Error('Could not submit hole 1 scores')
 				setTotalScores()
 				navigate('/hole18')
-				dispatch(setCompletedHolesAction('hole4'))
+				// dispatch(setCompletedHolesAction('hole4'))
 			} catch (error) {
 				console.log(error)
 			}

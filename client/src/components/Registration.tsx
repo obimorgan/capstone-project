@@ -70,6 +70,7 @@ export default function Registration() {
 			<Container sx={{ display: 'flex', justifyContent: 'center' }}>
 				<Stack direction='column' component='form' sx={{ mb: 4 }}>
 					<TextField
+						type='text'
 						id='outlined-start-adornment'
 						sx={{ m: 1, width: '30ch' }}
 						InputProps={{
@@ -83,6 +84,7 @@ export default function Registration() {
 						value={credentials.name}
 					/>
 					<TextField
+						type='email'
 						id='outlined-start-adornment'
 						sx={{ m: 1, width: '30ch' }}
 						InputProps={{
@@ -96,6 +98,7 @@ export default function Registration() {
 						value={credentials.email}
 					/>
 					<TextField
+						type='password'
 						id='outlined-start-adornment'
 						sx={{ m: 1, width: '30ch' }}
 						InputProps={{
@@ -112,7 +115,7 @@ export default function Registration() {
 						Register
 					</Button>
 					<Container sx={{ display: 'flex', textAlign: 'center ', justifyContent: 'center' }}>
-						<IconButton size='large'>
+						{/* <IconButton size='large'>
 							<Badge>
 								<FacebookIcon />
 							</Badge>
@@ -126,7 +129,7 @@ export default function Registration() {
 							<Badge>
 								<InstagramIcon />
 							</Badge>
-						</IconButton>
+						</IconButton> */}
 					</Container>
 				</Stack>
 			</Container>

@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
-import { setGameInProgressAction } from '../redux/actions'
+import { setGameInProgressAction, setEndGameAction } from '../redux/actions'
 import { containerStyle, WallPaper } from './style'
 
 const socket = io('http://localhost:3001', { transports: ['websocket'] })
@@ -23,7 +23,7 @@ const Scoreboard = () => {
 	const game = useSelector((state: IReduxStore) => state.gameroom.games)
 	const dispatch = useDispatch()
 	const players = useSelector((state: IReduxStore) => state.gameroom.games.players)
-	const myId = useSelector((state: IReduxStore) => state.user.currentUser._id)
+	// const myId = useSelector((state: IReduxStore) => state.user.currentUser._id)
 
 	const handleSubmit = () => {
 		players.forEach((player) => {
@@ -37,7 +37,7 @@ const Scoreboard = () => {
 			gameId: game._id,
 			totalScores: players,
 		})
-
+		dispatch(setEndGameAction(false))
 		navigate('/todays')
 	}
 
@@ -100,6 +100,3 @@ const Scoreboard = () => {
 }
 
 export default Scoreboard
-function reRenderLobbyAction(arg0: boolean): any {
-	throw new Error('Function not implemented.')
-}

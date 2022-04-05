@@ -1,5 +1,7 @@
 /** @format */
 
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined'
+import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined'
 import { Button, Checkbox, FormControlLabel, Stack, Typography } from '@mui/material'
 import Container from '@mui/material/Container/Container'
 import Table from '@mui/material/Table'
@@ -79,6 +81,17 @@ const Hole18 = () => {
 				<Typography variant='h2' sx={{ zIndex: 1, textAlign: 'center' }}>
 					HOLE 18
 				</Typography>
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Stack direction='row'>
+						<Typography variant='body1' sx={{ zIndex: 1, textAlign: 'center' }}>
+							Average strokes:
+						</Typography>
+						&nbsp;
+						<Typography variant='body1' fontWeight='bold' sx={{ zIndex: 1, textAlign: 'center' }}>
+							1
+						</Typography>
+					</Stack>
+				</Box>
 				<Box sx={{ flexGrow: 1 }} />
 				<TableContainer sx={{ zIndex: 1 }}>
 					<Stack direction='row'>
@@ -90,7 +103,7 @@ const Hole18 = () => {
 									<TableCell align='left'></TableCell>
 								</TableRow>
 							</TableHead>
-							<TableBody>
+							{/* <TableBody>
 								{hole18 &&
 									hole18.map((player, i) => (
 										<TableRow key={player.playerId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -108,6 +121,30 @@ const Hole18 = () => {
 													control={<Checkbox onChange={() => dispatch(incHole18ScoreAction(player.playerId))} />}
 													label='+1'
 												/>
+											</TableCell>
+										</TableRow>
+									))}
+							</TableBody> */}
+							<TableBody>
+								{hole18 &&
+									hole18.map((player, i) => (
+										<TableRow key={player.playerId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+											<TableCell align='left' component='th' scope='column'>
+												{player.name}
+												{/* <input type='text' value={player.name} /> */}
+											</TableCell>
+											<TableCell align='center'>
+												<Button
+													onClick={(e) => {
+														dispatch(decHole18ScoreAction(player.playerId))
+													}}
+												>
+													<RemoveCircleOutlinedIcon />
+												</Button>
+												{player.score}
+												<Button onClick={(e) => dispatch(incHole18ScoreAction(player.playerId))}>
+													<AddCircleOutlinedIcon />
+												</Button>
 											</TableCell>
 										</TableRow>
 									))}

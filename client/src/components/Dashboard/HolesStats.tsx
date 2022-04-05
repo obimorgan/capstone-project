@@ -25,12 +25,33 @@ export default function HolesStats() {
 	const [search, setSearch] = useState('')
 	const players = useSelector((state: IReduxStore) => state.user.usersBestScores)
 
-	const assets = [map1, map2, map3, map4, map18]
+	const assets = [
+		{ name: 'hole 1', map: map1, average: 2 },
+		{ name: 'hole 2', map: map2, average: 4 },
+		{ name: 'hole 3', map: map3, average: 3 },
+		{ name: 'hole 4', map: map4, average: 5 },
+		{ name: 'hole 5', map: map18, average: 7 },
+		{ name: 'hole 6', map: map1, average: 2 },
+		{ name: 'hole 7', map: map2, average: 4 },
+		{ name: 'hole 8', map: map3, average: 3 },
+		{ name: 'hole 9', map: map4, average: 5 },
+	]
+
+	const assets1 = [
+		{ name: 'hole 10', map: map1, average: 2 },
+		{ name: 'hole 11', map: map2, average: 4 },
+		{ name: 'hole 12', map: map3, average: 3 },
+		{ name: 'hole 13', map: map4, average: 5 },
+		{ name: 'hole 14', map: map18, average: 7 },
+		{ name: 'hole 15', map: map1, average: 2 },
+		{ name: 'hole 16', map: map2, average: 4 },
+		{ name: 'hole 17', map: map3, average: 3 },
+		{ name: 'hole 18', map: map4, average: 1 },
+	]
 
 	return (
 		<>
 			<Container sx={containerStyle}>
-				<AvgStrokeChart />
 				<Stack direction='row'>
 					<Box sx={{ width: '100%', overflow: 'hidden', zIndex: 1 }}>
 						<Box sx={{ zIndex: 1, display: 'flex', justifyContent: 'between', alignItems: 'center' }}>
@@ -44,320 +65,83 @@ export default function HolesStats() {
 								HOLES
 							</Typography>
 							<Box sx={{ flexGrow: 1 }} />
+							<AvgStrokeChart />
 						</Box>
 						<Table>
 							<TableHead>
 								<TableRow>
-									<TableCell align='left'>Hole</TableCell>
-									<TableCell align='left'>Average Swings</TableCell>
-									{/* <TableCell align='right'>Bestscore</TableCell> */}
+									<TableCell align='left'></TableCell>
+									{assets.map((asset) => (
+										<TableCell align='left'>{asset.name}</TableCell>
+									))}
 								</TableRow>
 							</TableHead>
-							{/* {players &&
-						players.map((player) => (
-							<TableBody key={player._id}>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<Avatar alt='avatar' src={player.avatar} sx={{ width: 28, height: 28 }} />
-											<Typography sx={{ ml: 1, my: 'auto' }}>{player.name}</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>{player.email}</TableCell>
-									<TableCell align='right'>{player.bestScore}</TableCell>
-								</TableRow>
-							</TableBody>
-						))} */}
+
 							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map1} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>1</Typography>
-										</Stack>
+								{/* <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
+									<TableCell component='th' scope='row'>
+										Map
 									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
+									{assets &&
+										assets.map((asset, index) => (
+											<>
+												<TableCell key={index} align='center'>
+													{asset.map}
+												</TableCell>
+											</>
+										))}
+								</TableRow> */}
 								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map2} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>2</Typography>
-										</Stack>
+									<TableCell component='th' scope='row'>
+										Average strokes
 									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map3} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>3</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map4} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>4</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map18} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>5</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map1} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>6</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map4} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>7</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map18} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>8</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map1} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>9</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
+									{assets &&
+										assets.map((asset, index) => (
+											<>
+												<TableCell key={index} align='left'>
+													{asset.average}
+												</TableCell>
+											</>
+										))}
 								</TableRow>
 							</TableBody>
 						</Table>
-					</Box>
-					<Box sx={{ width: '100%', overflow: 'hidden', zIndex: 1 }}>
-						<Box sx={{ zIndex: 1, display: 'flex', justifyContent: 'between', alignItems: 'center' }}>
-							{/* <TextField
-						id='outlined-name'
-						label='Search user...'
-						value={search}
-						onChange={(e) => setSearch(e.target.value)}
-					/> */}
-							<Typography sx={{ fontWeight: '500' }} variant='h3'>
-								HOLES
-							</Typography>
-							<Box sx={{ flexGrow: 1 }} />
-						</Box>
 						<Table>
 							<TableHead>
 								<TableRow>
-									<TableCell align='left'>Hole</TableCell>
-									<TableCell align='left'>Average Swings</TableCell>
-									{/* <TableCell align='right'>Bestscore</TableCell> */}
+									<TableCell align='left'></TableCell>
+									{assets1.map((asset) => (
+										<TableCell align='left'>{asset.name}</TableCell>
+									))}
 								</TableRow>
 							</TableHead>
-							{/* {players &&
-						players.map((player) => (
-							<TableBody key={player._id}>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<Avatar alt='avatar' src={player.avatar} sx={{ width: 28, height: 28 }} />
-											<Typography sx={{ ml: 1, my: 'auto' }}>{player.name}</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>{player.email}</TableCell>
-									<TableCell align='right'>{player.bestScore}</TableCell>
-								</TableRow>
-							</TableBody>
-						))} */}
+
 							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map1} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>1</Typography>
-										</Stack>
+								{/* <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
+									<TableCell component='th' scope='row'>
+										Map
 									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
+									{assets &&
+										assets.map((asset, index) => (
+											<>
+												<TableCell key={index} align='center'>
+													{asset.map}
+												</TableCell>
+											</>
+										))}
+								</TableRow> */}
 								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map2} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>2</Typography>
-										</Stack>
+									<TableCell component='th' scope='row'>
+										Average strokes
 									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map3} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>3</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map4} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>4</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map18} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>5</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map1} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>6</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map4} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>7</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map18} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>8</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
-									<TableCell>
-										<Stack direction='row' sx={{ align: 'center' }}>
-											<EditIcon sx={{ mr: 1, my: 'auto' }} />
-											<MapImage>
-												<img src={map1} />
-											</MapImage>
-											<Typography sx={{ ml: 1, my: 'auto' }}>9</Typography>
-										</Stack>
-									</TableCell>
-									<TableCell align='left'>5</TableCell>
+									{assets1 &&
+										assets1.map((asset, index) => (
+											<>
+												<TableCell key={index} align='left'>
+													{asset.average}
+												</TableCell>
+											</>
+										))}
 								</TableRow>
 							</TableBody>
 						</Table>

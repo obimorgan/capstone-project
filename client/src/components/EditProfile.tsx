@@ -118,7 +118,7 @@ const EditProfile = () => {
 									type='text'
 									id='outlined-start-adornment'
 									sx={{ width: '30ch' }}
-									label='name'
+									label='Name'
 									value={inputs?.name}
 									onChange={(e) => handleInputs('name', e.target.value)}
 								/>
@@ -127,7 +127,7 @@ const EditProfile = () => {
 									type='text'
 									id='outlined-start-adornment'
 									sx={{ mt: 2, width: '30ch' }}
-									label='email'
+									label={inputs?.email ? inputs?.email : 'Please provide an email'}
 									value={inputs?.email}
 									onChange={(e) => handleInputs('email', e.target.value)}
 								/>

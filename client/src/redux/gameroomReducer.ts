@@ -45,6 +45,12 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				openEditProfile: action.payload,
 			}
 
+		case ACTIONS.SET_END_GAME:
+			return {
+				...state,
+				isEndOfGame: action.payload,
+			}
+
 		//Total scores
 		case ACTIONS.SET_PLAYER_TOTAL_SCORE:
 			return {
@@ -185,31 +191,55 @@ const gameroomReducer = (state = initialState.gameroom, action: AnyAction) => {
 				...state,
 				games: {
 					...state.games,
-					players: [...state.games.players].map((player) => {
-						if (player.playerId === action.payload.playerId) {
-							return { ...player, totalScore: (player.totalScore -= 2) }
+					hole18: [...state.games.hole18].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: detail.score - 1 }
 						}
-						return {
-							...player,
-						}
+						return { ...detail }
 					}),
 				},
 			}
+		// return {
+		// 	...state,
+		// 	games: {
+		// 		...state.games,
+		// 		players: [...state.games.players].map((player) => {
+		// 			if (player.playerId === action.payload.playerId) {
+		// 				return { ...player, totalScore: (player.totalScore -= 2) }
+		// 			}
+		// 			return {
+		// 				...player,
+		// 			}
+		// 		}),
+		// 	},
+		// }
 		case ACTIONS.INCREASE_HOLE18_SCORE:
 			return {
 				...state,
 				games: {
 					...state.games,
-					players: [...state.games.players].map((player) => {
-						if (player.playerId === action.payload.playerId) {
-							return { ...player, totalScore: (player.totalScore += 1) }
+					hole18: [...state.games.hole18].map((detail) => {
+						if (detail.playerId === action.payload) {
+							return { ...detail, score: detail.score + 1 }
 						}
-						return {
-							...player,
-						}
+						return { ...detail }
 					}),
 				},
 			}
+		// return {
+		// 	...state,
+		// 	games: {
+		// 		...state.games,
+		// 		players: [...state.games.players].map((player) => {
+		// 			if (player.playerId === action.payload.playerId) {
+		// 				return { ...player, totalScore: (player.totalScore += 1) }
+		// 			}
+		// 			return {
+		// 				...player,
+		// 			}
+		// 		}),
+		// 	},
+		// }
 
 		default:
 			return state

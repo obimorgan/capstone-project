@@ -1,6 +1,7 @@
 /** @format */
 
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
+import Skeleton from '@mui/lab/Skeleton/Skeleton'
 import Avatar from '@mui/material/Avatar/Avatar'
 import Box from '@mui/material/Box/Box'
 import Button from '@mui/material/Button/Button'
@@ -23,6 +24,8 @@ export default function LeaderBoardToday() {
 	const [todaysGames, setTodaysGames] = useState([])
 	const isAhost = useSelector((state: IReduxStore) => state.user.isAHost)
 	const reRender = useSelector((state: IReduxStore) => state.gameroom.setGameInProgress)
+	const isEndOfGame = useSelector((state: IReduxStore) => state.gameroom.isEndOfGame)
+	console.log(isEndOfGame)
 	const navigate = useNavigate()
 
 	const fetchTodaysGames = async () => {
@@ -60,7 +63,7 @@ export default function LeaderBoardToday() {
 					>
 						TODAY'S LEADERBOARD
 					</Typography>
-					{todaysGames.length > 1 && todaysGames[0].totalScore.value > 0 ? (
+					{todaysGames.length > 1 ? (
 						<Fab sx={{ position: 'absolute', left: 25, zIndex: 1, top: 125, width: 30, height: 5 }}>
 							<EmojiEventsIcon color='warning' fontSize='small' />
 						</Fab>
@@ -95,10 +98,10 @@ export default function LeaderBoardToday() {
 								) : (
 									<>
 										<Typography sx={{ fontWeight: 'bold', textAlign: 'center', ml: 1 }}>
-											No one has played today...
+											Today's leaderboard is currently empty...
 										</Typography>
 										<Typography sx={{ fontWeight: 'bold', textAlign: 'center', ml: 1 }}>
-											First place is up for grab
+											We hope to see your name on it.
 										</Typography>
 										<Typography sx={{ fontWeight: 'bold', textAlign: 'center', ml: 1 }}>GOOD LUCK!</Typography>
 									</>
@@ -111,7 +114,7 @@ export default function LeaderBoardToday() {
 								.sort((a, b) => {
 									return a.totalScore - b.totalScore
 								})
-								.slice(2)
+								.slice(3)
 								.map((player, index) => (
 									<TableBody key={player._id}>
 										<TableRow>
@@ -129,13 +132,29 @@ export default function LeaderBoardToday() {
 									</TableBody>
 								))}
 					</Table>
-					<Box sx={{ flexGrow: 1 }} />
-					{isAhost && (
-						<Box sx={{ position: 'relative', bottom: -450, zIndex: 1 }}>
-							<Button variant='contained' onClick={() => navigate('/hole1')}>
+					{isEndOfGame ? (
+						<Box
+						// sx={{ position: 'relative', bottom: -450, zIndex: 1 }}
+						>
+							<Button
+								sx={{ position: 'relative', mt: 10, zIndex: 1 }}
+								variant='contained'
+								onClick={() => navigate('/hole1')}
+							>
 								START GAME
 							</Button>
 						</Box>
+					) : (
+						<>
+							<Typography sx={{ fontWeight: 'bold', textAlign: 'center', ml: 1 }}>
+								We hope you had a great game!
+							</Typography>
+							<Typography sx={{ fontWeight: 'bold', textAlign: 'center', ml: 1 }}>See you soon.</Typography>
+
+							<Button sx={{ position: 'relative', mt: 5, zIndex: 1 }} variant='contained' onClick={() => navigate('/')}>
+								Home
+							</Button>
+						</>
 					)}
 				</Box>
 				<WallPaper />

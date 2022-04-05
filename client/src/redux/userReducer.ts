@@ -40,6 +40,7 @@ const userReducer = (state = initialState.user, action: AnyAction) => {
 				...state,
 				isLoggedIn: false,
 				currentUser: null,
+				games: null,
 			}
 
 		default:

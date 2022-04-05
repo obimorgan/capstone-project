@@ -66,7 +66,7 @@ const Hole2 = () => {
 				})
 				if (!response) throw new Error('Could not submit hole 2 scores')
 				setTotalScores()
-				navigate('/hole3')
+				navigate('/hole18')
 			} catch (error) {
 				console.log(error)
 			}
@@ -86,6 +86,17 @@ const Hole2 = () => {
 				<Typography variant='h2' sx={{ zIndex: 1, textAlign: 'center' }}>
 					HOLE 2
 				</Typography>
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Stack direction='row'>
+						<Typography variant='body1' sx={{ zIndex: 1, textAlign: 'center' }}>
+							Average strokes:
+						</Typography>
+						&nbsp;
+						<Typography variant='body1' fontWeight='bold' sx={{ zIndex: 1, textAlign: 'center' }}>
+							4
+						</Typography>
+					</Stack>
+				</Box>
 				<Box sx={{ flexGrow: 1 }} />
 				<TableContainer sx={{ zIndex: 1 }}>
 					<Stack direction='row'>

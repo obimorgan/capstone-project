@@ -4,12 +4,12 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import LeaderboardSharpIcon from '@mui/icons-material/LeaderboardSharp'
 import HomeIcon from '@mui/icons-material/Home'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
-import LocalPizzaIcon from '@mui/icons-material/LocalPizza'
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import Box from '@mui/material/Box'
 import SpeedDial from '@mui/material/SpeedDial'
 import SpeedDialAction from '@mui/material/SpeedDialAction'
-import { logOutUserAction, openEditProfileAction, setGameInProgressAction } from '../redux/actions'
+import { logOutUserAction, openEditProfileAction, setGameInProgressAction, setEndGameAction } from '../redux/actions'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -30,6 +30,7 @@ export default function BasicSpeedDial() {
 	const handleSignOut = () => {
 		dispatch(logOutUserAction(false))
 		dispatch(setGameInProgressAction(false))
+		dispatch(setEndGameAction(false))
 	}
 	const actions = [
 		{
@@ -44,7 +45,10 @@ export default function BasicSpeedDial() {
 			name: 'Sign out',
 		},
 
-		{ icon: <LocalPizzaIcon sx={{ fontSize: 'large' }} />, name: 'Food' },
+		{
+			icon: <AdminPanelSettingsIcon sx={{ fontSize: 'large' }} onClick={() => navigate('/dashboard')} />,
+			name: 'Dashboard',
+		},
 		{
 			icon: (
 				<AccountCircleIcon
@@ -69,7 +73,7 @@ export default function BasicSpeedDial() {
 					}}
 				/>
 			),
-			name: 'LeaderBoard',
+			name: 'Home',
 		},
 	]
 	return (
