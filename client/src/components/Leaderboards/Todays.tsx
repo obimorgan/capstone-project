@@ -114,7 +114,7 @@ export default function LeaderBoardToday() {
 								.sort((a, b) => {
 									return a.totalScore - b.totalScore
 								})
-								.slice(3)
+								.slice(3, 6)
 								.map((player, index) => (
 									<TableBody key={player._id}>
 										<TableRow>
@@ -132,7 +132,7 @@ export default function LeaderBoardToday() {
 									</TableBody>
 								))}
 					</Table>
-					{isEndOfGame ? (
+					{!isEndOfGame ? (
 						<Box
 						// sx={{ position: 'relative', bottom: -450, zIndex: 1 }}
 						>
@@ -153,6 +153,13 @@ export default function LeaderBoardToday() {
 
 							<Button sx={{ position: 'relative', mt: 5, zIndex: 1 }} variant='contained' onClick={() => navigate('/')}>
 								Home
+							</Button>
+							<Button
+								sx={{ position: 'relative', mt: 5, zIndex: 1, ml: 1 }}
+								variant='contained'
+								onClick={() => navigate('/leaderboard')}
+							>
+								Leaderboard
 							</Button>
 						</>
 					)}

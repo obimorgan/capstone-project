@@ -40,8 +40,8 @@ const ScoreCard = () => {
 									<TableCell></TableCell>
 									<TableCell align='left'>{game.hole1[0]?.name}</TableCell>
 									{game.hole1.length >= 1 && <TableCell align='center'>{game.hole1[1]?.name}</TableCell>}
-									{game.hole1.length >= 2 && <TableCell align='center'>{game.hole1[2]?.name}</TableCell>}
-									{game.hole1.length >= 4 && <TableCell align='center'>{game.hole1[3]?.name}</TableCell>}
+									{/* {game.hole1.length >= 2 && <TableCell align='center'>{game.hole1[2]?.name}</TableCell>}
+									{game.hole1.length >= 4 && <TableCell align='center'>{game.hole1[3]?.name}</TableCell>} */}
 								</TableRow>
 							</TableHead>
 							<TableBody>
@@ -67,7 +67,7 @@ const ScoreCard = () => {
 											</>
 										))}
 								</TableRow>
-								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
+								{/* <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
 									<TableCell component='th' scope='row'>
 										Hole 3
 									</TableCell>
@@ -88,7 +88,7 @@ const ScoreCard = () => {
 												<TableCell align='center'>{player.score}</TableCell>
 											</>
 										))}
-								</TableRow>
+								</TableRow> */}
 								<TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 1 }}>
 									<TableCell component='th' scope='row'>
 										Hole 18

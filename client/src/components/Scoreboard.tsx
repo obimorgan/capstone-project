@@ -38,7 +38,7 @@ const Scoreboard = () => {
 			totalScores: players,
 		})
 		dispatch(setEndGameAction(false))
-		navigate('/todays')
+		navigate('/leaderboard')
 	}
 
 	useEffect(() => {

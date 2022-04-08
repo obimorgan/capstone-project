@@ -99,8 +99,8 @@ const Hole18 = () => {
 							<TableHead>
 								<TableRow>
 									<TableCell align='left'>Players</TableCell>
-									<TableCell align='left'>Hole in 1</TableCell>
-									<TableCell align='left'></TableCell>
+									<TableCell align='center'>Score</TableCell>
+									{/* <TableCell align='left'></TableCell> */}
 								</TableRow>
 							</TableHead>
 							{/* <TableBody>

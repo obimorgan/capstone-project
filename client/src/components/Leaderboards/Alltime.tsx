@@ -116,7 +116,7 @@ export default function Alltime() {
 									.sort((a, b) => {
 										return a.bestScore - b.bestScore
 									})
-									.slice(3, 10)
+									.slice(3, 8)
 									.map((player, index) => (
 										<TableBody key={player._id}>
 											<TableRow>

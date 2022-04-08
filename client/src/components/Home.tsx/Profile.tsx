@@ -14,7 +14,9 @@ export default function Profile() {
 	return (
 		<Container sx={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}>
 			<Box sx={{ zIndex: 1, marginTop: 4, marginBottom: 5 }}>
-				<Avatar sx={{ width: 100, height: 100 }} alt='avatar' src={player?.avatar} />
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Avatar sx={{ width: 100, height: 100 }} alt='avatar' src={player?.avatar} />
+				</Box>
 				<Typography variant='h6' gutterBottom component='div'>
 					{player?.name}
 				</Typography>

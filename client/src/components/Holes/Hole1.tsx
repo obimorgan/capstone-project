@@ -92,7 +92,7 @@ const Hole1 = () => {
 						</Typography>
 						&nbsp;
 						<Typography variant='body1' fontWeight='bold' sx={{ zIndex: 1, textAlign: 'center' }}>
-							3
+							2
 						</Typography>
 					</Stack>
 				</Box>

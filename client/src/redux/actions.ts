@@ -196,19 +196,13 @@ export const incHole4ScoreAction = (userId: string) => {
 export const decHole18ScoreAction = (userId: string) => {
 	return {
 		type: ACTIONS.DECREASE_HOLE18_SCORE,
-		payload: {
-			userId: userId,
-			score: 2,
-		},
+		payload: userId,
 	}
 }
 
 export const incHole18ScoreAction = (userId: string) => {
 	return {
 		type: ACTIONS.INCREASE_HOLE18_SCORE,
-		payload: {
-			userId: userId,
-			score: 1,
-		},
+		payload: userId,
 	}
 }
